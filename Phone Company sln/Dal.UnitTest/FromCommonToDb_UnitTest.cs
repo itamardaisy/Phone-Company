@@ -14,133 +14,123 @@ namespace Dal.UnitTest
     public class FromCommonToDb_UnitTest
     {
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetCall_Convert()
         {
             //Arrange
             var commonCall = new Call();
             var dbCall = new DbCall();
             //Act
-            dbCall = commonCall.CommonToDb();
+            var results = commonCall.CommonToDb();
             //Assert
-            Assert.AreEqual(dbCall, commonCall);
+            Assert.AreEqual(dbCall, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetClient_Convert()
         {
             //Arrange
             var commonClient = new Client();
             var dbClient = new DbClient();
             //Act
-            dbClient = commonClient.CommonToDb();
+            var results = commonClient.CommonToDb();
             //Assert
-            Assert.AreEqual(dbClient, commonClient);
+            Assert.AreEqual(dbClient, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetClientType_Convert()
         {
             //Arrange
             var commonClientType = new ClientType();
             var dbClientType = new DbClientType();
             //Act
-            dbClientType = commonClientType.CommonToDb();
+            var results = commonClientType.CommonToDb();
             //Assert
-            Assert.AreEqual(dbClientType, commonClientType);
+            Assert.AreEqual(dbClientType, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetLine_Convert()
         {
             //Arrange
             var commonLine = new Line();
             var dbLine = new DbLine();
             //Act
-            dbLine = commonLine.CommonToDb();
+            var results = commonLine.CommonToDb();
             //Assert
-            Assert.AreEqual(dbLine, commonLine);
+            Assert.AreEqual(dbLine, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetPackage_Convert()
         {
             //Arrange
             var commonPackage = new Package();
             var dbPackage = new DbPackage();
             //Act
-            dbPackage = commonPackage.CommonToDb();
+            var results = commonPackage.CommonToDb();
             //Assert
-            Assert.AreEqual(dbPackage, commonPackage);
+            Assert.AreEqual(dbPackage, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetPayment_Convert()
         {
             //Arrange
             var commonPayment = new Payment();
             var dbPayment = new DbPayment();
             //Act
-            dbPayment = commonPayment.CommonToDb();
+            var results = commonPayment.CommonToDb();
             //Assert
-            Assert.AreEqual(dbPayment, commonPayment);
+            Assert.AreEqual(dbPayment, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetSelectedNumber_Convert()
         {
             //Arrange
             var commonSelectedNumber = new SelectedNumber();
             var dbSelectedNumber = new DbSelectedNumber();
             //Act
-            dbSelectedNumber = commonSelectedNumber.CommonToDb();
+            var results = commonSelectedNumber.CommonToDb();
             //Assert
-            Assert.AreEqual(dbSelectedNumber, commonSelectedNumber);
+            Assert.AreEqual(dbSelectedNumber, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetSMS_Convert()
         {
             //Arrange
             var commonSMS = new SMS();
             var dbSMS = new DbSMS();
             //Act
-            dbSMS = commonSMS.CommonToDb();
+            var results = commonSMS.CommonToDb();
             //Assert
-            Assert.AreEqual(dbSMS, commonSMS);
+            Assert.AreEqual(dbSMS, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetUnsignClient_Convert()
         {
             //Arrange
             var commonUnsignClient = new UnsignClient();
             var dbUnsignClient = new DbUnsignClient();
             //Act
-            dbUnsignClient = commonUnsignClient.CommonToDb();
+            var results = commonUnsignClient.CommonToDb();
             //Assert
-            Assert.AreEqual(dbUnsignClient, commonUnsignClient);
+            Assert.AreEqual(dbUnsignClient, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetUser_Convert()
         {
             //Arrange
             var commonUser = new User();
             var dbUser = new DbUser();
             //Act
-            dbUser = commonUser.CommonToDb();
+            var results = commonUser.CommonToDb();
             //Assert
-            Assert.AreEqual(dbUser, commonUser);
+            Assert.AreEqual(dbUser, results);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Common.Models;
 using Dal.DataModels;
+using Dal.ModelConverters;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 [assembly: InternalsVisibleTo("Dal.UnitTest")]
+
 namespace Dal.ModelConverters
 {
     internal static class FromDbToCommon
