@@ -11,14 +11,14 @@ namespace Common.Interfaces
     {
         ClientType GetTypeByName(string typeName);
 
-        ClientType AddNewType(ClientType clientType);
+        void AddNewType(ClientType clientType);
 
         bool DeleteType(string typeName);
 
         List<ClientType> GetAllTypes();
 
-        ClientType UpdateMinutePrice(string typeName, double newPrice);
+        void UpdateMinutePrice(string typeName, double newPrice);
 
-        ClientType UpdateSMSPrice(string typeName, double newPrice);
+        void UpdateSMSPrice(string typeName, double newPrice);
     }
 }

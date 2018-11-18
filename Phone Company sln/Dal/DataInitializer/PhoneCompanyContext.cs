@@ -22,7 +22,7 @@ namespace Dal.DataInitializer
         public virtual DbSet<DbPayment> Payments { get; set; }
         public DbSet<DbSelectedNumber> SelectedNumbers { get; set; }
         public virtual DbSet<DbSMS> SMSs{ get; set; }
-        public DbSet<DbUnsignClient> UnsignClients { get; set; }
+        public virtual DbSet<DbUnsignClient> UnsignClients { get; set; }
         public DbSet<DbUser> Users { get; set; }
     }
 }

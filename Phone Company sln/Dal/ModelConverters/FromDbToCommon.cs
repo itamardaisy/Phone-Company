@@ -11,7 +11,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 [assembly: InternalsVisibleTo("Dal.UnitTest")]
-
 namespace Dal.ModelConverters
 {
     internal static class FromDbToCommon
@@ -23,7 +22,8 @@ namespace Dal.ModelConverters
                 DestinationNumber = dbCall.DestinationNumber,
                 Duration = dbCall.Duration,
                 LineId = dbCall.LineId,
-                Id = dbCall.Id
+                Id = dbCall.Id,
+                CallDate = dbCall.CallDate
             };
             return call;
         }

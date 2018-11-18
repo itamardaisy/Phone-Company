@@ -25,7 +25,7 @@ namespace Dal.DataModels
         [ForeignKey(nameof(ClientType))]
         public int ClientTypeId { get; set; }
 
-        public DbClientType ClientType { get; set; }
+        public virtual DbClientType ClientType { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
