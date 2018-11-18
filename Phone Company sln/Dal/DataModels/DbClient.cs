@@ -22,7 +22,7 @@ namespace Dal.DataModels
         public string LastName { get; set; }
 
         [Required]
-        [ForeignKey("ClientType")]
+        [ForeignKey(nameof(ClientType))]
         public int ClientTypeId { get; set; }
 
         public DbClientType ClientType { get; set; }

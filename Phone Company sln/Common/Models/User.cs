@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace Common.Models
         private string password;
         private int callAnswer;
         private DateTime signDate;
-        private int type;
+        private UserType type;
 
         public int Id
         {
@@ -40,7 +41,7 @@ namespace Common.Models
             set { password = value; }
         }
 
-        public int Type
+        public UserType Type
         {
             get { return type; }
             set { type = value; }

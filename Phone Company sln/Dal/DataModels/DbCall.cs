@@ -14,7 +14,7 @@ namespace Dal.DataModels
         public int Id { get; set; }
 
         [Required]
-        [ForeignKey("Line")]
+        [ForeignKey(nameof(Line))]
         public int LineId { get; set; }
 
         public DbLine Line { get; set; }

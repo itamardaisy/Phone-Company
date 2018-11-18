@@ -1,4 +1,5 @@
-﻿using Common.Models;
+﻿using Common.Enums;
+using Common.Models;
 using Dal.DataModels;
 using System;
 using System.Collections.Generic;
@@ -145,7 +146,7 @@ namespace Dal.ModelConverters
                 Id = user.Id,
                 Name = user.Name,
                 Password = user.Password,
-                Type = user.Type
+                Type = (UserType)user.Type
             };
             return dbUser;
         }
