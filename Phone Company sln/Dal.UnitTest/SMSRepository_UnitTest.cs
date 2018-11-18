@@ -7,8 +7,54 @@ namespace Dal.UnitTest
     public class SMSRepository_UnitTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void AddNewSMS_RecivedNewSMS_SMSWasAddedToTheDBAndTheCallWasReturn()
         {
+            //Arrange
+
+            //Act
+
+            //Assert
+        }
+
+        [TestMethod]
+        public void GetLineSMS_RecivedLineNumber_ListOfLineSMSsWasRecived()
+        {
+            //Arrange
+
+            //Act
+
+            //Assert
+        }
+
+        [TestMethod]
+        public void GetLineSMS_RecivedLineNumber_NoSMSWasFound()
+        {
+            //Arrange
+
+            //Act
+
+            //Assert
+        }
+
+        [TestMethod]
+        public void GetLineSMSMonth_RecivedLineNumberAndMonth_ListOfSMSsOfTheMonthRecived
+()
+        {
+            //Arrange
+
+            //Act
+
+            //Assert
+        }
+
+        [TestMethod]
+        public void GetLineSMSMonth_RecivedLineNumberAndMonth_NoSMSsOfTheMonthFound()
+        {
+            //Arrange
+
+            //Act
+
+            //Assert
         }
     }
 }

@@ -7,8 +7,46 @@ namespace Dal.UnitTest
     public class LineRepository_UnitTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void AddNewLine_RecivedNewLine_LineWasAddedToTheDB()
         {
+            //Arrange
+
+            //Act
+
+            //Assert
+        }
+
+        [TestMethod]
+        public void GetLine_RecivedLineName_RecivedTheLineFromTheDB
+()
+        {
+            //Arrange
+
+            //Act
+
+            //Assert
+        }
+
+        [TestMethod]
+        public void GetLine_RecivedLineName_NoClientWasFound
+()
+        {
+            //Arrange
+
+            //Act
+
+            //Assert
+        }
+
+        [TestMethod]
+        public void UpdateLine_RecivedLineToUpdate_LineWasUpdatedInTheDB
+()
+        {
+            //Arrange
+
+            //Act
+
+            //Assert
         }
     }
 }

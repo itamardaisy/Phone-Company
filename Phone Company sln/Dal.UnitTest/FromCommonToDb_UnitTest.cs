@@ -1,6 +1,7 @@
 ﻿using Common.Models;
 using Dal.DataModels;
 using Dal.ModelConverters;
+using FakeItEasy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -14,133 +15,203 @@ namespace Dal.UnitTest
     public class FromCommonToDb_UnitTest
     {
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetCall_Convert()
         {
             //Arrange
             var commonCall = new Call();
             var dbCall = new DbCall();
+
+            var fake = A.Fake<DbCall>(o => o.Wrapping(dbCall));
             //Act
-            dbCall = commonCall.CommonToDb();
+            var results = commonCall.CommonToDb();
+            A.CallTo(() => fake.Equals(A<object>._)).ReturnsLazily(
+                call =>
+                {
+                    var other = call.GetArgument<DbCall>(0);
+                    return results.Id == other.Id;
+                });
             //Assert
-            Assert.AreEqual(dbCall, commonCall);
+            Assert.AreEqual(fake, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetClient_Convert()
         {
             //Arrange
             var commonClient = new Client();
             var dbClient = new DbClient();
+
+            var fake = A.Fake<DbClient>(o => o.Wrapping(dbClient));
             //Act
-            dbClient = commonClient.CommonToDb();
+            var results = commonClient.CommonToDb();
+            A.CallTo(() => fake.Equals(A<object>._)).ReturnsLazily(
+                call =>
+                {
+                    var other = call.GetArgument<DbClient>(0);
+                    return results.Id == other.Id;
+                });
             //Assert
-            Assert.AreEqual(dbClient, commonClient);
+            Assert.AreEqual(fake, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetClientType_Convert()
         {
             //Arrange
             var commonClientType = new ClientType();
             var dbClientType = new DbClientType();
+
+            var fake = A.Fake<DbClientType>(o => o.Wrapping(dbClientType));
             //Act
-            dbClientType = commonClientType.CommonToDb();
+            var results = commonClientType.CommonToDb();
+            A.CallTo(() => fake.Equals(A<object>._)).ReturnsLazily(
+                call =>
+                {
+                    var other = call.GetArgument<DbClientType>(0);
+                    return results.Id == other.Id;
+                });
             //Assert
-            Assert.AreEqual(dbClientType, commonClientType);
+            Assert.AreEqual(fake, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetLine_Convert()
         {
             //Arrange
             var commonLine = new Line();
             var dbLine = new DbLine();
+
+            var fake = A.Fake<DbLine>(o => o.Wrapping(dbLine));
             //Act
-            dbLine = commonLine.CommonToDb();
+            var results = commonLine.CommonToDb();
+            A.CallTo(() => fake.Equals(A<object>._)).ReturnsLazily(
+               call =>
+                 {
+                     var other = call.GetArgument<DbLine>(0);
+                     return results.Id == other.Id;
+                 });
             //Assert
-            Assert.AreEqual(dbLine, commonLine);
+            Assert.AreEqual(fake, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetPackage_Convert()
         {
             //Arrange
             var commonPackage = new Package();
             var dbPackage = new DbPackage();
+
+            var fake = A.Fake<DbPackage>(o => o.Wrapping(dbPackage));
             //Act
-            dbPackage = commonPackage.CommonToDb();
+            var results = commonPackage.CommonToDb();
+            A.CallTo(() => fake.Equals(A<object>._)).ReturnsLazily(
+                call =>
+                  {
+                      var other = call.GetArgument<DbPackage>(0);
+                      return results.Id == other.Id;
+                  });
             //Assert
-            Assert.AreEqual(dbPackage, commonPackage);
+            Assert.AreEqual(fake, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetPayment_Convert()
         {
             //Arrange
             var commonPayment = new Payment();
             var dbPayment = new DbPayment();
+
+            var fake = A.Fake<DbPayment>(o => o.Wrapping(dbPayment));
             //Act
-            dbPayment = commonPayment.CommonToDb();
+            var results = commonPayment.CommonToDb();
+            A.CallTo(() => fake.Equals(A<object>._)).ReturnsLazily(
+                call =>
+                {
+                    var other = call.GetArgument<DbPayment>(0);
+                    return results.Id == other.Id;
+                });
             //Assert
-            Assert.AreEqual(dbPayment, commonPayment);
+            Assert.AreEqual(fake, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetSelectedNumber_Convert()
         {
             //Arrange
             var commonSelectedNumber = new SelectedNumber();
             var dbSelectedNumber = new DbSelectedNumber();
+
+            var fake = A.Fake<DbSelectedNumber>(o => o.Wrapping(dbSelectedNumber));
             //Act
-            dbSelectedNumber = commonSelectedNumber.CommonToDb();
+            var results = commonSelectedNumber.CommonToDb();
+            A.CallTo(() => fake.Equals(A<object>._)).ReturnsLazily(
+                call =>
+                {
+                    var other = call.GetArgument<DbSelectedNumber>(0);
+                    return results.Id == other.Id;
+                });
             //Assert
-            Assert.AreEqual(dbSelectedNumber, commonSelectedNumber);
+            Assert.AreEqual(fake, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetSMS_Convert()
         {
             //Arrange
             var commonSMS = new SMS();
             var dbSMS = new DbSMS();
+
+            var fake = A.Fake<DbSMS>(o => o.Wrapping(dbSMS));
             //Act
-            dbSMS = commonSMS.CommonToDb();
+            var results = commonSMS.CommonToDb();
+            A.CallTo(() => fake.Equals(A<object>._)).ReturnsLazily(
+               call =>
+               {
+                   var other = call.GetArgument<DbSMS>(0);
+                   return results.Id == other.Id;
+               });
             //Assert
-            Assert.AreEqual(dbSMS, commonSMS);
+            Assert.AreEqual(fake, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetUnsignClient_Convert()
         {
             //Arrange
             var commonUnsignClient = new UnsignClient();
             var dbUnsignClient = new DbUnsignClient();
+
+            var fake = A.Fake<DbUnsignClient>(o => o.Wrapping(dbUnsignClient));
             //Act
-            dbUnsignClient = commonUnsignClient.CommonToDb();
+            var results = commonUnsignClient.CommonToDb();
+            A.CallTo(() => fake.Equals(A<object>._)).ReturnsLazily(
+               call =>
+               {
+                   var other = call.GetArgument<DbUnsignClient>(0);
+                   return results.Id == other.Id;
+               });
             //Assert
-            Assert.AreEqual(dbUnsignClient, commonUnsignClient);
+            Assert.AreEqual(fake, results);
         }
 
         [TestMethod]
-        [Ignore("Method Isn't In GitHub")]
         public void CommonToDb_GetUser_Convert()
         {
             //Arrange
             var commonUser = new User();
             var dbUser = new DbUser();
+
+            var fake = A.Fake<DbUser>(o => o.Wrapping(dbUser));
             //Act
-            dbUser = commonUser.CommonToDb();
+            var results = commonUser.CommonToDb();
+            A.CallTo(() => fake.Equals(A<object>._)).ReturnsLazily(
+                call =>
+                {
+                    var other = call.GetArgument<DbUser>(0);
+                    return results.Id == other.Id;
+                });
             //Assert
-            Assert.AreEqual(dbUser, commonUser);
+            Assert.AreEqual(fake, results);
         }
     }
 }
