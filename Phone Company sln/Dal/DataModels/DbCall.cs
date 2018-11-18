@@ -20,7 +20,7 @@ namespace Dal.DataModels
         public DbLine Line { get; set; }
 
         [Required]
-        [MaxLength(30, ErrorMessage = "Cannot be more the 30 chars")]
+        //   [MaxLength(30, ErrorMessage = "Cannot be more the 30 chars")]
         public double Duration { get; set; }
 
         [Required]
