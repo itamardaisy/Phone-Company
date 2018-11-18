@@ -72,6 +72,15 @@
     <Compile Include="ModelConverters\FromCommonToDb.cs" />
     <Compile Include="ModelConverters\FromDbToCommon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CallsRepository.cs" />
+    <Compile Include="Repositories\ClientRepository.cs" />
+    <Compile Include="Repositories\ClientTypeRepository.cs" />
+    <Compile Include="Repositories\LineRepository.cs" />
+    <Compile Include="Repositories\ManagerRepository.cs" />
+    <Compile Include="Repositories\PackageRepository.cs" />
+    <Compile Include="Repositories\PaymentRepository.cs" />
+    <Compile Include="Repositories\SelectedNumbersRepository.cs" />
+    <Compile Include="Repositories\SMSRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

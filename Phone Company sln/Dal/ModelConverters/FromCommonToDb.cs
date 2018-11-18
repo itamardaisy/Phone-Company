@@ -20,7 +20,8 @@ namespace Dal.ModelConverters
                 DestinationNumber = call.DestinationNumber,
                 Duration = call.Duration,
                 Id = call.Id,
-                LineId = call.LineId
+                LineId = call.LineId,
+                CallDate = call.CallDate
             };
             return dbCall;
         }

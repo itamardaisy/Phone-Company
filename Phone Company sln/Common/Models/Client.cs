@@ -8,6 +8,7 @@ namespace Common.Models
 {
     public class Client
     {
+        public global::Dal.DataModels.DbClient fromCommontodb;
         private int id;
         private string name;
         private string lastName;

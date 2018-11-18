@@ -23,6 +23,8 @@ namespace Dal.DataModels
         //   [MaxLength(30, ErrorMessage = "Cannot be more the 30 chars")]
         public double Duration { get; set; }
 
+        public DateTime CallDate { get; set; }
+
         [Required]
         public string DestinationNumber { get; set; }
     }

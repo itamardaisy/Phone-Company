@@ -9,7 +9,7 @@ namespace Common.Interfaces
 {
     public interface ICallsRepository
     {
-        Call AddNewCall(Call call);
+        void AddNewCall(Call call);
 
         List<Call> GetLineCalls(string lineNumber);
 

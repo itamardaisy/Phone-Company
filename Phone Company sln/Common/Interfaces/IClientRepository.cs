@@ -9,9 +9,9 @@ namespace Common.Interfaces
 {
     public interface IClientRepository
     {
-        Client AddNewClient(Client client);
+        void AddNewClient(Client client);
 
-        Client UpdateClient(Client client);
+        void UpdateClient(Client client);
 
         Client GetClientById(int id);
     }
