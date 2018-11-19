@@ -13,6 +13,7 @@ namespace UI.Employee.ViewModel
     internal class ViewModelLocator
     {
         public const string MainPageKey = "MainView";
+        public const string EmployeeMainPageKey = "EmployeeMainPage";
 
         public ViewModelLocator()
         {
@@ -21,7 +22,7 @@ namespace UI.Employee.ViewModel
             #region Navigation Key Configure
 
             var nav = new NavigationService();
-            // nav.Configure(ClientLoginPageKey, typeof(Page.ClientLoginPage));
+            nav.Configure(EmployeeMainPageKey, typeof(Pages.EmployeeMainPage));
 
             #endregion Navigation Key Configure
 
