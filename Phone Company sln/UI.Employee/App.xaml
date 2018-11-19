@@ -1,0 +1,12 @@
+﻿<Application
+    x:Class="UI.Employee.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UI.Employee"
+    xmlns:Locator="using:UI.Employee.ViewModel">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Locator:ViewModelLocator x:Key="Locator" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
