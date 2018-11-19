@@ -13,11 +13,18 @@ namespace UI.Employee.ViewModel
     {
         private readonly INavigationService _navigationService;
         public RelayCommand NavigateCommandToSearchForClient { get; private set; }
+        public RelayCommand NavigateCommandToAddClient { get; set; }
 
         public EmployeeMainViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             NavigateCommandToSearchForClient = new RelayCommand(NavigateCommandActionToFindClient);
+            NavigateCommandToAddClient = new RelayCommand(NavigateCommandActionToAddNewClient);
+        }
+
+        private void NavigateCommandActionToAddNewClient()
+        {
+            _navigationService.NavigateTo(pageKey: "AddNewClientPage");
         }
 
         private void NavigateCommandActionToFindClient()

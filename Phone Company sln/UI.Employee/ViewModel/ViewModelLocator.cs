@@ -17,6 +17,7 @@ namespace UI.Employee.ViewModel
         public const string MainPageKey = "MainView";
         public const string EmployeeMainPageKey = "EmployeeMainPage";
         public const string FindClientPageKey = "FindClientPage";
+        public const string AddNewClientPageKey = "AddNewClientPage";
 
         #endregion PageKey for navigation Service
 
@@ -32,6 +33,7 @@ namespace UI.Employee.ViewModel
             nav.Configure(MainPageKey, typeof(MainPage));
             nav.Configure(EmployeeMainPageKey, typeof(Pages.EmployeeMainPage));
             nav.Configure(FindClientPageKey, typeof(Pages.FindClientPage));
+            nav.Configure(AddNewClientPageKey, typeof(Pages.AddNewClientPage));
 
             #endregion Navigation Key Configure
 
@@ -43,6 +45,7 @@ namespace UI.Employee.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<EmployeeMainViewModel>();
             SimpleIoc.Default.Register<FindClientViewModel>();
+            SimpleIoc.Default.Register<AddNewClientViewModel>();
 
             //Example For Registering Service
             //  SimpleIoc.Default.Register<IService, Service>();
@@ -71,6 +74,14 @@ namespace UI.Employee.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<FindClientViewModel>();
+            }
+        }
+
+        public AddNewClientViewModel AddNewClientViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AddNewClientViewModel>();
             }
         }
 
