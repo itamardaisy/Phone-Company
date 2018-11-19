@@ -125,8 +125,12 @@
     <Compile Include="Pages\EmployeeMainPage.xaml.cs">
       <DependentUpon>EmployeeMainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\FindClientPage.xaml.cs">
+      <DependentUpon>FindClientPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\EmployeeMainViewModel.cs" />
+    <Compile Include="ViewModel\FindClientViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
@@ -156,6 +160,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\EmployeeMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FindClientPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
