@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace UI.Employee.ViewModel
 
         public int SearchID { get; set; }
 
-        public List<Client> ClientsFound { get; set; }
+        public ObservableCollection<Client> ClientsFound { get; set; }
 
         public RelayCommand CommandToGetUserByID { get; private set; }
         public RelayCommand NavigateCommandToBack { get; private set; }
@@ -27,7 +28,7 @@ namespace UI.Employee.ViewModel
             NavigateCommandToBack = new RelayCommand(NavigateCommandActionToBack);
             CommandToGetUserByID = new RelayCommand(CommandToGetUser);
             // there's a new client here just to see that the binding works
-            ClientsFound = new List<Client>
+            ClientsFound = new ObservableCollection<Client>
             {
                 new Client { Adress = "asdasdsa", CallToCenter = 111, ClientTypeId = 1, ContactNumber = "12312312", Id = 1, LastName = "baba", Name = "asdasda", SignDate = DateTime.MinValue }
             };
