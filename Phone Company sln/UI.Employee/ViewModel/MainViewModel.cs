@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UI.Employee.Helper;
 
 namespace UI.Employee.ViewModel
 {
@@ -21,7 +22,7 @@ namespace UI.Employee.ViewModel
 
         private void NavigateCommandAction()
         {
-            _navigationService.NavigateTo(pageKey: "EmployeeMainPage");
+            _navigationService.NavigateTo("EmployeeMainPage");
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UI.Employee.Helper;
 using Windows.UI.Xaml.Controls;
 
 namespace UI.Employee.ViewModel
@@ -18,6 +19,7 @@ namespace UI.Employee.ViewModel
         public const string EmployeeMainPageKey = "EmployeeMainPage";
         public const string FindClientPageKey = "FindClientPage";
         public const string AddNewClientPageKey = "AddNewClientPage";
+        public const string ClientsInfoPageKey = "ClientsInfoPage";
 
         #endregion PageKey for navigation Service
 
@@ -30,10 +32,11 @@ namespace UI.Employee.ViewModel
             //Configuring each PageKey for a page
 
             var nav = new NavigationService();
-            nav.Configure(MainPageKey, typeof(MainPage));
-            nav.Configure(EmployeeMainPageKey, typeof(Pages.EmployeeMainPage));
-            nav.Configure(FindClientPageKey, typeof(Pages.FindClientPage));
-            nav.Configure(AddNewClientPageKey, typeof(Pages.AddNewClientPage));
+            nav.Configure(MainPageKey, typeof(MainPage)/*new Uri("../MainPage.xaml", UriKind.Relative)*/);
+            nav.Configure(EmployeeMainPageKey, typeof(Pages.EmployeeMainPage) /*new Uri("../Pages/EmployeeMainPage.xaml", UriKind.Relative));*/);
+            nav.Configure(FindClientPageKey, typeof(Pages.FindClientPage) /*new Uri("../Pages/FindClientPage.xaml", UriKind.Relative));*/  );
+            nav.Configure(AddNewClientPageKey, typeof(Pages.AddNewClientPage) /*new Uri("../Pages/AddNewClientPage.xaml", UriKind.Relative));*/);
+            nav.Configure(ClientsInfoPageKey, typeof(Pages.ClientsInfoPage) /*new Uri("../Pages/ClientsInfoPage.xaml", UriKind.Relative));*/ );
 
             #endregion Navigation Key Configure
 
@@ -46,6 +49,7 @@ namespace UI.Employee.ViewModel
             SimpleIoc.Default.Register<EmployeeMainViewModel>();
             SimpleIoc.Default.Register<FindClientViewModel>();
             SimpleIoc.Default.Register<AddNewClientViewModel>();
+            SimpleIoc.Default.Register<ClientsInfoViewModel>();
 
             //Example For Registering Service
             //  SimpleIoc.Default.Register<IService, Service>();
@@ -58,6 +62,14 @@ namespace UI.Employee.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
+            }
+        }
+
+        public ClientsInfoViewModel ClientsInfoViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ClientsInfoViewModel>();
             }
         }
 

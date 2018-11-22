@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UI.Employee.Helper;
 using UI.Employee.Models;
 using Windows.UI.Popups;
 
@@ -17,7 +18,7 @@ namespace UI.Employee.ViewModel
 
         public int SearchID { get; set; }
 
-        public Client localClientToUSe { get; set; }
+        public Client localClientToUse { get; set; }
 
         public ObservableCollection<Client> ClientsFound { get; set; }
 
@@ -38,9 +39,11 @@ namespace UI.Employee.ViewModel
             };
         }
 
-        private async void CommandMoveToSelctedUser()
+        private void CommandMoveToSelctedUser()
         {
-            await new MessageDialog("This Method will move you to a screen where you can chamge info on the user || The User ID IS " + localClientToUSe.Id).ShowAsync();
+            //await new MessageDialog("This Method will move you to a screen where you can chamge info on the user || The User ID IS " + localClientToUSe.Id).ShowAsync();
+
+            _navigationService.NavigateTo(pageKey: "ClientsInfoPage", parameter: localClientToUse);
         }
 
         //This Method will get the id that user has entered
@@ -48,7 +51,7 @@ namespace UI.Employee.ViewModel
         private async void CommandToGetUser()
         {
             await new MessageDialog("This Method will get the id that user has entered").ShowAsync();
-            localClientToUSe = ClientsFound.FirstOrDefault();
+            localClientToUse = ClientsFound.FirstOrDefault();
         }
 
         private void NavigateCommandActionToBack()
