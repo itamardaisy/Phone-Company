@@ -17,16 +17,20 @@ namespace UI.Employee.ViewModel
 
         public int SearchID { get; set; }
 
+        public Client localClientToUSe { get; set; }
+
         public ObservableCollection<Client> ClientsFound { get; set; }
 
         public RelayCommand CommandToGetUserByID { get; private set; }
         public RelayCommand NavigateCommandToBack { get; private set; }
+        public RelayCommand CommandToMoveToSelectedUser { get; private set; }
 
         public FindClientViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             NavigateCommandToBack = new RelayCommand(NavigateCommandActionToBack);
             CommandToGetUserByID = new RelayCommand(CommandToGetUser);
+            CommandToMoveToSelectedUser = new RelayCommand(CommandMoveToSelctedUser);
             // there's a new client here just to see that the binding works
             ClientsFound = new ObservableCollection<Client>
             {
@@ -34,11 +38,17 @@ namespace UI.Employee.ViewModel
             };
         }
 
+        private async void CommandMoveToSelctedUser()
+        {
+            await new MessageDialog("This Method will move you to a screen where you can chamge info on the user || The User ID IS " + localClientToUSe.Id).ShowAsync();
+        }
+
         //This Method will get the id that user has entered
         //with OnChangeProperty so the list will be updated
         private async void CommandToGetUser()
         {
             await new MessageDialog("This Method will get the id that user has entered").ShowAsync();
+            localClientToUSe = ClientsFound.FirstOrDefault();
         }
 
         private void NavigateCommandActionToBack()
