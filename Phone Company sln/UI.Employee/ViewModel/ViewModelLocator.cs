@@ -52,7 +52,7 @@ namespace UI.Employee.ViewModel
                 SimpleIoc.Default.Register<EmployeeMainViewModel>();
                 SimpleIoc.Default.Register<FindClientViewModel>();
                 SimpleIoc.Default.Register<AddNewClientViewModel>();
-                SimpleIoc.Default.Register<ClientsInfoViewModel>();
+                SimpleIoc.Default.Register<ClientsInfoViewModel>(() => new ClientsInfoViewModel());
             }
             catch (Exception e)
             {

@@ -38,7 +38,7 @@
         <ListBox ItemsSource="{Binding ClientsFound,Mode=TwoWay}" DisplayMemberPath="Name"  Grid.Row="2" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="5">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding CommandToMoveToSelectedUser}" />
+                    <i:InvokeCommandAction Command="{Binding CommandToMoveToSelectedUser}" CommandParameter="{Binding SelectedUser}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListBox>

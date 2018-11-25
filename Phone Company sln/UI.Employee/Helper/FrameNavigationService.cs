@@ -11,7 +11,7 @@ using Windows.UI.Xaml.Media;
 
 namespace UI.Employee.Helper
 {
-    internal class FrameNavigationService : IFrameNavigationService, INotifyPropertyChanged
+    internal class FrameNavigationService : PageNavigationService, INotifyPropertyChanged
     {
         #region Fields
 

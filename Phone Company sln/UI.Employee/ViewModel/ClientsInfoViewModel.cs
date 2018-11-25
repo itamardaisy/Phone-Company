@@ -11,21 +11,19 @@ using Windows.UI.Xaml.Navigation;
 
 namespace UI.Employee.ViewModel
 {
-    internal class ClientsInfoViewModel : Page
+    internal class ClientsInfoViewModel
     {
         private readonly INavigationService _navigationService;
 
         public Client newClient { get; set; }
 
-        public ClientsInfoViewModel(NavigationService navigationService)
+        public ClientsInfoViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        public ClientsInfoViewModel()
         {
-            newClient = e.Parameter as Client;  // "My data"
-            base.OnNavigatedTo(e);
         }
     }
 }
