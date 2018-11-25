@@ -43,7 +43,7 @@ namespace UI.Employee.ViewModel
 
         private void NavigationCommandActionToMainEmployeePage()
         {
-            _navigationService.NavigateTo(pageKey: "EmployeeMainPage");
+            _navigationService.NavigateTo("EmployeeMainPage");
         }
 
         //This function will add to the observableCollection all the client types

@@ -41,9 +41,8 @@ namespace UI.Employee.ViewModel
 
         private void CommandMoveToSelctedUser()
         {
-            //await new MessageDialog("This Method will move you to a screen where you can chamge info on the user || The User ID IS " + localClientToUSe.Id).ShowAsync();
-
-            _navigationService.NavigateTo(pageKey: "ClientsInfoPage", parameter: localClientToUse);
+            //await new MessageDialog("This Method will move you to a screen where you can change info on the user || The User ID IS " + localClientToUSe.Id).ShowAsync();
+            _navigationService.NavigateTo("ClientsInfoPage", localClientToUse);
         }
 
         //This Method will get the id that user has entered

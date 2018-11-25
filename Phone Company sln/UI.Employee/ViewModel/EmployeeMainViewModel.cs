@@ -25,12 +25,12 @@ namespace UI.Employee.ViewModel
 
         private void NavigateCommandActionToAddNewClient()
         {
-            _navigationService.NavigateTo(pageKey: "AddNewClientPage");
+            _navigationService.NavigateTo("AddNewClientPage");
         }
 
         private void NavigateCommandActionToFindClient()
         {
-            _navigationService.NavigateTo(pageKey: "FindClientPage");
+            _navigationService.NavigateTo("FindClientPage");
         }
     }
 }
