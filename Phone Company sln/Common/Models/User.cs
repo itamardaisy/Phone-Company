@@ -13,9 +13,9 @@ namespace Common.Models
         private string name;
         private string email;
         private string password;
-        private int callAnswer;
-        private DateTime signDate;
         private UserType type;
+        private DateTime signDate;
+        private int callAnswer;
 
         public int Id
         {

@@ -1,4 +1,5 @@
-﻿using Common.Interfaces;
+﻿using Common.Enums;
+using Common.Interfaces;
 using Common.Models;
 using Dal.DataInitializer;
 using Dal.ModelConverters;
@@ -21,11 +22,13 @@ namespace Dal.Repositories
             }
         }
 
-        public Payment GetByMonth(DateTime dateTime)
+        public Dictionary<PaymentType,Payment> GetByMonth(DateTime dateTime, Client client, string lineNumber)
         {
             using(PhoneCompanyContext context = new PhoneCompanyContext())
             {
-                return context.Payments.Where(x => x.Month.Month == dateTime.Month).FirstOrDefault().DbToCommon();
+                var calls = context.Calls.Select(x => x.CallDate.Month == dateTime.Month).ToList();
+                var smss = context.SMSs.Select(x => x.SMSDate.Month == dateTime.Month).ToList();
+                foreach
             }
         }
     }

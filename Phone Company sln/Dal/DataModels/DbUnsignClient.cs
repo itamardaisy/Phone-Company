@@ -48,5 +48,11 @@ namespace Dal.DataModels
         [Required]
         [DefaultValue(0)]
         public int CallToCenter { get; set; }
+
+        [Required]
+        [ForeignKey(nameof(User))]
+        public int UserId { get; set; }
+
+        public virtual DbUser User { get; set; }
     }
 }

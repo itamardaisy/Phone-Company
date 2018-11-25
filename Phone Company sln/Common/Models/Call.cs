@@ -9,22 +9,21 @@ namespace Common.Models
     public class Call
     {
         private int id;
-        private int lineId;
         private double duration;
         private string destinationNumber;
         private DateTime callDate;
-
-        public DateTime CallDate
-        {
-            get { return callDate; }
-            set { callDate = value; }
-        }
-
+        private int lineId;
 
         public int Id
         {
             get { return id; }
             set { id = value; }
+        }
+
+        public DateTime CallDate
+        {
+            get { return callDate; }
+            set { callDate = value; }
         }
 
         public int LineId

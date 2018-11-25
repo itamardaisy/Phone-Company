@@ -8,7 +8,6 @@ namespace Common.Models
 {
     public class Client
     {
-      //  public global::Dal.DataModels.DbClient fromCommontodb;
         private int id;
         private string name;
         private string lastName;
@@ -17,6 +16,7 @@ namespace Common.Models
         private string contactNumber;
         private DateTime signDate;
         private int callToCenter;
+        private int userId;
 
         public int Id
         {
@@ -64,6 +64,12 @@ namespace Common.Models
         {
             get { return callToCenter; }
             set { callToCenter = value; }
+        }
+
+        public int UserId
+        {
+            get { return userId; }
+            set { userId = value; }
         }
     }
 }

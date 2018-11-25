@@ -1,4 +1,5 @@
-﻿using Common.Models;
+﻿using Common.Enums;
+using Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Common.Interfaces
 {
     public interface IPaymentRepository
     {
-        Payment GetByMonth(DateTime dateTime);
+        Dictionary<PaymentType, Payment> GetByMonth(DateTime dateTime, Client client, string lineNumber);
 
         void AddPayment(Payment payment);
     }
