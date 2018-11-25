@@ -10,10 +10,11 @@ namespace Dal.DataInitializer
 {
     public class PhoneCompanyContext : DbContext
     {
-        public PhoneCompanyContext()
+        public PhoneCompanyContext() : base("PhoneCompanyDb")
         {
             Database.SetInitializer(new DbInit());
         }
+
         public virtual DbSet<DbCall> Calls { get; set; }
         public virtual DbSet<DbClient> Clients { get; set; }
         public DbSet<DbClientType> ClientTypes { get; set; }
