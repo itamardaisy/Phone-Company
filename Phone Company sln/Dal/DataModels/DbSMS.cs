@@ -23,6 +23,9 @@ namespace Dal.DataModels
 
         public DbLine Line { get; set; }
 
+        [DataType(DataType.DateTime)]
+        public DateTime SmsDate { get; set; }
+
         [Required]
         public string DestinationNumber { get; set; }
     }

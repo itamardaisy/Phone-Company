@@ -12,7 +12,7 @@ namespace Dal.DataInitializer
     {
         public PhoneCompanyContext() : base("PhoneCompanyDb")
         {
-            Database.SetInitializer(new DbInit());
+            Database.SetInitializer<PhoneCompanyContext>(new CreateDatabaseIfNotExists<PhoneCompanyContext>());
         }
 
         public virtual DbSet<DbCall> Calls { get; set; }

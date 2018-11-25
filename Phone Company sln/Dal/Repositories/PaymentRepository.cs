@@ -1,5 +1,7 @@
 ﻿using Common.Interfaces;
 using Common.Models;
+using Dal.DataInitializer;
+using Dal.ModelConverters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +12,21 @@ namespace Dal.Repositories
 {
     public class PaymentRepository : IPaymentRepository
     {
-        public bool AddPayment(Payment payment)
+        public void AddPayment(Payment payment)
         {
-            throw new NotImplementedException();
+            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                context.Payments.Add(payment.CommonToDb());
+                context.SaveChanges();
+            }
         }
 
         public Payment GetByMonth(DateTime dateTime)
         {
-            throw new NotImplementedException();
+            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                return context.Payments.Where(x => x.Month.Month == dateTime.Month).FirstOrDefault().DbToCommon();
+            }
         }
     }
 }
