@@ -1,5 +1,6 @@
 ﻿using Common.Enums;
 using Common.Models;
+using Dal.DataInitializer;
 using Dal.DataModels;
 using Dal.ModelConverters;
 
@@ -39,7 +40,8 @@ namespace Dal.ModelConverters
                 ContactNumber = dbClient.ContactNumber,
                 Id = dbClient.Id,
                 LastName = dbClient.LastName,
-                Name = dbClient.Name
+                Name = dbClient.Name,
+                UserId = dbClient.UserId
             };
             return client;
         }
@@ -60,10 +62,9 @@ namespace Dal.ModelConverters
         {
             Line line = new Line()
             {
-                ClientId = dbLine.ClientId,
                 Id = dbLine.Id,
                 Number = dbLine.Number,
-                Package = dbLine.PackageId,
+                PackageId = dbLine.PackageId,
                 Status = dbLine.Status
             };
             return line;
@@ -117,7 +118,8 @@ namespace Dal.ModelConverters
                 DestinationNumber = dbSMS.DestinationNumber,
                 ExternalPrice = dbSMS.ExternalPrice,
                 Id = dbSMS.Id,
-                LineId = dbSMS.LineId
+                LineId = dbSMS.LineId,
+                SMSDate = dbSMS.SMSDate
             };
             return sMS;
         }

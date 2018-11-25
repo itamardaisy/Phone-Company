@@ -9,21 +9,15 @@ namespace Common.Models
     public class Line
     {
         private int id;
-        private int clientId;
         private string number;
         private bool status;
-        private int package;
+        private int packageId;
+        private int clientId;
 
         public int Id
         {
             get { return id; }
             set { id = value; }
-        }
-
-        public int ClientId
-        {
-            get { return clientId; }
-            set { clientId = value; }
         }
 
         public string Number
@@ -38,10 +32,16 @@ namespace Common.Models
             set { status = value; }
         }
 
-        public int Package
+        public int PackageId
         {
-            get { return package; }
-            set { package = value; }
+            get { return packageId; }
+            set { packageId = value; }
+        }
+
+        public int ClientId
+        {
+            get { return clientId; }
+            set { clientId = value; }
         }
     }
 }

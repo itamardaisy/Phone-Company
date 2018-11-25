@@ -25,5 +25,8 @@ namespace Dal.DataModels
 
         [Required]
         public string DestinationNumber { get; set; }
+
+        [Required]
+        public DateTime SMSDate { get; set; }
     }
 }

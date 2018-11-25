@@ -17,6 +17,7 @@ namespace Common.Models
         private DateTime signDate;
         private DateTime unsignDate;
         private int callToCenter;
+        private int userId;
 
         public int Id
         {
@@ -70,6 +71,12 @@ namespace Common.Models
         {
             get { return callToCenter; }
             set { callToCenter = value; }
+        }
+
+        public int UserId
+        {
+            get { return userId; }
+            set { userId = value; }
         }
     }
 }

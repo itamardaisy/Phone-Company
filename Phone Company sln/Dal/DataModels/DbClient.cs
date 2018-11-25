@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace Dal.DataModels
 
         [Required]
         [DataType(DataType.Text)]
+        [RegularExpression("([a-z A-Z]{5,20})~([a-z A-Z]{5,20})~([0-9/]{1,3})~([0-9A-Z]{1,3})")] //cityName Street 6/3A
         public string Adress { get; set; }
 
         [Required]
@@ -41,5 +43,11 @@ namespace Dal.DataModels
 
         [Required(AllowEmptyStrings = true)]
         public int CallToCenter { get; set; }
+
+        [Required]
+        [ForeignKey(nameof(User))]
+        public int UserId { get; set; }
+
+        public virtual DbUser User { get; set; }
     }
 }

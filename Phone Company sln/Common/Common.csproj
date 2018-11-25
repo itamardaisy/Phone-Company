@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\PaymentType.cs" />
     <Compile Include="Enums\UserType.cs" />
     <Compile Include="Interfaces\ICallsRepository.cs" />
     <Compile Include="Interfaces\IClientRepository.cs" />

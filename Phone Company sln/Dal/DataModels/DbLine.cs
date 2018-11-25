@@ -14,16 +14,16 @@ namespace Dal.DataModels
         public int Id { get; set; }
 
         [Required]
-        [ForeignKey(nameof(Client))]
-        public int ClientId { get; set; }
-
-        public DbClient Client { get; set; }
-
-        [Required]
         [ForeignKey(nameof(Package))]
         public int PackageId { get; set; }
 
         public DbPackage Package { get; set; }
+
+        [Required]
+        [ForeignKey(nameof(Client))]
+        public int ClientId { get; set; }
+
+        public DbClient Client { get; set; }
 
         [Required]
         [DataType(DataType.PhoneNumber)]

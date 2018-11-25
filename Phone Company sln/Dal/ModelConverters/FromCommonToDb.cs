@@ -37,7 +37,8 @@ namespace Dal.ModelConverters
                 ContactNumber = client.ContactNumber,
                 Id = client.Id,
                 LastName = client.LastName,
-                Name = client.Name
+                Name = client.Name,
+                UserId = client.UserId
             };
             return dbClient;
         }
@@ -58,10 +59,9 @@ namespace Dal.ModelConverters
         {
             DbLine dbLine = new DbLine()
             {
-                ClientId = line.ClientId,
                 Id = line.Id,
                 Number = line.Number,
-                PackageId = line.Package,
+                PackageId = line.PackageId,
                 Status = line.Status
             };
             return dbLine;
@@ -115,7 +115,8 @@ namespace Dal.ModelConverters
                 DestinationNumber = sMS.DestinationNumber,
                 ExternalPrice = sMS.ExternalPrice,
                 Id = sMS.Id,
-                LineId = sMS.LineId
+                LineId = sMS.LineId,
+                SMSDate = sMS.SMSDate
             };
             return dbSMS;
         }

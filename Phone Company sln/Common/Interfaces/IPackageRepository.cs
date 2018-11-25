@@ -9,12 +9,12 @@ namespace Common.Interfaces
 {
     public interface IPackageRepository
     {
-        Package AddNewPackage(Package package);
+        void AddNewPackage(Package package);
 
         bool DeletePackage(string packageName);
 
         Package GetPackageByName(string packageName);
 
-        bool UpdatePackage(int id, Package package);
+        void UpdatePackage(Package package);
     }
 }

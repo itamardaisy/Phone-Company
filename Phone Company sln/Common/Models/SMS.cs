@@ -10,8 +10,9 @@ namespace Common.Models
     {
         private int id;
         private double externalPrice;
-        private int lineId;
         private string destinationNumber;
+        private DateTime smsDate;
+        private int lineId;
 
         public int Id
         {
@@ -25,16 +26,22 @@ namespace Common.Models
             set { destinationNumber = value; }
         }
 
-        public int LineId
-        {
-            get { return lineId; }
-            set { lineId = value; }
-        }
-
         public double ExternalPrice
         {
             get { return externalPrice; }
             set { externalPrice = value; }
+        }
+
+        public DateTime SMSDate
+        {
+            get { return smsDate; }
+            set { smsDate = value; }
+        }
+
+        public int LineId
+        {
+            get { return lineId; }
+            set { lineId = value; }
         }
     }
 }
