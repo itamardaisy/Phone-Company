@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UI.Employee.Helper
 {
-    internal interface IFrameNavigationService : INavigationService
+    internal interface PageNavigationService : INavigationService
     {
         object Parameter { get; }
     }

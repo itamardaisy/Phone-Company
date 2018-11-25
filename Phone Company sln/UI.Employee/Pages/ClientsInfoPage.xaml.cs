@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UI.Employee.Models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +26,19 @@ namespace UI.Employee.Pages
         public ClientsInfoPage()
         {
             this.InitializeComponent();
+        }
+
+        private Client newClient { get; set; }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            newClient = e.Parameter as Client;  // "My data"
+            clientName.Text = newClient.Name.ToString();
+            clientLastName.Text = newClient.LastName.ToString();
+            clientAddress.Text = newClient.Adress.ToString();
+            clientNumber.Text = newClient.ContactNumber.ToString();
+            clientType.Text = newClient.ClientTypeId.ToString();
+            base.OnNavigatedTo(e);
         }
     }
 }

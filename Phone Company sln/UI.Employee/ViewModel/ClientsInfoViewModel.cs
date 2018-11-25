@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UI.Employee.Helper;
 using UI.Employee.Models;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 namespace UI.Employee.ViewModel
@@ -19,7 +20,10 @@ namespace UI.Employee.ViewModel
         public ClientsInfoViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-            //newClient = navigationService.Parameter as Client;
+        }
+
+        public ClientsInfoViewModel()
+        {
         }
     }
 }
