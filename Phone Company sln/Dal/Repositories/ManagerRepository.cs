@@ -10,11 +10,12 @@ namespace Dal.Repositories
 {
     public class ManagerRepository : IManagerRepository
     {
+        
         public Line GetClientReport(Line line)
         {
             throw new NotImplementedException();
         }
-
+        
         public List<Client> GetClientWhoMostLikleyToUnsign()
         {
             throw new NotImplementedException();

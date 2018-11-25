@@ -20,6 +20,11 @@ namespace Dal.Repositories
             throw new NotImplementedException();
         }
 
+        public void SetPackage(Package newPackage)
+        {
+            throw new NotImplementedException();
+        }
+
         public Line UpdateLine(Line line)
         {
             throw new NotImplementedException();

@@ -19,6 +19,7 @@ namespace Dal.Repositories
             {
                 context.ClientTypes.Add(clientType.CommonToDb());
                 context.SaveChanges();
+
             }
         }
 

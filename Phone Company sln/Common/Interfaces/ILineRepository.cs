@@ -14,5 +14,7 @@ namespace Common.Interfaces
         Line GetLine(string lineName);
 
         Line UpdateLine(Line line);
+
+        void SetPackage(Package newPackage);
     }
 }
