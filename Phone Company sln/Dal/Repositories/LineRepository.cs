@@ -40,7 +40,12 @@ namespace Dal.Repositories
             }
         }
 
-        private void UpdateTheLineProperties(DbLine dbLine, Line line)
+        public void SetPackage(Package newPackage)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Line UpdateLine(Line line)
         {
             dbLine.ClientId = line.ClientId;
             dbLine.Id = line.Id;

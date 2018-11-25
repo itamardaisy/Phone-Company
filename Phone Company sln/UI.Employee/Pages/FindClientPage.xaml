@@ -1,0 +1,48 @@
+﻿<Page
+    x:Class="UI.Employee.Pages.FindClientPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UI.Employee.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="using:Windows.UI.Interactivity"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding Source={StaticResource Locator},Path=FindClientViewModel}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.ColumnSpan="10" Text="Search For A Client" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" />
+
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SearchID,Mode=TwoWay}" Grid.ColumnSpan="2" FontSize="50" PlaceholderText="Type Client ID" />
+        <Button Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Command="{Binding CommandToGetUserByID}" Content="Get All Clients" FontSize="50" />
+
+        <ListBox x:Name="myListBox" ItemsSource="{Binding ClientsFound,Mode=TwoWay}" DisplayMemberPath="Name" SelectedItem="{Binding SelctedClient}"  Grid.Row="2" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="5">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding CommandToMoveToSelectedUser}" CommandParameter="{Binding SelctedClient}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListBox>
+
+        <Button Grid.Row="5" Command="{Binding NavigateCommandToBack }" Grid.Column="1" Content="Back"  FontSize="50" />
+    </Grid>
+</Page>

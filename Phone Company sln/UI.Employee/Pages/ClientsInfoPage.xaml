@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="UI.Employee.Pages.ClientsInfoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UI.Employee.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding Source={StaticResource Locator},Path=ClientsInfoViewModel}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.ColumnSpan="10" Text="Client Info" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" />
+
+        <TextBox Name="clientName" Grid.Row="2" PlaceholderText="Name" Text="{Binding newClient.Name}" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="40" />
+        <TextBox Name="clientLastName" Grid.Row="2" PlaceholderText="Last Name" Text="{Binding newClient.LastName}" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="40" />
+
+        <TextBox Name="clientAddress" PlaceholderText="Address" Grid.Row="3" Text="{Binding newClient.Adress}" Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="40" />
+
+        <TextBox Name="clientType" PlaceholderText="Type" Grid.Row="4"   Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="40" />
+        <TextBox Name="clientNumber" PlaceholderText="Number" Grid.Row="4" Text="{Binding newClient.ContactNumber}" Grid.Column="4" Grid.ColumnSpan="2" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+    </Grid>
+</Page>

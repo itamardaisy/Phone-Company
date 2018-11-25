@@ -13,6 +13,8 @@ namespace Common.Interfaces
 
         Line GetLine(string lineName);
 
-        void UpdateLine(Line line);
+        Line UpdateLine(Line line);
+
+        void SetPackage(Package newPackage);
     }
 }

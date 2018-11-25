@@ -9,7 +9,7 @@ namespace Common.Interfaces
 {
     public interface ISelectedNumbersRepository
     {
-        bool AddNewNumber(SelectedNumber selectedNumber);
+        void AddNewNumber(SelectedNumber selectedNumber);
 
         bool DeleteNumber(int id);
 

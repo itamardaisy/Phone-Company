@@ -15,16 +15,17 @@ namespace Dal.Repositories
     {
         public void AddNewType(ClientType clientType)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 context.ClientTypes.Add(clientType.CommonToDb());
                 context.SaveChanges();
+
             }
         }
 
         public bool DeleteType(string typeName)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 context.ClientTypes.Remove(context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName));
                 if (!(context.ClientTypes.Any(x => x.TypeName == typeName)))
@@ -36,7 +37,7 @@ namespace Dal.Repositories
 
         public List<ClientType> GetAllTypes()
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 return context.ClientTypes.Select(x => x.DbToCommon()).ToList();
             }
@@ -44,7 +45,7 @@ namespace Dal.Repositories
 
         public ClientType GetTypeByName(string typeName)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 return context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName).DbToCommon();
             }
@@ -52,7 +53,7 @@ namespace Dal.Repositories
 
         public void UpdateMinutePrice(string typeName, double newPrice)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName)
                                    .MinutePrice = newPrice;

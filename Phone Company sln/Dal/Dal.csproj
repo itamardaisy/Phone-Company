@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataInitializer\DbInit.cs" />
     <Compile Include="DataInitializer\PhoneCompanyContext.cs" />
     <Compile Include="DataModels\DbCall.cs" />
     <Compile Include="DataModels\DbClient.cs" />

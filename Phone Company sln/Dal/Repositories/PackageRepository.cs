@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dal.ModelConverters;
 using Dal.DataModels;
+using Dal.ModelConverters;
 
 namespace Dal.Repositories
 {
@@ -24,13 +25,22 @@ namespace Dal.Repositories
 
         public bool DeletePackage(string packageName)
         {
+            /*
+             * This function needs to delete a spesific package.
+             * on the delete it needs to fine which customer is using this package and change they're package to other one.
+             *
+             * parameters:
+             *      packageName - the wanted package name.
+             *
+             * return:
+             *      true if the operation sacceed. otherwise false.
+             *
+             */
+            List<Client> packageClients;
             using(PhoneCompanyContext context = new PhoneCompanyContext())
             {
-                context.Packages.Remove(context.Packages.FirstOrDefault(x => x.PackageName == packageName));
-                if (!(context.Packages.Any(x => x.PackageName == packageName)))
-                    return true;
-                else
-                    return false;
+                var wantedPackage = context.Packages.Where(x => x.PackageName == packageName).FirstOrDefault();
+                packageClients = context.Lines.Where(x => x.PackageId == wantedPackage.Id).Select(x => x.)
             }
         }
 
