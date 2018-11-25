@@ -19,7 +19,7 @@ namespace UI.Employee.ViewModel
 
         public int SearchID { get; set; }
 
-        public Client SelectedUser { get; set; }
+        public Client SelctedClient { get; set; }
 
         public ObservableCollection<Client> ClientsFound { get; set; }
 
@@ -43,7 +43,7 @@ namespace UI.Employee.ViewModel
         private void CommandMoveToSelctedUser()
         {
             //await new MessageDialog("This Method will move you to a screen where you can change info on the user || The User ID IS " + localClientToUSe.Id).ShowAsync();
-            _navigationService.NavigateTo("ClientsInfoPage", SelectedUser);
+            _navigationService.NavigateTo("ClientsInfoPage", SelctedClient);
         }
 
         //This Method will get the id that user has entered
@@ -51,7 +51,7 @@ namespace UI.Employee.ViewModel
         private async void CommandToGetUser()
         {
             await new MessageDialog("This Method will get the id that user has entered").ShowAsync();
-            SelectedUser = ClientsFound.FirstOrDefault();
+            //SelectedUser = ClientsFound.FirstOrDefault();
         }
 
         private void NavigateCommandActionToBack()
