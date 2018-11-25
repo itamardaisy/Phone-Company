@@ -9,7 +9,7 @@ namespace Common.Interfaces
 {
     public interface ISMSRepository
     {
-        Call AddNewSMS(SMS sMS);
+        void AddNewSMS(SMS sMS);
 
         List<SMS> GetLineSMS(string lineNumber);
 

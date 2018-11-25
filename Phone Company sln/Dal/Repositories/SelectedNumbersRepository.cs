@@ -1,5 +1,7 @@
 ﻿using Common.Interfaces;
 using Common.Models;
+using Dal.DataInitializer;
+using Dal.ModelConverters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +12,18 @@ namespace Dal.Repositories
 {
     public class SelectedNumbersRepository : ISelectedNumbersRepository
     {
-        public bool AddNewNumber(SelectedNumber selectedNumber)
+        public void AddNewNumber(SelectedNumber selectedNumber)
         {
-            throw new NotImplementedException();
+            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                context.SelectedNumbers.Add(selectedNumber.CommonToDb());
+                context.SaveChanges();
+            }
         }
 
         public bool DeleteNumber(int id)
         {
-            throw new NotImplementedException();
+
         }
 
         public bool UpdateNumber(int id, string numberToReplace, string replacingNumber)

@@ -12,12 +12,23 @@ namespace Dal.Repositories
     {
         public Package AddNewPackage(Package package)
         {
-            throw new NotImplementedException();
+           
         }
 
         public bool DeletePackage(string packageName)
         {
-            throw new NotImplementedException();
+            /*
+             * This function needs to delete a spesific package. 
+             * on the delete it needs to fine which customer is using this package and change they're package to other one.
+             * 
+             * parameters:
+             *      packageName - the wanted package name.
+             *      
+             * return:
+             *      true if the operation sacceed. otherwise false.
+             * 
+             */
+
         }
 
         public Package GetPackageByName(string packageName)

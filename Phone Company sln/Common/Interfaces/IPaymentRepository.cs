@@ -11,6 +11,6 @@ namespace Common.Interfaces
     {
         Payment GetByMonth(DateTime dateTime);
 
-        bool AddPayment(Payment payment);
+        void AddPayment(Payment payment);
     }
 }
