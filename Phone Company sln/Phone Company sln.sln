@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dal.UnitTest", "Dal.UnitTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Employee", "UI.Employee\UI.Employee.csproj", "{89E75693-F6E5-4E25-9133-50CC0E9580DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{C116091F-1667-430E-8D82-3AF4650F662B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,26 @@ Global
 		{89E75693-F6E5-4E25-9133-50CC0E9580DB}.Release|x86.ActiveCfg = Release|x86
 		{89E75693-F6E5-4E25-9133-50CC0E9580DB}.Release|x86.Build.0 = Release|x86
 		{89E75693-F6E5-4E25-9133-50CC0E9580DB}.Release|x86.Deploy.0 = Release|x86
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Debug|x64.Build.0 = Debug|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Debug|x86.Build.0 = Debug|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Release|ARM.Build.0 = Release|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Release|ARM64.Build.0 = Release|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Release|x64.ActiveCfg = Release|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Release|x64.Build.0 = Release|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Release|x86.ActiveCfg = Release|Any CPU
+		{C116091F-1667-430E-8D82-3AF4650F662B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
