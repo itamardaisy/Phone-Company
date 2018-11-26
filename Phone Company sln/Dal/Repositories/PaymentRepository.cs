@@ -28,7 +28,7 @@ namespace Dal.Repositories
             {
                 var calls = context.Calls.Select(x => x.CallDate.Month == dateTime.Month).ToList();
                 var smss = context.SMSs.Select(x => x.SMSDate.Month == dateTime.Month).ToList();
-                foreach
+                return null;
             }
         }
     }

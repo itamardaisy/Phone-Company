@@ -23,7 +23,7 @@ namespace Dal.Repositories
 
         public bool DeleteNumber(int id)
         {
-
+            return false;
         }
 
         public bool UpdateNumber(int id, string numberToReplace, string replacingNumber)

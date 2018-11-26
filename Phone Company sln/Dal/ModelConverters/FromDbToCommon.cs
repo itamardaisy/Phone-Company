@@ -43,7 +43,7 @@ namespace Dal.ModelConverters
                 Name = dbClient.Name,
                 UserId = dbClient.UserId
             };
-            return client
+            return client;
         }
 
         internal static ClientType DbToCommon(this DbClientType dbClientType)

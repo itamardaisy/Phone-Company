@@ -45,7 +45,7 @@ namespace Dal.Repositories
             throw new NotImplementedException();
         }
 
-        public Line UpdateLine(Line line)
+        private void UpdateTheLineProperties(DbLine dbLine, Line line)
         {
             dbLine.ClientId = line.ClientId;
             dbLine.Id = line.Id;

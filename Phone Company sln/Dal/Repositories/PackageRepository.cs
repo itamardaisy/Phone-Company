@@ -36,11 +36,12 @@ namespace Dal.Repositories
              *      true if the operation sacceed. otherwise false.
              *
              */
+            return false;
             List<Client> packageClients;
             using(PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 var wantedPackage = context.Packages.Where(x => x.PackageName == packageName).FirstOrDefault();
-                packageClients = context.Lines.Where(x => x.PackageId == wantedPackage.Id).Select(x => x.)
+                //packageClients = context.Lines.Where(x => x.PackageId == wantedPackage.Id).Select(x => x.DbToCommon()).ToList();
             }
         }
 
