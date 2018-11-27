@@ -23,50 +23,44 @@ namespace UI.Employee.ViewModel
 
         #endregion PageKey for navigation Service
 
-        [PreferredConstructor]
+        /// <summary>
+        /// Registering all the Views in ViewLocator In The Constructor
+        /// </summary>
         public ViewModelLocator()
         {
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-            var nav = new NavigationService();
-
-            #region Navigation Key Configure
-
-            //Configuring each PageKey for a page
-
-            nav.Configure(MainPageKey, typeof(MainPage));
-            nav.Configure(EmployeeMainPageKey, typeof(Pages.EmployeeMainPage));
-            nav.Configure(FindClientPageKey, typeof(Pages.FindClientPage));
-            nav.Configure(AddNewClientPageKey, typeof(Pages.AddNewClientPage));
-            nav.Configure(ClientsInfoPageKey, typeof(Pages.ClientsInfoPage));
-
-            #endregion Navigation Key Configure
-
             #region ViewModel Register
 
-            //Registering all the Views in ViewLocator
-            try
-            {
-                // code causing TargetInvocationException
-                SimpleIoc.Default.Register<INavigationService>(() => nav);
-                SimpleIoc.Default.Register<MainViewModel>();
-                SimpleIoc.Default.Register<EmployeeMainViewModel>();
-                SimpleIoc.Default.Register<FindClientViewModel>();
-                SimpleIoc.Default.Register<AddNewClientViewModel>();
-                SimpleIoc.Default.Register<ClientsInfoViewModel>(() => new ClientsInfoViewModel());
-            }
-            catch (Exception e)
-            {
-                if (e.InnerException != null)
-                {
-                    string err = e.InnerException.Message;
-                }
-            }
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
+            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<EmployeeMainViewModel>();
+            SimpleIoc.Default.Register<FindClientViewModel>();
+            SimpleIoc.Default.Register<AddNewClientViewModel>();
+            SimpleIoc.Default.Register(() => new ClientsInfoViewModel());
             //Example For Registering Service
             //  SimpleIoc.Default.Register<IService, Service>();
 
             #endregion ViewModel Register
+
+            SetUpNavigation();
         }
+
+        /// <summary>
+        /// Configuring each PageKey for a page
+        /// </summary>
+        private static void SetUpNavigation()
+        {
+            var nav = new FrameNavigationService();
+
+            nav.Configure(MainPageKey, new Uri("../MainPage.xaml", UriKind.Relative));
+            nav.Configure(EmployeeMainPageKey, new Uri("../Pages/EmployeePage.xaml", UriKind.Relative));
+            nav.Configure(FindClientPageKey, new Uri("../Pages/FindClientPage.xaml", UriKind.Relative));
+            nav.Configure(AddNewClientPageKey, new Uri("../Pages/AddNewClientPage.xaml", UriKind.Relative));
+            nav.Configure(ClientsInfoPageKey, new Uri("../Pages/ClientsInfoPage.xaml", UriKind.Relative));
+            SimpleIoc.Default.Register<IFrameNavigationService>(() => nav);
+        }
+
+        #region Setting ViewModels
 
         public MainViewModel MainView
         {
@@ -112,5 +106,7 @@ namespace UI.Employee.ViewModel
         {
             return ServiceLocator.Current.GetInstance<T>();
         }
+
+        #endregion Setting ViewModels
     }
 }

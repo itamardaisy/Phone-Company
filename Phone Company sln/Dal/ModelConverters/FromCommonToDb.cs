@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 [assembly: InternalsVisibleTo("Dal.UnitTest")]
+[assembly: InternalsVisibleTo("BL.UnitTest")]
+
 namespace Dal.ModelConverters
 {
     internal static class FromCommonToDb

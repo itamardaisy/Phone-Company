@@ -9,13 +9,15 @@ using System.Threading.Tasks;
 using Dal.ModelConverters;
 using Dal.DataModels;
 
+using Dal.ModelConverters;
+
 namespace Dal.Repositories
 {
     public class PackageRepository : IPackageRepository
     {
         public void AddNewPackage(Package package)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 context.Packages.Add(package.CommonToDb());
                 context.SaveChanges();
@@ -35,6 +37,7 @@ namespace Dal.Repositories
              *      true if the operation sacceed. otherwise false.
              *
              */
+            return false;
             List<Client> packageClients;
             using(PhoneCompanyContext context = new PhoneCompanyContext())
             {
@@ -45,7 +48,7 @@ namespace Dal.Repositories
 
         public Package GetPackageByName(string packageName)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 return context.Packages.FirstOrDefault(x => x.PackageName == packageName).DbToCommon();
             }
@@ -53,7 +56,7 @@ namespace Dal.Repositories
 
         public void UpdatePackage(Package package)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 DbPackage dbPackage = context.Packages.FirstOrDefault(x => x.Id == package.Id);
                 UpdateThePackageProperties(dbPackage, package);

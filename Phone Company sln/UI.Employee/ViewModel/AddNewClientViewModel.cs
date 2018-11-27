@@ -14,7 +14,7 @@ namespace UI.Employee.ViewModel
 {
     internal class AddNewClientViewModel
     {
-        private readonly INavigationService _navigationService;
+        private readonly IFrameNavigationService _navigationService;
         public RelayCommand NavigateCommandToMainEmployeePage { get; private set; }
         public RelayCommand CommandToAddNewUser { get; set; }
 
@@ -28,7 +28,7 @@ namespace UI.Employee.ViewModel
 
         public string ClientNumber { get; set; }
 
-        public AddNewClientViewModel(INavigationService navigationService)
+        public AddNewClientViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
             NavigateCommandToMainEmployeePage = new RelayCommand(NavigationCommandActionToMainEmployeePage);

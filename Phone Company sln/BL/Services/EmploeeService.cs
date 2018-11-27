@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BL.Services
 {
-    class EmploeeService : IEmploeeService
+    public class EmploeeService : IEmploeeService
     {
         private readonly ClientRepository CR;
 
