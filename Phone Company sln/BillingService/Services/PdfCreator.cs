@@ -1,13 +1,8 @@
 ﻿using Common.Interfaces;
 using Common.Models;
 using PdfSharp;
-using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TheArtOfDev.HtmlRenderer.PdfSharp;
 
 namespace BillingService.Services
@@ -38,7 +33,7 @@ namespace BillingService.Services
              "</table>";
             string style = "<style> table, th, td { border: 1px solid black; border - collapse: collapse; }</style>";
             string html = $"<!DOCTYPE html><html><head>{style}<title></title></head><body>{header}{Table}</body></html>";
-            PdfDocument pdf = PdfGenerator.GeneratePdf(html, PageSize.A4);
+            PdfSharp.Pdf.PdfDocument pdf = PdfGenerator.GeneratePdf(html, PageSize.A4);
             pdf.Save(@"D:\Programming\Programming Works\Phone Company Github\Phone Company sln\ConsoleTest\Test.pdf");
         }
 
@@ -105,7 +100,6 @@ namespace BillingService.Services
             }
             catch
             {
-
             }
         }
     }
