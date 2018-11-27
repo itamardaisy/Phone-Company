@@ -22,6 +22,36 @@ namespace Dal.Repositories
             }
         }
 
+        public bool DeleteClient(int id)
+        {
+            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                var clientToRemove = context.Clients.FirstOrDefault(x => x.Id == id);
+                context.UnsignClients.Add(FromClientToUnsignClient(clientToRemove));
+                context.Clients.Remove(clientToRemove);
+                if (context.Clients.Any(x => x.Id == id))
+                    return false;
+                else
+                    return true;
+            }
+        }
+
+        private DbUnsignClient FromClientToUnsignClient(DbClient client)
+        {
+            return new DbUnsignClient()
+            {
+                Name = client.Name,
+                LastName = client.LastName,
+                SignDate = client.SignDate,
+                UnsignDate = DateTime.Now,
+                Adress = client.Adress,
+                CallToCenter = client.CallToCenter,
+                ClientTypeId = client.ClientTypeId,
+                ContactNumber = client.ContactNumber,
+                UserId = client.UserId
+            };
+        }
+
         public Client GetClientById(int id)
         {
             using(PhoneCompanyContext context = new PhoneCompanyContext())

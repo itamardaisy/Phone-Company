@@ -14,5 +14,7 @@ namespace Common.Interfaces
         void UpdateClient(Client client);
 
         Client GetClientById(int id);
+
+        bool DeleteClient(int id);
     }
 }
