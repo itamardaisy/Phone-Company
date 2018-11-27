@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Dal.ModelConverters;
 using Dal.DataModels;
-using Dal.ModelConverters;
 
 namespace Dal.Repositories
 {
@@ -36,7 +35,6 @@ namespace Dal.Repositories
              *      true if the operation sacceed. otherwise false.
              *
              */
-            return false;
             List<Client> packageClients;
             using(PhoneCompanyContext context = new PhoneCompanyContext())
             {
