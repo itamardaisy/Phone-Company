@@ -12,11 +12,11 @@ namespace UI.Employee.ViewModel
 {
     internal class EmployeeMainViewModel
     {
-        private readonly INavigationService _navigationService;
+        private readonly IFrameNavigationService _navigationService;
         public RelayCommand NavigateCommandToSearchForClient { get; private set; }
         public RelayCommand NavigateCommandToAddClient { get; set; }
 
-        public EmployeeMainViewModel(INavigationService navigationService)
+        public EmployeeMainViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
             NavigateCommandToSearchForClient = new RelayCommand(NavigateCommandActionToFindClient);

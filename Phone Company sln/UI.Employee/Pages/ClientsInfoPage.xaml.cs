@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UI.Employee.Models;
+using UI.Employee.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -29,6 +30,7 @@ namespace UI.Employee.Pages
         }
 
         private Client newClient { get; set; }
+        private ClientsInfoViewModel clientsInfoViewModel = new ClientsInfoViewModel();
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -38,6 +40,7 @@ namespace UI.Employee.Pages
             clientAddress.Text = newClient.Adress.ToString();
             clientNumber.Text = newClient.ContactNumber.ToString();
             clientType.Text = newClient.ClientTypeId.ToString();
+
             base.OnNavigatedTo(e);
         }
     }

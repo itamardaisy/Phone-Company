@@ -123,7 +123,7 @@
     </Compile>
     <Compile Include="Enums\UserType.cs" />
     <Compile Include="Helper\FrameNavigationService.cs" />
-    <Compile Include="Helper\PageNavigationService.cs" />
+    <Compile Include="Helper\IFrameNavigationService.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

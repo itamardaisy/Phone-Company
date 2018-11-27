@@ -5,13 +5,14 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
 namespace UI.Employee.Helper
 {
-    internal class FrameNavigationService : PageNavigationService, INotifyPropertyChanged
+    internal class FrameNavigationService : IFrameNavigationService, INotifyPropertyChanged
     {
         #region Fields
 
@@ -78,6 +79,7 @@ namespace UI.Employee.Helper
                 }
 
                 var frame = GetDescendantFromName(Window.Current.Content, "MainFrame") as Frame;
+                // var page = frame.Content as MainPage;
 
                 if (frame != null)
                 {

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dal.ModelConverters;
 using Dal.DataModels;
+
 using Dal.ModelConverters;
 
 namespace Dal.Repositories
@@ -16,7 +17,7 @@ namespace Dal.Repositories
     {
         public void AddNewPackage(Package package)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 context.Packages.Add(package.CommonToDb());
                 context.SaveChanges();
@@ -37,17 +38,17 @@ namespace Dal.Repositories
              *
              */
             return false;
-            List<Client> packageClients;
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
-            {
-                var wantedPackage = context.Packages.Where(x => x.PackageName == packageName).FirstOrDefault();
-                //packageClients = context.Lines.Where(x => x.PackageId == wantedPackage.Id).Select(x => x.DbToCommon()).ToList();
-            }
+            //List<Client> packageClients;
+            //using (PhoneCompanyContext context = new PhoneCompanyContext())
+            //{
+            //    var wantedPackage = context.Packages.Where(x => x.PackageName == packageName).FirstOrDefault();
+            //    //packageClients = context.Lines.Where(x => x.PackageId == wantedPackage.Id).Select(x => x.DbToCommon()).ToList();
+            //}
         }
 
         public Package GetPackageByName(string packageName)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 return context.Packages.FirstOrDefault(x => x.PackageName == packageName).DbToCommon();
             }
@@ -55,7 +56,7 @@ namespace Dal.Repositories
 
         public void UpdatePackage(Package package)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 DbPackage dbPackage = context.Packages.FirstOrDefault(x => x.Id == package.Id);
                 UpdateThePackageProperties(dbPackage, package);

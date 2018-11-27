@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BL.Services
 {
-    class EmploeeService : IEmploeeService
+    public class EmploeeService : IEmploeeService
     {
         public void AddNewClient(Client client)
         {

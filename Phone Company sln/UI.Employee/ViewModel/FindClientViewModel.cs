@@ -15,7 +15,7 @@ namespace UI.Employee.ViewModel
 {
     internal class FindClientViewModel
     {
-        private readonly INavigationService _navigationService;
+        private readonly IFrameNavigationService _navigationService;
 
         public int SearchID { get; set; }
 
@@ -27,7 +27,7 @@ namespace UI.Employee.ViewModel
         public RelayCommand NavigateCommandToBack { get; private set; }
         public RelayCommand CommandToMoveToSelectedUser { get; private set; }
 
-        public FindClientViewModel(INavigationService navigationService)
+        public FindClientViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
             NavigateCommandToBack = new RelayCommand(NavigateCommandActionToBack);

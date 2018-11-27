@@ -20,23 +20,22 @@ namespace Dal.UnitTest
         [TestMethod]
         public void AddNewCall_RecivedNewCall_CallWasAddedToTheDB()
         {
-            //Arrange
-            //var testData = new List<DbCall>
-            //{
-            //    new DbCall{Id = 1,CallDate= DateTime.Now,DestinationNumber = "123123",Duration = 43,LineId=4},
-            //    new DbCall{Id = 2,CallDate= DateTime.Now,DestinationNumber = "123123",Duration = 43,LineId=3},
-            //    new DbCall{Id = 3,CallDate= DateTime.Now,DestinationNumber = "123123",Duration = 43,LineId=2},
-            //    new DbCall{Id = 4,CallDate= DateTime.Now,DestinationNumber = "123123",Duration = 43,LineId=1},
-            //};
-            //var set = A.Fake<DbSet<DbCall>>
-            //    (c => c.Implements(typeof(IQueryable<DbCall>))
-            //    .Implements(typeof(IDbAsyncEnumerable<DbCall>)))
-            //    .AddRange(testData);
+            // Arrange
+            var testData = new List<DbCall>
+            {
+                new DbCall{Id = 1,CallDate = DateTime.Now,DestinationNumber = "213123",
+                    Duration = 69,Line = "12313",LineId = 1}
+            };
 
-            //var context = A.Fake<PhoneCompanyContext>();
-            //A.CallTo(() => context.Calls).ReturnsLazily(set);
+            var set = A.Fake<DbSet<DbCall>>
+                (c => c.Implements(typeof(IQueryable<DbCall>))
+                .Implements(typeof(IDbAsyncEnumerable<DbCall>)))
+                .SetupData(testData);
 
-            //var productService = new ProductService(context);
+            var context = A.Fake<PhoneCompanyContext>();
+            A.CallTo(() => context.Calls).Returns(set);
+
+            var controller = new CallsRepository();
 
             //Act
 
