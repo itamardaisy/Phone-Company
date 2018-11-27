@@ -67,10 +67,6 @@
     <Compile Include="Migrations\201811181259011_new.Designer.cs">
       <DependentUpon>201811181259011_new.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201811252105569_insertsInfoToDatabase.cs" />
-    <Compile Include="Migrations\201811252105569_insertsInfoToDatabase.Designer.cs">
-      <DependentUpon>201811252105569_insertsInfoToDatabase.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConverters\FromCommonToDb.cs" />
     <Compile Include="ModelConverters\FromDbToCommon.cs" />
@@ -95,9 +91,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811181259011_new.resx">
       <DependentUpon>201811181259011_new.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811252105569_insertsInfoToDatabase.resx">
-      <DependentUpon>201811252105569_insertsInfoToDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

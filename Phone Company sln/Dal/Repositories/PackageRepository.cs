@@ -38,12 +38,12 @@ namespace Dal.Repositories
              *
              */
             return false;
-            //List<Client> packageClients;
-            //using (PhoneCompanyContext context = new PhoneCompanyContext())
-            //{
-            //    var wantedPackage = context.Packages.Where(x => x.PackageName == packageName).FirstOrDefault();
-            //    //packageClients = context.Lines.Where(x => x.PackageId == wantedPackage.Id).Select(x => x.DbToCommon()).ToList();
-            //}
+            List<Client> packageClients;
+            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                var wantedPackage = context.Packages.Where(x => x.PackageName == packageName).FirstOrDefault();
+                //packageClients = context.Lines.Where(x => x.PackageId == wantedPackage.Id).Select(x => x.DbToCommon()).ToList();
+            }
         }
 
         public Package GetPackageByName(string packageName)
