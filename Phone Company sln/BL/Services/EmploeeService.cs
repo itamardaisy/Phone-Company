@@ -25,15 +25,15 @@ namespace BL.Services
                 CR.AddNewClient(client);
             }
             catch (AddToDatabaseException ex){
-                Common.EnvironmentService.Services.WriteExceptions(ex);
+                Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
             }
             catch(RemoveFromDatabaseException ex){
-                Common.EnvironmentService.Services.WriteExceptions(ex);
+                Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
             }
             catch (GetFromDatabaseException ex){
-                Common.EnvironmentService.Services.WriteExceptions(ex);
+                Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
             }
-        }
+        }   
 
         public bool DeleteClient(int id)
         {
@@ -41,13 +41,13 @@ namespace BL.Services
                 return CR.DeleteClient(id);
             }
             catch (AddToDatabaseException ex){
-                Common.EnvironmentService.Services.WriteExceptions(ex);
-            }
+                Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
+            }   
             catch (RemoveFromDatabaseException ex){
-                Common.EnvironmentService.Services.WriteExceptions(ex);
+                Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
             }
             catch (GetFromDatabaseException ex){
-                Common.EnvironmentService.Services.WriteExceptions(ex);
+                Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
             }
             return false;
         }

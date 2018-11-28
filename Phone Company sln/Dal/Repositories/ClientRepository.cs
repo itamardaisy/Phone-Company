@@ -1,4 +1,5 @@
-﻿using Common.Exceptions;
+﻿using Common.EnvironmentService;
+using Common.Exceptions;
 using Common.Interfaces;
 using Common.Models;
 using Dal.DataInitializer;
@@ -30,16 +31,18 @@ namespace Dal.Repositories
                 try
                 {
                     var clientToRemove = context.Clients.FirstOrDefault(x => x.Id == id);
-                    try { context.UnsignClients.Add(FromClientToUnsignClient(clientToRemove)); }
-                    catch { throw new AddToDatabaseException(); }
-                    try { context.Clients.Remove(clientToRemove); }
-                    catch { throw new RemoveFromDatabaseException(); }
+                    context.UnsignClients.Add(FromClientToUnsignClient(clientToRemove));
+                    context.Clients.Remove(clientToRemove);
+                    if (context.Clients.Any(x => x.Id == id))
+                        return false;
+                    else
+                        return true;
                 }
-                catch { throw new GetFromDatabaseException(); }
-                if (context.Clients.Any(x => x.Id == id))
-                    return false;
-                else
-                    return true;
+                catch(ArgumentNullException ex)
+                {
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new GetFromDatabaseException(ex.Message);
+                }
             }
         }
 

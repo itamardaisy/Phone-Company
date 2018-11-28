@@ -8,6 +8,6 @@ namespace Common.Exceptions
 {
     public class GetFromDatabaseException : Exception
     {
-        public GetFromDatabaseException():base() { }
+        public GetFromDatabaseException(string message = "") : base(message) { }
     }
 }

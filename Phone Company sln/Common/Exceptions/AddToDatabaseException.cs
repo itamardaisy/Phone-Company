@@ -8,6 +8,8 @@ namespace Common.Exceptions
 {
     public class AddToDatabaseException : Exception
     {
-        public AddToDatabaseException() :base() { }
+
+
+        public AddToDatabaseException(string message = "") : base(message) { }
     }
 }
