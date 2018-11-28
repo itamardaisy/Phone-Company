@@ -27,6 +27,12 @@ namespace Dal.UnitTest
         }
 
         [TestMethod]
+        public void DeleteClient_RecivedClientID_TheClientWillDeletedAndAddedToTheUnSignTable()
+        {
+
+        }
+
+        [TestMethod]
         public void GetClientByID_RecivedClientID_ClientWasRetrivedFromDB()
         {
             //Arrange

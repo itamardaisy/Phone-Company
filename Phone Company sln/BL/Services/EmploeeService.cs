@@ -1,4 +1,5 @@
-﻿using Common.Interfaces;
+﻿using Common.Exceptions;
+using Common.Interfaces;
 using Common.Models;
 using Dal.Repositories;
 using System;
@@ -21,18 +22,36 @@ namespace BL.Services
 
         public void AddNewClient(Client client)
         {
-            try
-            {
+            try{
                 CR.AddNewClient(client);
-            }catch (InvalidOperationException ex){
-                Debug.WriteLine(ex.Message);
             }
-            //catch ()
-            //{
-            //}
-        }
+            catch (AddToDatabaseException ex){
+                Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
+            }
+            catch(RemoveFromDatabaseException ex){
+                Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
+            }
+            catch (GetFromDatabaseException ex){
+                Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
+            }
+        }   
 
-        public bool DeleteClient(int id) => CR.DeleteClient(id);
+        public bool DeleteClient(int id)
+        {
+            try{
+                return CR.DeleteClient(id);
+            }
+            catch (AddToDatabaseException ex){
+                Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
+            }   
+            catch (RemoveFromDatabaseException ex){
+                Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
+            }
+            catch (GetFromDatabaseException ex){
+                Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
+            }
+            return false;
+        }
 
         public Package FindOptimizePackage(Client client)
         {

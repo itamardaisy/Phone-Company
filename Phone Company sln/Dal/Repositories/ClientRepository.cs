@@ -1,4 +1,6 @@
-﻿using Common.Interfaces;
+﻿using Common.EnvironmentService;
+using Common.Exceptions;
+using Common.Interfaces;
 using Common.Models;
 using Dal.DataInitializer;
 using Dal.DataModels;
@@ -15,7 +17,7 @@ namespace Dal.Repositories
     {
         public void AddNewClient(Client client)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 context.Clients.Add(client.CommonToDb());
                 context.SaveChanges();
@@ -24,15 +26,23 @@ namespace Dal.Repositories
 
         public bool DeleteClient(int id)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
-                var clientToRemove = context.Clients.FirstOrDefault(x => x.Id == id);
-                context.UnsignClients.Add(FromClientToUnsignClient(clientToRemove));
-                context.Clients.Remove(clientToRemove);
-                if (context.Clients.Any(x => x.Id == id))
-                    return false;
-                else
-                    return true;
+                try
+                {
+                    var clientToRemove = context.Clients.FirstOrDefault(x => x.Id == id);
+                    context.UnsignClients.Add(FromClientToUnsignClient(clientToRemove));
+                    context.Clients.Remove(clientToRemove);
+                    if (context.Clients.Any(x => x.Id == id))
+                        return false;
+                    else
+                        return true;
+                }
+                catch(ArgumentNullException ex)
+                {
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new GetFromDatabaseException(ex.Message);
+                }
             }
         }
 
@@ -54,7 +64,7 @@ namespace Dal.Repositories
 
         public Client GetClientById(int id)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 return context.Clients.FirstOrDefault(x => x.Id == id).DbToCommon();
             }
@@ -62,7 +72,7 @@ namespace Dal.Repositories
 
         public void UpdateClient(Client client)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 var dbClient = context.Clients.FirstOrDefault(x => x.Id == client.Id);
                 UpdateTheClientProperties(dbClient, client);

@@ -43,7 +43,11 @@
   <ItemGroup>
     <Compile Include="Enums\PaymentType.cs" />
     <Compile Include="Enums\UserType.cs" />
+    <Compile Include="EnvironmentService\Sevices.cs" />
+    <Compile Include="Exceptions\AddToDatabaseException.cs" />
     <Compile Include="Exceptions\DbUpdateException.cs" />
+    <Compile Include="Exceptions\GetFromDatabaseException.cs" />
+    <Compile Include="Exceptions\RemoveFromDatabaseException.cs" />
     <Compile Include="Interfaces\BillingService interfaces\IPaymentDataAccess.cs" />
     <Compile Include="Interfaces\Repository interfaces\ICallsRepository.cs" />
     <Compile Include="Interfaces\Repository interfaces\IClientRepository.cs" />
@@ -58,6 +62,7 @@
     <Compile Include="Interfaces\BillingService interfaces\IPdfCreator.cs" />
     <Compile Include="Interfaces\Repository interfaces\ISelectedNumbersRepository.cs" />
     <Compile Include="Interfaces\Repository interfaces\ISMSRepository.cs" />
+    <Compile Include="Logger\Logger.cs" />
     <Compile Include="Models\Call.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\ClientType.cs" />
