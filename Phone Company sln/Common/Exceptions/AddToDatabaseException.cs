@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Common.Exceptions
 {
-    public class DbUpdateException : Exception
+    public class AddToDatabaseException : Exception
     {
-        public DbUpdateException() :base() { }
+        public AddToDatabaseException() :base() { }
     }
 }

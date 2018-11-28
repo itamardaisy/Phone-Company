@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Common.Exceptions
 {
-    public class DbUpdateException : Exception
+    public class RemoveFromDatabaseException : Exception
     {
-        public DbUpdateException() :base() { }
+        public RemoveFromDatabaseException() :base() { }
     }
 }
