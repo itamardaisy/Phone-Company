@@ -5,53 +5,55 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using BL.Services;
 
 namespace Server.Employee.Controllers
 {
     public class ManagerController : ApiController
     {
-        private const string route = "api/manager/";
+        private const string Route = "api/manager/";
+        private readonly ManagerService managerService = new ManagerService();
 
         [HttpPost]
-        [Route(route + "AddNewPackage")]
+        [Route(Route + "AddNewPackage")]
         public void AddNewPackage(Package package)
         {
-            throw new NotImplementedException();
+            managerService.AddNewPackage(package);
         }
 
         [HttpGet]
-        [Route(route + "GetClientWhoMostLikelyToUnsign")]
-        public List<Client> GetClientWhoMostLikelyToUnsign()
+        [Route(Route + "GetClientWhoMostLikelyToUnsigned")]
+        public List<Client> GetClientWhoMostLikelyToUnsigned()
         {
-            throw new NotImplementedException();
+            return managerService.GetClientWhoMostLikelyToUnsign();
         }
 
         [HttpGet]
-        [Route(route + "GetMostAnoingClient")]
-        public Client GetMostAnoingClient()
+        [Route(Route + "GetMostAnnoyingClient")]
+        public Client GetMostAnnoyingClient()
         {
-            throw new NotImplementedException();
+            return managerService.GetMostAnoingClient();
         }
 
         [HttpGet]
-        [Route(route + "GetMostConnectedClient")]
+        [Route(Route + "GetMostConnectedClient")]
         public Client GetMostConnectedClient()
         {
-            throw new NotImplementedException();
+            return managerService.GetMostConnectedClient();
         }
 
         [HttpGet]
-        [Route(route + "GetMostProfitableClient")]
+        [Route(Route + "GetMostProfitableClient")]
         public Client GetMostProfitableClient()
         {
-            throw new NotImplementedException();
+            return managerService.GetMostProfitableClient();
         }
 
         [HttpGet]
-        [Route(route + "GetMostValuentEmploee")]
-        public User GetMostValuentEmploee()
+        [Route(Route + "GetMostValuentEmployee")]
+        public User GetMostValuentEmployee()
         {
-            throw new NotImplementedException();
+            return managerService.GetMostValuentEmploee();
         }
     }
 }

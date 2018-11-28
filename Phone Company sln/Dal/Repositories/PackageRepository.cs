@@ -1,15 +1,9 @@
 ﻿using Common.Interfaces;
 using Common.Models;
 using Dal.DataInitializer;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Dal.ModelConverters;
 using Dal.DataModels;
-
-using Dal.ModelConverters;
 
 namespace Dal.Repositories
 {
@@ -38,12 +32,12 @@ namespace Dal.Repositories
              *
              */
             return false;
-            List<Client> packageClients;
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
-            {
-                var wantedPackage = context.Packages.Where(x => x.PackageName == packageName).FirstOrDefault();
-                //packageClients = context.Lines.Where(x => x.PackageId == wantedPackage.Id).Select(x => x.DbToCommon()).ToList();
-            }
+            // List<Client> packageClients;
+            //using(PhoneCompanyContext context = new PhoneCompanyContext())
+            //{
+            //    var wantedPackage = context.Packages.Where(x => x.PackageName == packageName).FirstOrDefault();
+            //    //packageClients = context.Lines.Where(x => x.PackageId == wantedPackage.Id).Select(x => x.DbToCommon()).ToList();
+            //}
         }
 
         public Package GetPackageByName(string packageName)

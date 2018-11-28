@@ -4,29 +4,37 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Routing;
+using BillingService.Services;
+using Common.Models;
 
 namespace Server.Employee.Controllers
 {
     public class PaymentDataAccessController : ApiController
     {
-        private const string route = "api/PaymentDataAccess/";
+        private const string Route = "api/PaymentDataAccess/";
 
-        [Route(route + "GetClientMonthPayment")]
+        private readonly PaymentDataAccess paymentDataAccess = new PaymentDataAccess();
+
+        [Route(Route + "GetClientMonthPayment")]
         [HttpGet]
-        public void GetClientMonthPayment()
+        public ICollection<Payment> GetClientMonthPayment(int clientId, DateTime month)
         {
+            return paymentDataAccess.GetClientMonthPayment(clientId, month);
         }
 
-        [Route(route + "GetPdfFileFromDataBaseAsByteArray")]
+        [Route(Route + "GetPdfFileFromDataBaseAsByteArray")]
         [HttpGet]
-        public void GetPdfFileFromDataBaseAsByteArray()
+        public byte[] GetPdfFileFromDataBaseAsByteArray()
         {
+            return paymentDataAccess.GetPdfFileFromDataBaseAsByteArray();
         }
 
-        [Route(route + "SaveFileToDatabase")]
+        [Route(Route + "SaveFileToDatabase")]
         [HttpPost]
-        public void SaveFileToDatabase()
+        public void SaveFileToDatabase(string pdf)
         {
+            throw new NotImplementedException();
         }
     }
 }

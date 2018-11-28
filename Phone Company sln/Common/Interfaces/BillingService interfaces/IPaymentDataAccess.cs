@@ -12,7 +12,7 @@ namespace Common.Interfaces.BillingService_interfaces
     {
         ICollection<Payment> GetClientMonthPayment(int clientId, DateTime month);
 
-        void SaveFileToDatabase(File pdfFile);
+        //  void SaveFileToDatabase(File pdfFile);
 
         byte[] GetPdfFileFromDataBaseAsByteArray();
     }

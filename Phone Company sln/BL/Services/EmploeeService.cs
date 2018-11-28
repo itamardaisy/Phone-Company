@@ -3,6 +3,7 @@ using Common.Models;
 using Dal.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,15 +24,12 @@ namespace BL.Services
             try
             {
                 CR.AddNewClient(client);
+            }catch (InvalidOperationException ex){
+                Debug.WriteLine(ex.Message);
             }
-            catch(InvalidOperationException ex) 
-            {
-
-            }
-            catch ()
-            {
-
-            }
+            //catch ()
+            //{
+            //}
         }
 
         public bool DeleteClient(int id) => CR.DeleteClient(id);

@@ -15,7 +15,7 @@ namespace Dal.Repositories
     {
         public void AddNewCall(Call call)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 context.Calls.Add(call.CommonToDb());
                 context.SaveChanges();
@@ -24,21 +24,21 @@ namespace Dal.Repositories
 
         public List<Call> GetLineCalls(string lineNumber)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 return context.Calls
-                              .Where(x => x.Line.Number == lineNumber)
+                              .Where(x => x.Line == lineNumber)
                               .Select(c => c.DbToCommon()).ToList();
             }
         }
 
         public List<Call> GetLineCallsMonth(string lineNumber)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 DateTime monthAgo = DateTime.Now - TimeSpan.FromDays(30);
                 return context.Calls
-                              .Where(x => x.Line.Number == lineNumber && x.CallDate > monthAgo)
+                              .Where(x => x.Line == lineNumber && x.CallDate > monthAgo)
                               .Select(c => c.DbToCommon()).ToList();
             }
         }
