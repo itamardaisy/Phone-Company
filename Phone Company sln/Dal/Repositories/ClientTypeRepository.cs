@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dal.DataModels;
+using Common.EnvironmentService;
+using Common.Exceptions;
 
 namespace Dal.Repositories
 {
@@ -17,9 +19,14 @@ namespace Dal.Repositories
         {
             using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
-                context.ClientTypes.Add(clientType.CommonToDb());
-                context.SaveChanges();
-
+                try{
+                    context.ClientTypes.Add(clientType.CommonToDb());
+                    context.SaveChanges();
+                }
+                catch (Exception ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new DataProcedureException(ex.Message);
+                }
             }
         }
 
@@ -27,11 +34,17 @@ namespace Dal.Repositories
         {
             using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
-                context.ClientTypes.Remove(context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName));
-                if (!(context.ClientTypes.Any(x => x.TypeName == typeName)))
-                    return true;
-                else
-                    return false;
+                try{
+                    context.ClientTypes.Remove(context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName));
+                    if (!(context.ClientTypes.Any(x => x.TypeName == typeName)))
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new DataProcedureException(ex.Message);
+                }
             }
         }
 
@@ -39,7 +52,17 @@ namespace Dal.Repositories
         {
             using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
-                return context.ClientTypes.Select(x => x.DbToCommon()).ToList();
+                try{
+                    return context.ClientTypes.Select(x => x.DbToCommon()).ToList();
+                }
+                catch (ArgumentNullException ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new GetFromDatabaseException(ex.Message);
+                }
+                catch (Exception ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new DataProcedureException(ex.Message);
+                }
             }
         }
 
@@ -47,7 +70,17 @@ namespace Dal.Repositories
         {
             using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
-                return context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName).DbToCommon();
+                try{
+                    return context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName).DbToCommon();
+                }
+                catch (ArgumentNullException ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new GetFromDatabaseException(ex.Message);
+                }
+                catch (Exception ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new DataProcedureException(ex.Message);
+                }
             }
         }
 
@@ -55,9 +88,19 @@ namespace Dal.Repositories
         {
             using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
-                context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName)
-                                   .MinutePrice = newPrice;
-                context.SaveChanges();
+                try{
+                    context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName)
+                                       .MinutePrice = newPrice;
+                    context.SaveChanges();
+                }
+                catch (ArgumentNullException ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new GetFromDatabaseException(ex.Message);
+                }
+                catch (Exception ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new DataProcedureException(ex.Message);
+                }
             }
         }
 
@@ -65,9 +108,19 @@ namespace Dal.Repositories
         {
             using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
-                context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName)
-                                   .SMSPrice = newPrice;
-                context.SaveChanges();
+                try{
+                    context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName)
+                                       .SMSPrice = newPrice;
+                    context.SaveChanges();
+                }
+                catch (ArgumentNullException ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new GetFromDatabaseException(ex.Message);
+                }
+                catch (Exception ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new DataProcedureException(ex.Message);
+                }
             }
         }
     }

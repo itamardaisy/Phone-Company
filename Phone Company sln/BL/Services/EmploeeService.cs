@@ -41,13 +41,10 @@ namespace BL.Services
             try{
                 return CR.DeleteClient(id);
             }
-            catch (AddToDatabaseException ex){
+            catch (GetFromDatabaseException ex){ 
                 Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
             }   
-            catch (RemoveFromDatabaseException ex){
-                Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
-            }
-            catch (GetFromDatabaseException ex){
+            catch (DataProcedureException ex){
                 Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
             }
             return false;

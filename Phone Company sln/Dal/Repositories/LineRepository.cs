@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Dal.ModelConverters;
 using Dal.DataInitializer;
 using Dal.DataModels;
+using Common.EnvironmentService;
+using Common.Exceptions;
 
 namespace Dal.Repositories
 {
@@ -17,8 +19,18 @@ namespace Dal.Repositories
         {
             using(PhoneCompanyContext context = new PhoneCompanyContext())
             {
-                context.Lines.Add(line.CommonToDb());
-                context.SaveChanges();
+                try{
+                    context.Lines.Add(line.CommonToDb());
+                    context.SaveChanges();
+                }
+                catch (ArgumentNullException ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new GetFromDatabaseException(ex.Message);
+                }
+                catch (Exception ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new DataProcedureException(ex.Message);
+                }
             }
         }
 
@@ -26,7 +38,17 @@ namespace Dal.Repositories
         {
             using(PhoneCompanyContext context = new PhoneCompanyContext())
             {
-                return context.Lines.FirstOrDefault(x => x.Number == lineNumber).DbToCommon();
+                try{
+                    return context.Lines.FirstOrDefault(x => x.Number == lineNumber).DbToCommon();
+                }
+                catch (ArgumentNullException ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new GetFromDatabaseException(ex.Message);
+                }
+                catch (Exception ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new DataProcedureException(ex.Message);
+                }
             }
         }
 
@@ -34,15 +56,39 @@ namespace Dal.Repositories
         {
             using(PhoneCompanyContext context = new PhoneCompanyContext())
             {
-                DbLine dbLine = context.Lines.FirstOrDefault(x => x.Id == line.Id);
-                UpdateTheLineProperties(dbLine, line);
-                context.SaveChanges();
+                try{
+                    DbLine dbLine = context.Lines.FirstOrDefault(x => x.Id == line.Id);
+                    UpdateTheLineProperties(dbLine, line);
+                    context.SaveChanges();
+                }
+                catch (ArgumentNullException ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new GetFromDatabaseException(ex.Message);
+                }
+                catch (Exception ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new DataProcedureException(ex.Message);
+                }
             }
         }
 
-        public void SetPackage(Package newPackage)
+        public void SetPackage(int ClientId, int newPackageId)
         {
-            throw new NotImplementedException();
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                try{
+                    context.Lines.FirstOrDefault(x => x.ClientId == ClientId).PackageId = newPackageId;
+                    context.SaveChanges();
+                }
+                catch (ArgumentNullException ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new GetFromDatabaseException(ex.Message);
+                }
+                catch (Exception ex){
+                    Services.WriteExceptionsToLogger(ex);
+                    throw new DataProcedureException(ex.Message);
+                }
+            }
         }
 
         private void UpdateTheLineProperties(DbLine dbLine, Line line)
