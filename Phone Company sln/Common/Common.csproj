@@ -45,6 +45,7 @@
     <Compile Include="Enums\UserType.cs" />
     <Compile Include="EnvironmentService\Sevices.cs" />
     <Compile Include="Exceptions\AddToDatabaseException.cs" />
+    <Compile Include="Exceptions\DataProcedureException.cs" />
     <Compile Include="Exceptions\DbUpdateException.cs" />
     <Compile Include="Exceptions\GetFromDatabaseException.cs" />
     <Compile Include="Exceptions\RemoveFromDatabaseException.cs" />
