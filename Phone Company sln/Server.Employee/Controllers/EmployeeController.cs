@@ -5,60 +5,63 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using BL.Services;
 
 namespace Server.Employee.Controllers
 {
     public class EmployeeController : ApiController
     {
-        private const string route = "api/employee/";
+        private const string Route = "api/employee/";
 
-        [Route(route + "AddNewClient")]
+        private readonly EmploeeService employeeService = new EmploeeService();
+
+        [Route(Route + "AddNewClient")]
         [HttpPost]
         public void AddNewClient(Client client)
         {
-            throw new NotImplementedException();
+            employeeService.AddNewClient(client);
         }
 
-        [Route(route + "DeleteClient")]
+        [Route(Route + "DeleteClient")]
         [HttpDelete]
         public bool DeleteClient(int id)
         {
-            throw new NotImplementedException();
+            return employeeService.DeleteClient(id);
         }
 
-        [Route(route + "FindOptimizePackage")]
+        [Route(Route + "FindOptimizePackage")]
         [HttpGet]
         public Package FindOptimizePackage(Client client)
         {
-            throw new NotImplementedException();
+            return employeeService.FindOptimizePackage(client);
         }
 
-        [Route(route + "GetClient")]
+        [Route(Route + "GetClient")]
         [HttpGet]
         public Client GetClient(string lineNumber, string clientName)
         {
-            throw new NotImplementedException();
+            return employeeService.GetClient(lineNumber, clientName);
         }
 
-        [Route(route + "GetClientTypes")]
+        [Route(Route + "GetClientTypes")]
         [HttpGet]
         public List<ClientType> GetClientTypes()
         {
-            throw new NotImplementedException();
+            return employeeService.GetClientTypes();
         }
 
-        [Route(route + "GetReceiptByMonth")]
+        [Route(Route + "GetReceiptByMonth")]
         [HttpGet]
         public Receipt GetReceiptByMonth(int clientId, DateTime month)
         {
-            throw new NotImplementedException();
+            return employeeService.GetReceiptByMonth(clientId, month);
         }
 
-        [Route(route + "UpdateClientDetails")]
+        [Route(Route + "UpdateClientDetails")]
         [HttpPut]
         public void UpdateClientDetails(Client client)
         {
-            throw new NotImplementedException();
+            employeeService.UpdateClientDetails(client);
         }
     }
 }

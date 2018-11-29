@@ -17,7 +17,7 @@ namespace Dal.DataModels
         [ForeignKey(nameof(Line))]
         public int LineId { get; set; }
 
-        public DbLine Line { get; set; }
+        public string Line { get; set; }
 
         [Required]
         public double Duration { get; set; }

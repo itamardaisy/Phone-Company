@@ -9,12 +9,13 @@ namespace Server.Employee.Controllers
 {
     public class BillingController : ApiController
     {
-        private const string route = "api/Billing/";
+        private const string Route = "api/Billing/";
 
-        [Route(route + "CreatePDF")]
+        [Route(Route + "CreatePDF")]
         [HttpGet]
-        public void CreatePDF()
+        public string CreatePdf()
         {
+            return "Hello World";
         }
     }
 }
