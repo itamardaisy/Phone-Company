@@ -15,6 +15,10 @@ namespace Dal.Repositories
 {
     public class ClientTypeRepository : IClientTypeRepository
     {
+        /// <summary>
+        /// This method gets a new client type and add it to the context.
+        /// </summary>
+        /// <param name="clientType"> The new client type </param>
         public void AddNewType(ClientType clientType)
         {
             using (PhoneCompanyContext context = new PhoneCompanyContext())
@@ -30,6 +34,11 @@ namespace Dal.Repositories
             }
         }
 
+        /// <summary>
+        /// This method get a client type name and delete it from the context.
+        /// </summary>
+        /// <param name="typeName"> The type name </param>
+        /// <returns> True if the type has removed, otherwise false </returns>
         public bool DeleteType(string typeName)
         {
             using (PhoneCompanyContext context = new PhoneCompanyContext())
@@ -48,6 +57,10 @@ namespace Dal.Repositories
             }
         }
 
+        /// <summary>
+        /// Returns the all client type that exist.
+        /// </summary>
+        /// <returns> List of client types </returns>
         public List<ClientType> GetAllTypes()
         {
             using (PhoneCompanyContext context = new PhoneCompanyContext())
@@ -66,6 +79,11 @@ namespace Dal.Repositories
             }
         }
 
+        /// <summary>
+        /// Returns a client type by name.
+        /// </summary>
+        /// <param name="typeName"> The type name </param>
+        /// <returns> Client type </returns>
         public ClientType GetTypeByName(string typeName)
         {
             using (PhoneCompanyContext context = new PhoneCompanyContext())
@@ -84,6 +102,12 @@ namespace Dal.Repositories
             }
         }
 
+        /// <summary>
+        /// This method gets the name of the client type and the new price for minutes
+        /// and update the price.
+        /// </summary>
+        /// <param name="typeName"> The type name </param>
+        /// <param name="newPrice"> The new price </param>
         public void UpdateMinutePrice(string typeName, double newPrice)
         {
             using (PhoneCompanyContext context = new PhoneCompanyContext())
@@ -104,6 +128,12 @@ namespace Dal.Repositories
             }
         }
 
+        /// <summary>
+        /// This method gets the name of the client type and the new price for SMS
+        /// and update the price.
+        /// </summary>
+        /// <param name="typeName"> The type name </param>
+        /// <param name="newPrice"> The new price </param>
         public void UpdateSMSPrice(string typeName, double newPrice)
         {
             using (PhoneCompanyContext context = new PhoneCompanyContext())

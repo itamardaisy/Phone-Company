@@ -15,6 +15,10 @@ namespace Dal.Repositories
 {
     public class LineRepository : ILineRepository
     {
+        /// <summary>
+        /// This method gets a new line and add it to the context.
+        /// </summary>
+        /// <param name="line"> The new line </param>
         public void AddNewLine(Line line)
         {
             using(PhoneCompanyContext context = new PhoneCompanyContext())
@@ -34,6 +38,11 @@ namespace Dal.Repositories
             }
         }
 
+        /// <summary>
+        /// This method gets a linenumber and returns the line.
+        /// </summary>
+        /// <param name="lineNumber"> The lineNumber </param>
+        /// <returns> A line object </returns>
         public Line GetLine(string lineNumber)
         {
             using(PhoneCompanyContext context = new PhoneCompanyContext())
@@ -52,6 +61,10 @@ namespace Dal.Repositories
             }
         }
 
+        /// <summary>
+        /// This method get an updated line and replace it with line that matchs with the lineId.
+        /// </summary>
+        /// <param name="line"> The updated line. </param>
         public void UpdateLine(Line line)
         {
             using(PhoneCompanyContext context = new PhoneCompanyContext())
@@ -72,6 +85,12 @@ namespace Dal.Repositories
             }
         }
 
+        /// <summary>
+        /// This method get a client id that indicate to the client that want to set his package,
+        /// and a new package id that indicate to the new package.
+        /// </summary>
+        /// <param name="ClientId"> The client id </param>
+        /// <param name="newPackageId"> The package id </param>
         public void SetPackage(int ClientId, int newPackageId)
         {
             using (PhoneCompanyContext context = new PhoneCompanyContext())
@@ -91,6 +110,11 @@ namespace Dal.Repositories
             }
         }
 
+        /// <summary>
+        /// Gets the updated line and the line that needs to update and merge with the properties.
+        /// </summary>
+        /// <param name="dbLine"> The database line </param>
+        /// <param name="line"> The incoming line </param>
         private void UpdateTheLineProperties(DbLine dbLine, Line line)
         {
             dbLine.ClientId = line.ClientId;

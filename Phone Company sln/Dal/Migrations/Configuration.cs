@@ -23,6 +23,7 @@ namespace Dal.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
+            context.Packages.AddOrUpdate(new DbPackage { DisscountPrecentage = 0, FixedPrice = 100, InsideFamilyCall = false, MaxMinute = 200, MostCallNumber = false, PackageName = "DefaultPackage", TotalPrice = 100 });
         }
     }
 }

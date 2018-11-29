@@ -1,5 +1,6 @@
 ﻿using Common.Interfaces;
 using Common.Models;
+using Dal.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,13 @@ namespace BL.Services
 {
     public class ManagerService : IManagerService
     {
+        private readonly ManagerRepository MR;
+
+        public ManagerService()
+        {
+            MR = new ManagerRepository();
+        }
+
         public void AddNewPackage(Package package)
         {
             throw new NotImplementedException();

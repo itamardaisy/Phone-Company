@@ -1,4 +1,5 @@
 ﻿using Common.Enums;
+using Common.EnvironmentService;
 using Common.Interfaces;
 using Common.Models;
 using Dal.DataInitializer;
@@ -13,12 +14,23 @@ namespace Dal.Repositories
 {
     public class PaymentRepository : IPaymentRepository
     {
+        /// <summary>
+        /// This method gets a new payment and add it to the context.
+        /// </summary>
+        /// <param name="payment"> </param>
         public void AddPayment(Payment payment)
         {
             using(PhoneCompanyContext context = new PhoneCompanyContext())
             {
-                context.Payments.Add(payment.CommonToDb());
-                context.SaveChanges();
+                try
+                {
+                    context.Payments.Add(payment.CommonToDb());
+                    context.SaveChanges();
+                }
+                catch(Exception ex)
+                {
+                    Services.WriteExceptionsToLogger(ex);
+                }
             }
         }
 

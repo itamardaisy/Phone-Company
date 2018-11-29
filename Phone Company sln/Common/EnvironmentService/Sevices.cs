@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common.EnvironmentService
 {
+    /// <summary>
+    /// This class represent the environment services for the all project.
+    /// </summary>
     public static class Services
     {
         public static void WriteExceptionsToLogger(Exception ex)

@@ -16,5 +16,7 @@ namespace Common.Interfaces
         Package GetPackageByName(string packageName);
 
         void UpdatePackage(Package package);
+
+        List<Client> GetPackageClients(string packageName)
     }
 }

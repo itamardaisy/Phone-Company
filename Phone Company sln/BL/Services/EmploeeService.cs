@@ -14,10 +14,12 @@ namespace BL.Services
     public class EmploeeService : IEmploeeService
     {
         private readonly ClientRepository CR;
+        private readonly ClientTypeRepository CTR;
 
         public EmploeeService()
         {
             CR = new ClientRepository();
+            CTR = new ClientTypeRepository();
         }
 
         public void AddNewClient(Client client)
