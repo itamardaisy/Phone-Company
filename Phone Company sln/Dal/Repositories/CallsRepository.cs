@@ -34,19 +34,9 @@ namespace Dal.Repositories
         {
             using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
-                try{
-                    return context.Calls
-                                  .Where(x => x.Line.Number == lineNumber)
-                                  .Select(c => c.DbToCommon()).ToList();
-                }
-                catch(ArgumentNullException ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
-                catch(Exception ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                return context.Calls
+                              .Where(x => x.Line.Number == lineNumber)
+                              .Select(c => c.DbToCommon()).ToList();
             }
         }
 
@@ -54,20 +44,10 @@ namespace Dal.Repositories
         {
             using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
-                try{
-                    DateTime monthAgo = DateTime.Now - TimeSpan.FromDays(30);
-                    return context.Calls
-                                  .Where(x => x.Line.Number == lineNumber && x.CallDate > monthAgo)
-                                  .Select(c => c.DbToCommon()).ToList();
-                }
-                catch (ArgumentNullException ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
-                catch (Exception ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                DateTime monthAgo = DateTime.Now - TimeSpan.FromDays(30);
+                return context.Calls
+                              .Where(x => x.Line.Number == lineNumber && x.CallDate > monthAgo)
+                              .Select(c => c.DbToCommon()).ToList();
             }
         }
     }
