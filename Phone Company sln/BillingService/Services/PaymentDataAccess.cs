@@ -21,9 +21,9 @@ namespace BillingService.Services
             throw new NotImplementedException();
         }
 
-        //public void SaveFileToDatabase(string pdf)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void SaveFileToDatabase(string pdfFile)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
