@@ -14,19 +14,7 @@ namespace ConsoleTest
     {
         static void Main(string[] args)
         {
-            try
-            {
-                Console.WriteLine("hello world");
-                try { throw new Exception("kuku"); }
-                catch(Exception e) { Console.WriteLine(e.Message); throw new Exception("kaka"); }
-                
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw new Exception();
-            }
-            Console.Read();
+            
         }
     }
 }

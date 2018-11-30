@@ -15,26 +15,33 @@ namespace Dal.Repositories
 {
     public class LineRepository : ILineRepository
     {
+        PhoneCompanyContext context;
+
+        public LineRepository(PhoneCompanyContext context)
+        {
+            this.context = context;
+        }
+
         /// <summary>
         /// This method gets a new line and add it to the context.
         /// </summary>
         /// <param name="line"> The new line </param>
         public void AddNewLine(Line line)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try{
-                    context.Lines.Add(line.CommonToDb());
-                    context.SaveChanges();
-                }
-                catch (ArgumentNullException ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
-                catch (Exception ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                context.Lines.Add(line.CommonToDb());
+                context.SaveChanges();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new GetFromDatabaseException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new DataProcedureException(ex.Message);
             }
         }
 
@@ -45,19 +52,19 @@ namespace Dal.Repositories
         /// <returns> A line object </returns>
         public Line GetLine(string lineNumber)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try{
-                    return context.Lines.FirstOrDefault(x => x.Number == lineNumber).DbToCommon();
-                }
-                catch (ArgumentNullException ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
-                catch (Exception ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                return context.Lines.FirstOrDefault(x => x.Number == lineNumber).DbToCommon();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new GetFromDatabaseException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new DataProcedureException(ex.Message);
             }
         }
 
@@ -67,21 +74,21 @@ namespace Dal.Repositories
         /// <param name="line"> The updated line. </param>
         public void UpdateLine(Line line)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try{
-                    DbLine dbLine = context.Lines.FirstOrDefault(x => x.Id == line.Id);
-                    UpdateTheLineProperties(dbLine, line);
-                    context.SaveChanges();
-                }
-                catch (ArgumentNullException ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
-                catch (Exception ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                DbLine dbLine = context.Lines.FirstOrDefault(x => x.Id == line.Id);
+                UpdateTheLineProperties(dbLine, line);
+                context.SaveChanges();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new GetFromDatabaseException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new DataProcedureException(ex.Message);
             }
         }
 
@@ -93,20 +100,20 @@ namespace Dal.Repositories
         /// <param name="newPackageId"> The package id </param>
         public void SetPackage(int ClientId, int newPackageId)
         {
-            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try{
-                    context.Lines.FirstOrDefault(x => x.ClientId == ClientId).PackageId = newPackageId;
-                    context.SaveChanges();
-                }
-                catch (ArgumentNullException ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
-                catch (Exception ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                context.Lines.FirstOrDefault(x => x.ClientId == ClientId).PackageId = newPackageId;
+                context.SaveChanges();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new GetFromDatabaseException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new DataProcedureException(ex.Message);
             }
         }
 

@@ -12,13 +12,17 @@ namespace Dal.Repositories
 {
     public class SelectedNumbersRepository : ISelectedNumbersRepository
     {
+        PhoneCompanyContext context;
+
+        public SelectedNumbersRepository(PhoneCompanyContext context)
+        {
+            this.context = context;
+        }
+
         public void AddNewNumber(SelectedNumber selectedNumber)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
-            {
-                context.SelectedNumbers.Add(selectedNumber.CommonToDb());
-                context.SaveChanges();
-            }
+            context.SelectedNumbers.Add(selectedNumber.CommonToDb());
+            context.SaveChanges();
         }
 
         public bool DeleteNumber(int id)

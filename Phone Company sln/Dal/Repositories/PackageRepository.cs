@@ -14,24 +14,28 @@ namespace Dal.Repositories
 {
     public class PackageRepository : IPackageRepository
     {
+        PhoneCompanyContext context;
+
+        public PackageRepository(PhoneCompanyContext context)
+        {
+            this.context = context;
+        }
+
         /// <summary>
         /// This method gets the package from the BL and add it to the contexxt.
         /// </summary>
         /// <param name="package"> Indeicate the new package </param>
         public void AddNewPackage(Package package)
         {
-            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try
-                {
-                    context.Packages.Add(package.CommonToDb());
-                    context.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                context.Packages.Add(package.CommonToDb());
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new DataProcedureException(ex.Message);
             }
         }
 
@@ -45,31 +49,28 @@ namespace Dal.Repositories
         /// <returns> True if the operation sacceed. otherwise false.  </returns>
         public bool DeletePackage(string packageName)
         {
-            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try
-                {
-                    var wantedPackage = context.Packages.FirstOrDefault(x => x.PackageName == packageName);
-                    List<Client> packageClients = GetPackageClients(packageName);
-                    for (int i = 0; i < packageClients.Count; i++)
-                        ChangeToDefaultPackage(packageClients[i].Id);
-                    context.Packages.Remove(context.Packages.FirstOrDefault(x => x.PackageName == packageName));
-                    context.SaveChanges();
-                    if (!context.Packages.Any(x => x.PackageName == packageName))
-                        return true;
-                    else
-                        return false;
-                }
-                catch (ArgumentNullException ex)
-                {
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
-                catch (Exception ex)
-                {
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                var wantedPackage = context.Packages.FirstOrDefault(x => x.PackageName == packageName);
+                List<Client> packageClients = GetPackageClients(packageName);
+                for (int i = 0; i < packageClients.Count; i++)
+                    ChangeToDefaultPackage(packageClients[i].Id);
+                context.Packages.Remove(context.Packages.FirstOrDefault(x => x.PackageName == packageName));
+                context.SaveChanges();
+                if (!context.Packages.Any(x => x.PackageName == packageName))
+                    return true;
+                else
+                    return false;
+            }
+            catch (ArgumentNullException ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new GetFromDatabaseException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new DataProcedureException(ex.Message);
             }
         }
 
@@ -80,18 +81,15 @@ namespace Dal.Repositories
         /// <returns> The list of the clients. </returns>
         public List<Client> GetPackageClients(string packageName)
         {
-            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try
-                {
-                    return context.Lines.Where(x => x.Package.PackageName == packageName)
-                           .Select(x => x.Client.DbToCommon()).ToList();
-                }
-                catch (ArgumentNullException ex)
-                {
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
+                return context.Lines.Where(x => x.Package.PackageName == packageName)
+                       .Select(x => x.Client.DbToCommon()).ToList();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new GetFromDatabaseException(ex.Message);
             }
         }
 
@@ -102,17 +100,14 @@ namespace Dal.Repositories
         /// <returns> The wanted package. </returns>
         public Package GetPackageByName(string packageName)
         {
-            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try
-                {
-                    return context.Packages.FirstOrDefault(x => x.PackageName == packageName).DbToCommon();
-                }
-                catch (ArgumentNullException ex)
-                {
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
+                return context.Packages.FirstOrDefault(x => x.PackageName == packageName).DbToCommon();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new GetFromDatabaseException(ex.Message);
             }
         }
 
@@ -122,19 +117,16 @@ namespace Dal.Repositories
         /// <param name="package"></param>
         public void UpdatePackage(Package package)
         {
-            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try
-                {
-                    DbPackage dbPackage = context.Packages.FirstOrDefault(x => x.Id == package.Id);
-                    UpdateThePackageProperties(dbPackage, package);
-                    context.SaveChanges();
-                }
-                catch(ArgumentNullException ex)
-                {
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
+                DbPackage dbPackage = context.Packages.FirstOrDefault(x => x.Id == package.Id);
+                UpdateThePackageProperties(dbPackage, package);
+                context.SaveChanges();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new GetFromDatabaseException(ex.Message);
             }
         }
 
@@ -162,24 +154,21 @@ namespace Dal.Repositories
         /// <param name="clientId"> The wanted ClientId</param>
         private void ChangeToDefaultPackage(int clientId)
         {
-            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try
-                {
-                    int defaultPackageId = context.Packages.FirstOrDefault(x => x.PackageName == "DefaultPackage").Id;
-                    context.Lines.FirstOrDefault(x => x.ClientId == clientId).PackageId = defaultPackageId;
-                    context.SaveChanges();
-                }
-                catch (ArgumentNullException ex)
-                {
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
-                catch (Exception ex)
-                {
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                int defaultPackageId = context.Packages.FirstOrDefault(x => x.PackageName == "DefaultPackage").Id;
+                context.Lines.FirstOrDefault(x => x.ClientId == clientId).PackageId = defaultPackageId;
+                context.SaveChanges();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new GetFromDatabaseException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new DataProcedureException(ex.Message);
             }
         }
     }

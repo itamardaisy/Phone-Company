@@ -14,10 +14,10 @@ namespace Dal.DataModels
         public int Id { get; set; }
 
         [Required]
-        [ForeignKey(nameof(Client))]
-        public int ClientId { get; set; }
+        [ForeignKey(nameof(Line))]
+        public int LineId { get; set; }
 
-        public DbClient Client { get; set; }
+        public DbLine Line { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
