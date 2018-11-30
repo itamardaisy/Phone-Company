@@ -9,7 +9,7 @@ namespace Common.Interfaces
 {
     public interface IManagerRepository
     {
-        Line GetClientReport(Line line);
+        List<Payment> GetClientReport(int clientId);
 
         User GetMostvalentEmployee();
 

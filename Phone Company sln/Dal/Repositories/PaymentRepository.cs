@@ -14,34 +14,35 @@ namespace Dal.Repositories
 {
     public class PaymentRepository : IPaymentRepository
     {
+        PhoneCompanyContext context;
+
+        public PaymentRepository(PhoneCompanyContext context)
+        {
+            this.context = context;
+        }
+
         /// <summary>
         /// This method gets a new payment and add it to the context.
         /// </summary>
         /// <param name="payment"> </param>
         public void AddPayment(Payment payment)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try
-                {
-                    context.Payments.Add(payment.CommonToDb());
-                    context.SaveChanges();
-                }
-                catch(Exception ex)
-                {
-                    Services.WriteExceptionsToLogger(ex);
-                }
+                context.Payments.Add(payment.CommonToDb());
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
             }
         }
 
-        public Dictionary<PaymentType,Payment> GetByMonth(DateTime dateTime, Client client, string lineNumber)
+        public Dictionary<PaymentType, Payment> GetByMonth(DateTime dateTime, Client client, string lineNumber)
         {
-            using(PhoneCompanyContext context = new PhoneCompanyContext())
-            {
-                var calls = context.Calls.Select(x => x.CallDate.Month == dateTime.Month).ToList();
-                var smss = context.SMSs.Select(x => x.SMSDate.Month == dateTime.Month).ToList();
-                return null;
-            }
+            var calls = context.Calls.Select(x => x.CallDate.Month == dateTime.Month).ToList();
+            var smss = context.SMSs.Select(x => x.SMSDate.Month == dateTime.Month).ToList();
+            return null;
         }
     }
 }

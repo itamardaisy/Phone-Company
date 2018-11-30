@@ -15,24 +15,30 @@ namespace Dal.Repositories
 {
     public class ClientRepository : IClientRepository
     {
+        PhoneCompanyContext context;
+
+        public ClientRepository(PhoneCompanyContext context)
+        {
+            this.context = context;
+        }
+
         /// <summary>
         /// This method gets a client from the BL and add it to the context.
         /// </summary>
         /// <param name="client"> The client from the BL </param>
         public void AddNewClient(Client client)
         {
-            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try{
-                    context.Clients.Add(client.CommonToDb());
-                    context.SaveChanges();
-                }
-                catch (Exception ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                context.Clients.Add(client.CommonToDb());
+                context.SaveChanges();
             }
-        } 
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new DataProcedureException(ex.Message);
+            }
+        }
 
         /// <summary>
         /// This method gets the id of the wanted client and remove him from the context.
@@ -41,26 +47,26 @@ namespace Dal.Repositories
         /// <returns> True if the client removed seccesfully, otherwise false </returns>
         public bool DeleteClient(int id)
         {
-            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try{
-                    var clientToRemove = context.Clients.FirstOrDefault(x => x.Id == id);
-                    context.UnsignClients.Add(FromClientToUnsignClient(clientToRemove));
-                    context.Clients.Remove(clientToRemove);
-                    context.SaveChanges();
-                    if (context.Clients.Any(x => x.Id == id))
-                        return false;
-                    else
-                        return true;
-                }
-                catch(ArgumentNullException ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
-                catch(Exception ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                var clientToRemove = context.Clients.FirstOrDefault(x => x.Id == id);
+                context.UnsignClients.Add(FromClientToUnsignClient(clientToRemove));
+                context.Clients.Remove(clientToRemove);
+                context.SaveChanges();
+                if (context.Clients.Any(x => x.Id == id))
+                    return false;
+                else
+                    return true;
+            }
+            catch (ArgumentNullException ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new GetFromDatabaseException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new DataProcedureException(ex.Message);
             }
         }
 
@@ -92,15 +98,14 @@ namespace Dal.Repositories
         /// <returns> The wanted client </returns>
         public Client GetClientById(int id)
         {
-            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try{
-                    return context.Clients.FirstOrDefault(x => x.Id == id).DbToCommon();
-                }
-                catch(ArgumentNullException ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
+                return context.Clients.FirstOrDefault(x => x.Id == id).DbToCommon();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new GetFromDatabaseException(ex.Message);
             }
         }
 
@@ -110,21 +115,21 @@ namespace Dal.Repositories
         /// <param name="client"> The client to update </param>
         public void UpdateClient(Client client)
         {
-            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try{
-                    var dbClient = context.Clients.FirstOrDefault(x => x.Id == client.Id);
-                    UpdateTheClientProperties(dbClient, client);
-                    context.SaveChanges();
-                }
-                catch (ArgumentNullException ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
-                catch(Exception ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                var dbClient = context.Clients.FirstOrDefault(x => x.Id == client.Id);
+                UpdateTheClientProperties(dbClient, client);
+                context.SaveChanges();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new GetFromDatabaseException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new DataProcedureException(ex.Message);
             }
         }
 

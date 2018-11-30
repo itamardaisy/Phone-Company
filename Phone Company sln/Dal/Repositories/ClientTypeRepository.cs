@@ -15,22 +15,28 @@ namespace Dal.Repositories
 {
     public class ClientTypeRepository : IClientTypeRepository
     {
+        PhoneCompanyContext context;
+
+        public ClientTypeRepository(PhoneCompanyContext context)
+        {
+            this.context = context;
+        }
+
         /// <summary>
         /// This method gets a new client type and add it to the context.
         /// </summary>
         /// <param name="clientType"> The new client type </param>
         public void AddNewType(ClientType clientType)
         {
-            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try{
-                    context.ClientTypes.Add(clientType.CommonToDb());
-                    context.SaveChanges();
-                }
-                catch (Exception ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                context.ClientTypes.Add(clientType.CommonToDb());
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new DataProcedureException(ex.Message);
             }
         }
 
@@ -41,19 +47,18 @@ namespace Dal.Repositories
         /// <returns> True if the type has removed, otherwise false </returns>
         public bool DeleteType(string typeName)
         {
-            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try{
-                    context.ClientTypes.Remove(context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName));
-                    if (!(context.ClientTypes.Any(x => x.TypeName == typeName)))
-                        return true;
-                    else
-                        return false;
-                }
-                catch (Exception ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                context.ClientTypes.Remove(context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName));
+                if (!(context.ClientTypes.Any(x => x.TypeName == typeName)))
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new DataProcedureException(ex.Message);
             }
         }
 
@@ -63,19 +68,19 @@ namespace Dal.Repositories
         /// <returns> List of client types </returns>
         public List<ClientType> GetAllTypes()
         {
-            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try{
-                    return context.ClientTypes.Select(x => x.DbToCommon()).ToList();
-                }
-                catch (ArgumentNullException ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
-                catch (Exception ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                return context.ClientTypes.Select(x => x.DbToCommon()).ToList();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new GetFromDatabaseException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new DataProcedureException(ex.Message);
             }
         }
 
@@ -86,19 +91,19 @@ namespace Dal.Repositories
         /// <returns> Client type </returns>
         public ClientType GetTypeByName(string typeName)
         {
-            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try{
-                    return context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName).DbToCommon();
-                }
-                catch (ArgumentNullException ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
-                catch (Exception ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                return context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName).DbToCommon();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new GetFromDatabaseException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new DataProcedureException(ex.Message);
             }
         }
 
@@ -110,21 +115,21 @@ namespace Dal.Repositories
         /// <param name="newPrice"> The new price </param>
         public void UpdateMinutePrice(string typeName, double newPrice)
         {
-            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try{
-                    context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName)
-                                       .MinutePrice = newPrice;
-                    context.SaveChanges();
-                }
-                catch (ArgumentNullException ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
-                catch (Exception ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName)
+                                   .MinutePrice = newPrice;
+                context.SaveChanges();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new GetFromDatabaseException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new DataProcedureException(ex.Message);
             }
         }
 
@@ -136,21 +141,21 @@ namespace Dal.Repositories
         /// <param name="newPrice"> The new price </param>
         public void UpdateSMSPrice(string typeName, double newPrice)
         {
-            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            try
             {
-                try{
-                    context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName)
-                                       .SMSPrice = newPrice;
-                    context.SaveChanges();
-                }
-                catch (ArgumentNullException ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new GetFromDatabaseException(ex.Message);
-                }
-                catch (Exception ex){
-                    Services.WriteExceptionsToLogger(ex);
-                    throw new DataProcedureException(ex.Message);
-                }
+                context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName)
+                                   .SMSPrice = newPrice;
+                context.SaveChanges();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new GetFromDatabaseException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new DataProcedureException(ex.Message);
             }
         }
     }
