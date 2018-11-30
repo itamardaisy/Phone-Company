@@ -96,6 +96,7 @@
     <Compile Include="FromDbToCommon_UnitTest.cs" />
     <Compile Include="LineRepository_UnitTest.cs" />
     <Compile Include="ManagerRepository_UnitTest.cs" />
+    <Compile Include="ModelsGenerateForUnitTests.cs" />
     <Compile Include="PackageRepository_UnitTest.cs" />
     <Compile Include="PaymentRepository_UnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
