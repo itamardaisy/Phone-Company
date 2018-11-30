@@ -11,7 +11,7 @@ namespace Common.Models
         private int id;
         private DateTime month;
         private double totalPayment;
-        private int clientId;
+        private int lineId;
 
         public int Id
         {
@@ -31,10 +31,10 @@ namespace Common.Models
             set { totalPayment = value; }
         }
 
-        public int ClientId
+        public int LineId
         {
-            get { return clientId; }
-            set { clientId = value; }
+            get { return lineId; }
+            set { lineId = value; }
         }
     }
 }

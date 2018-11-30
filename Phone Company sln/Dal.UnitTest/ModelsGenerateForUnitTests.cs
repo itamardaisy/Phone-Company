@@ -83,7 +83,7 @@ namespace Dal.UnitTest
             return new Payment
             {
                 Id = 1,
-                ClientId = 1,
+                LineId = 1,
                 Month = DateTime.MaxValue,
                 TotalPayment = 13212         
             };
