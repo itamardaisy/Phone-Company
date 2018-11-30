@@ -3,15 +3,10 @@ using Common.Exceptions;
 using Common.Interfaces;
 using Common.Models;
 using Dal.DataInitializer;
-using Dal.DataModels;
-using Dal.Inner_Interfaces;
 using Dal.ModelConverters;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dal.Repositories
 {

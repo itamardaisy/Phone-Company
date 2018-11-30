@@ -43,7 +43,7 @@ namespace Dal.Repositories
 
         public List<Client> GetClientWhoMostLikleyToUnsign()
         {
-            throw new NotImplementedException();
+            return NotImplementedException();
         }
 
         public Client GetMostAnoyingClient()
