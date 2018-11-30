@@ -1,6 +1,8 @@
-﻿using Common.Interfaces;
+﻿using Common.EnvironmentService;
+using Common.Interfaces;
 using Common.Models;
 using Dal.DataInitializer;
+using Dal.DataModels;
 using Dal.ModelConverters;
 using System;
 using System.Collections.Generic;
@@ -35,15 +37,55 @@ namespace Dal.Repositories
                     clientPayments.Add(context.Payments.FirstOrDefault(x => x.LineId == clientLines[i].Id).DbToCommon());
                 return clientPayments;
             }
+            catch (ArgumentNullException ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+            }
             catch (Exception ex)
             {
-
+                Services.WriteExceptionsToLogger(ex);
             }
+            return null;
         }
 
-        public List<Client> GetClientWhoMostLikleyToUnsign()
+        /// <summary>
+        /// This method check looking for the client who most likely to unsign on folowing priorities
+        /// 1 - A cline who is selected number are unsign.
+        /// 2 - A client who uses the least
+        /// </summary>
+        /// <returns></returns>
+        public List<Client> GetClientWhoMostLikelyToUnsign()
         {
-            throw new NotImplementedException();
+
+        }
+
+        private bool ChecksWetherTheSelectedNumbersAreAvilable(DbSelectedNumber selectedNumber)
+        {
+
+        }
+
+        /// <summary>
+        /// This method will returns the client who uses the least.
+        /// </summary>
+        /// <returns> The client </returns>
+        private DbClient AClientWhoUsesTheLeast()
+        {
+
+        }
+
+        /// <summary>
+        /// This method will returns the client who is selected numbers are unsign.
+        /// </summary>
+        /// <returns> The client </returns>
+        private DbClient AClineWhoIsSelectedNumberAreUnsign(int clientId)
+        {
+            List<DbSelectedNumber> clientSelectedNumbers = new List<DbSelectedNumber>();
+            List<DbPackage> clientPackages = new List<DbPackage>();
+            var clientLines = context.Lines.Where(y => y.ClientId == clientId).ToList();
+            for (int i = 0; i < clientLines.Count; i++)
+                clientPackages.Add(context.Packages.FirstOrDefault(x => x.Id == clientLines[i].PackageId));
+            for (int i = 0; i < clientPackages.Count; i++)
+                clientSelectedNumbers.Add(context.SelectedNumbers.FirstOrDefault(x => x.Id == clientPackages[i].SelectedNumberId));
         }
 
         public Client GetMostAnoyingClient()

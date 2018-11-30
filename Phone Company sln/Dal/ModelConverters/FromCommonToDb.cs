@@ -77,7 +77,7 @@ namespace Dal.ModelConverters
                 FixedPrice = package.FixedPrice,
                 InsideFamilyCall = package.InsideFamilyCall,
                 Id = package.Id,
-                SelectedNuberId = package.SelectedNumberId,
+                SelectedNumberId = package.SelectedNumberId,
                 MaxMinute = package.MaxMinute,
                 MostCallNumber = package.MostCallNumber,
                 PackageName = package.PackageName,

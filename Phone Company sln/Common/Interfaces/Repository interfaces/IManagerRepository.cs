@@ -19,6 +19,6 @@ namespace Common.Interfaces
 
         List<Client> GetMostConectedClients();
 
-        List<Client> GetClientWhoMostLikleyToUnsign();
+        List<Client> GetClientWhoMostLikelyToUnsign();
     }
 }

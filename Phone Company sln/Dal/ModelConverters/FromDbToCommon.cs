@@ -84,7 +84,7 @@ namespace Dal.ModelConverters
                 MaxMinute = dbPackage.MaxMinute,
                 MostCallNumber = dbPackage.MostCallNumber,
                 PackageName = dbPackage.PackageName,
-                SelectedNumberId = dbPackage.SelectedNuberId
+                SelectedNumberId = dbPackage.SelectedNumberId
             };
             return package;
         }
