@@ -44,13 +44,14 @@ namespace Dal.UnitTest
             var context = A.Fake<PhoneCompanyContext>();
             A.CallTo(() => context.Calls).Returns(set);
 
-            var controller = new CallsRepository();
+            var controller = new CallsRepository(context);
+            var results = controller.GetLineCalls("121212");
 
             //Act
             controller.AddNewCall(newCall);
-            var results = controller.GetLineCalls("1232131");
             //Assert
-            Assert.AreEqual(results,newCall);
+            Assert.AreEqual(results.FirstOrDefault(),newCall);
+
 
         }
 
