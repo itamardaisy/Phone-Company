@@ -144,7 +144,7 @@ namespace Dal.Repositories
             dbPackage.MaxMinute = package.MaxMinute;
             dbPackage.MostCallNumber = package.MostCallNumber;
             dbPackage.PackageName = package.PackageName;
-            dbPackage.SelectedNuberId = package.SelectedNumberId;
+            dbPackage.SelectedNumberId = package.SelectedNumberId;
             dbPackage.TotalPrice = package.TotalPrice;
         }
 
