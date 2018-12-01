@@ -93,7 +93,7 @@ namespace Dal.ModelConverters
         {
             Payment payment = new Payment()
             {
-                ClientId = dbPayment.LineId,
+                LineId = dbPayment.LineId,
                 Id = dbPayment.Id,
                 Month = dbPayment.Month,
                 TotalPayment = dbPayment.TotalPayment
