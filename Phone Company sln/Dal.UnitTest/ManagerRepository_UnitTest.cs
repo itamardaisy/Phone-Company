@@ -11,6 +11,7 @@ namespace Dal.UnitTest
  ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -22,6 +23,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -33,6 +35,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -44,6 +47,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -54,6 +58,7 @@ namespace Dal.UnitTest
         public void GetMostProftableClient_RecivedRequest_MostProftableClientWasFoundAndSentIt
 ()
         {
+            throw new NotImplementedException();
             //Arrange
 
             //Act
@@ -66,6 +71,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -77,6 +83,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -88,6 +95,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -98,6 +106,7 @@ namespace Dal.UnitTest
         public void GetMostConectedClients_RecivedRequest_MostConctedClientsWasFoundAndSentTheListOfTheTopFive()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -109,6 +118,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -120,6 +130,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -130,6 +141,7 @@ namespace Dal.UnitTest
         public void GetClientsWhoMostLikelyToUnsign_RecivedRequest_ClientsWhoMostLikelyToUnsigWasNotFoun()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 

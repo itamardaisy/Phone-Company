@@ -10,6 +10,7 @@ namespace Dal.UnitTest
         public void AddNewClient_RecivedClient_UserWasAddedToTheDB()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -20,6 +21,7 @@ namespace Dal.UnitTest
         public void UpdateClient_NewIfoOnTheUserWasRecived_UserUpdatedInTheDB()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -29,12 +31,14 @@ namespace Dal.UnitTest
         [TestMethod]
         public void DeleteClient_RecivedClientID_TheClientWillDeletedAndAddedToTheUnSignTable()
         {
+            throw new NotImplementedException();
 
         }
 
         [TestMethod]
         public void GetClientByID_RecivedClientID_ClientWasRetrivedFromDB()
         {
+            throw new NotImplementedException();
             //Arrange
 
             //Act
@@ -46,6 +50,7 @@ namespace Dal.UnitTest
         public void GetClientByID_RecivedClientID_NoClientWasFound()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 

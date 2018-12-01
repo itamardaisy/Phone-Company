@@ -15,7 +15,8 @@ namespace BL.Services
 
         public ManagerService()
         {
-            MR = new ManagerRepository();
+            throw new NotImplementedException();
+
         }
 
         public void AddNewPackage(Package package)

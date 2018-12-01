@@ -10,6 +10,7 @@ namespace Dal.UnitTest
         public void AddNewSMS_RecivedNewSMS_SMSWasAddedToTheDBAndTheCallWasReturn()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -20,6 +21,7 @@ namespace Dal.UnitTest
         public void GetLineSMS_RecivedLineNumber_ListOfLineSMSsWasRecived()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -30,6 +32,7 @@ namespace Dal.UnitTest
         public void GetLineSMS_RecivedLineNumber_NoSMSWasFound()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -41,6 +44,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -51,6 +55,7 @@ namespace Dal.UnitTest
         public void GetLineSMSMonth_RecivedLineNumberAndMonth_NoSMSsOfTheMonthFound()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 

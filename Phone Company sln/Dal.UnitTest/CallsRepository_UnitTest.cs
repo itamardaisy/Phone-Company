@@ -15,7 +15,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NUnit.Framework;
 using Dal.UnitTest;
+using EntityFramework.FakeItEasy;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+using Times = Moq.Times;
 
 
 namespace Dal.UnitTest
@@ -23,52 +25,49 @@ namespace Dal.UnitTest
     [TestClass]
     public class CallsRepository_UnitTest
     {
- 
+        private Mock<DbSet<DbCall>> _mockSet;
+        private Mock<PhoneCompanyContext> _mockContext;
+
         [TestMethod]
         public void AddNewCall_RecivedNewCall_CallWasAddedToTheDB()
         {
-            // Arrange
-            var testData = new List<DbCall>
-            {
-                ModelsGenerateForUnitTests.GenrateCall().CommonToDb(),
-            };
+            _mockSet = new Mock<DbSet<DbCall>>();
 
-            var newCall = new Call
-                {CallDate = DateTime.Now, DestinationNumber = "121212", Duration = 123, LineId = 1};
+            _mockContext = new Mock<PhoneCompanyContext>();
+            _mockContext.Setup(m => m.Calls).Returns(_mockSet.Object);
 
-            var set = A.Fake<DbSet<DbCall>>
-                (c => c.Implements(typeof(IQueryable<DbCall>))
-                .Implements(typeof(IDbAsyncEnumerable<DbCall>)))
-                .SetupData(testData);
+            var service = new CallsRepository(_mockContext.Object);
+            service.AddNewCall(ModelsGenerateForUnitTests.GenrateCall());
 
-            var context = A.Fake<PhoneCompanyContext>();
-            A.CallTo(() => context.Calls).Returns(set);
-
-            var controller = new CallsRepository(context);
-            var results = controller.GetLineCalls("121212");
-
-            //Act
-            controller.AddNewCall(newCall);
-            //Assert
-            Assert.AreEqual(results.FirstOrDefault(),newCall);
-
-
+            _mockSet.Verify(m => m.Add(It.IsAny<DbCall>()),Times.Once);
+            _mockContext.Verify(m => m.SaveChanges(),Times.Once);
         }
 
         [TestMethod]
         public void GetLineCall_RecivedLineNumber_RecivedCallListFromDB()
         {
-            //Arrange
+            var testData = new List<DbCall>
+               {
+                   ModelsGenerateForUnitTests.GenrateCall().CommonToDb(),
+               }.AsQueryable();
 
-            //Act
+ 
 
+            _mockContext = new Mock<PhoneCompanyContext>();
+            _mockContext.Setup(m => m.Calls).Returns(_mockSet.Object);
+
+            var service = new CallsRepository(_mockContext.Object);
+            var results = service.GetLineCalls("1231212");
+            
             //Assert
+            Assert.AreEqual(results, ModelsGenerateForUnitTests.GenrateCall().CommonToDb());
         }
 
         [TestMethod]
         public void GetLineCall_RecivedLineNumber_NoLineCallsWasFoundInTheDB()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -79,6 +78,7 @@ namespace Dal.UnitTest
         public void GetLineCallsMonth_RecivedLineNumber_RecivedLineCallsOfTheMonthFromDB()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -89,7 +89,7 @@ namespace Dal.UnitTest
         public void GetLineCallsMonth_RecivedLineNumber_NoLineCallsOfTheMonthWasFound()
         {
             //Arrange
-
+            throw new NotImplementedException();
             //Act
 
             //Assert

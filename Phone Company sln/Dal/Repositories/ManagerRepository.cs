@@ -56,11 +56,13 @@ namespace Dal.Repositories
         /// <returns></returns>
         public List<Client> GetClientWhoMostLikelyToUnsign()
         {
+            throw new NotImplementedException();
 
         }
 
         private bool ChecksWetherTheSelectedNumbersAreAvilable(DbSelectedNumber selectedNumber)
         {
+            throw new NotImplementedException();
 
         }
 
@@ -70,6 +72,7 @@ namespace Dal.Repositories
         /// <returns> The client </returns>
         private DbClient AClientWhoUsesTheLeast()
         {
+            throw new NotImplementedException();
 
         }
 
@@ -86,6 +89,12 @@ namespace Dal.Repositories
                 clientPackages.Add(context.Packages.FirstOrDefault(x => x.Id == clientLines[i].PackageId));
             for (int i = 0; i < clientPackages.Count; i++)
                 clientSelectedNumbers.Add(context.SelectedNumbers.FirstOrDefault(x => x.Id == clientPackages[i].SelectedNumberId));
+
+
+            throw new NotImplementedException();
+
+
+
         }
 
         public Client GetMostAnoyingClient()
