@@ -49,6 +49,7 @@
     <Compile Include="Exceptions\DbUpdateException.cs" />
     <Compile Include="Exceptions\GetFromDatabaseException.cs" />
     <Compile Include="Exceptions\RemoveFromDatabaseException.cs" />
+    <Compile Include="Interfaces\BillingService interfaces\IPaymentCalculator.cs" />
     <Compile Include="Interfaces\BillingService interfaces\IPaymentDataAccess.cs" />
     <Compile Include="Interfaces\Repository interfaces\ICallsRepository.cs" />
     <Compile Include="Interfaces\Repository interfaces\IClientRepository.cs" />

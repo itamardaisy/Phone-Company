@@ -56,12 +56,7 @@ namespace Dal.Repositories
         /// <returns></returns>
         public List<Client> GetClientWhoMostLikelyToUnsign()
         {
-
-        }
-
-        private bool ChecksWetherTheSelectedNumbersAreAvilable(DbSelectedNumber selectedNumber)
-        {
-
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -70,22 +65,7 @@ namespace Dal.Repositories
         /// <returns> The client </returns>
         private DbClient AClientWhoUsesTheLeast()
         {
-
-        }
-
-        /// <summary>
-        /// This method will returns the client who is selected numbers are unsign.
-        /// </summary>
-        /// <returns> The client </returns>
-        private DbClient AClineWhoIsSelectedNumberAreUnsign(int clientId)
-        {
-            List<DbSelectedNumber> clientSelectedNumbers = new List<DbSelectedNumber>();
-            List<DbPackage> clientPackages = new List<DbPackage>();
-            var clientLines = context.Lines.Where(y => y.ClientId == clientId).ToList();
-            for (int i = 0; i < clientLines.Count; i++)
-                clientPackages.Add(context.Packages.FirstOrDefault(x => x.Id == clientLines[i].PackageId));
-            for (int i = 0; i < clientPackages.Count; i++)
-                clientSelectedNumbers.Add(context.SelectedNumbers.FirstOrDefault(x => x.Id == clientPackages[i].SelectedNumberId));
+            throw new NotImplementedException();
         }
 
         public Client GetMostAnoyingClient()

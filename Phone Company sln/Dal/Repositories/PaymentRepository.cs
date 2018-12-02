@@ -44,5 +44,22 @@ namespace Dal.Repositories
             var smss = context.SMSs.Select(x => x.SMSDate.Month == dateTime.Month).ToList();
             return null;
         }
+
+        public double CalcOverLimitCallsPayment(double overLimitMinuts, int clientTypeId)
+        {
+            var clientType = context.ClientTypes.FirstOrDefault(x => x.Id == clientTypeId);
+            return overLimitMinuts * clientType.MinutePrice;
+        }
+
+        public double CalcOverLimitSMSsPayment(int overLimitSMSs, int clientTypeId)
+        {
+            var clientType = context.ClientTypes.FirstOrDefault(x => x.Id == clientTypeId);
+            return overLimitSMSs * clientType.SMSPrice;
+        }
+
+        public double GetPackagePaymentByLine(int lineId)
+        {
+            return context.Packages.Where
+        }
     }
 }

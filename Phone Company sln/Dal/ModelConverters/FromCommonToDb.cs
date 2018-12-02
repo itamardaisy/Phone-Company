@@ -81,7 +81,8 @@ namespace Dal.ModelConverters
                 MaxMinute = package.MaxMinute,
                 MostCallNumber = package.MostCallNumber,
                 PackageName = package.PackageName,
-                TotalPrice = package.TotalPrice
+                TotalPrice = package.TotalPrice,
+                MaxSMSs = package.MaxSMSs
             };
             return dbPackage;
         }

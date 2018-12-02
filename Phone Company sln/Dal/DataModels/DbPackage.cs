@@ -32,6 +32,9 @@ namespace Dal.DataModels
         public int MaxMinute { get; set; }
 
         [Required]
+        public int MaxSMSs { get; set; }
+
+        [Required]
         [DataType(DataType.Currency)]
         public double FixedPrice { get; set; }
 

@@ -17,6 +17,13 @@ namespace Common.Models
         private bool mostCallNumber;
         private bool insideFamilyCall;
         private int selectedNumberId;
+        private int maxSMSs;
+
+        public int MaxSMSs
+        {
+            get { return maxSMSs; }
+            set { maxSMSs = value; }
+        }
 
         public int Id
         {

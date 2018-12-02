@@ -45,6 +45,21 @@ namespace Dal.Repositories
             }
         }
 
+        public double GetActualMonthCalls(int lineId, DateTime date)
+        {
+            double minutSum = 0.0;
+            var calls = context.Calls.Where(x => x.LineId == lineId && x.CallDate.Month == date.Month).Select(x => x.DbToCommon()).ToList();
+            foreach (var call in calls)
+                minutSum += call.Duration;
+            return minutSum;
+        }
+
+        public int GetActualMonthSMSs(int lineId, DateTime date)
+        {
+            var SMSs = context.SMSs.Where(x => x.LineId == lineId && x.SMSDate.Month == date.Month).Select(x => x.DbToCommon()).ToList();
+            return SMSs.Count;
+        }
+
         /// <summary>
         /// This method gets a linenumber and returns the line.
         /// </summary>
@@ -129,6 +144,11 @@ namespace Dal.Repositories
             dbLine.Number = line.Number;
             dbLine.PackageId = line.PackageId;
             dbLine.Status = line.Status;
+        }
+
+        public List<Line> GetClientLines(int clientId)
+        {
+            return context.Lines.Where(x => x.ClientId == clientId).Select(x => x.DbToCommon()).ToList();
         }
     }
 }
