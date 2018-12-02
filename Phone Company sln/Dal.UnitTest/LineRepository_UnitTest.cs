@@ -10,6 +10,7 @@ namespace Dal.UnitTest
         public void AddNewLine_RecivedNewLine_LineWasAddedToTheDB()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -21,6 +22,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -32,6 +34,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -43,6 +46,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 

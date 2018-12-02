@@ -11,6 +11,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -22,6 +23,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -33,6 +35,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -44,6 +47,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -55,6 +59,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -66,6 +71,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 

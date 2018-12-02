@@ -18,8 +18,10 @@ namespace BL.Services
 
         public EmploeeService()
         {
-            CR = new ClientRepository();
-            CTR = new ClientTypeRepository();
+            //CR = new ClientRepository();
+            //CTR = new ClientTypeRepository();
+            throw new NotImplementedException();
+
         }
 
         public void AddNewClient(Client client)

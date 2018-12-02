@@ -10,6 +10,7 @@ namespace Dal.UnitTest
         public void GetClientByName_RecivedClientName_ClientTypeWasRecivedFromDB()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -20,6 +21,7 @@ namespace Dal.UnitTest
         public void GetClientByName_RecivedClientName_NoClientTypeFound()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -31,6 +33,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -42,6 +45,7 @@ namespace Dal.UnitTest
 ()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -52,6 +56,7 @@ namespace Dal.UnitTest
         public void GetAllTypes_RecivedCallToFunction_RecivedAllClientTypesFromDB()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -62,6 +67,7 @@ namespace Dal.UnitTest
         public void UpdateMinutePrice_RecivedTypeToUpdateAndNewPrice_MinutePriceWasUpdatedInDB()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 
@@ -72,6 +78,7 @@ namespace Dal.UnitTest
         public void UpdateSMSPrice_RecivedTypeToUpdateAndNewPrice_SMSPriceWasUpdatedInDB()
         {
             //Arrange
+            throw new NotImplementedException();
 
             //Act
 

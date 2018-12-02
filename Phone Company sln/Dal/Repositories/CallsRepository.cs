@@ -73,5 +73,6 @@ namespace Dal.Repositories
                 throw new DataProcedureException(ex.Message);
             }
         }
+
     }
 }
