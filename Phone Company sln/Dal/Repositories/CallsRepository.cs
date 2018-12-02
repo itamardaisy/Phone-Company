@@ -12,7 +12,7 @@ namespace Dal.Repositories
 {
     public class CallsRepository : ICallsRepository
     {
-        PhoneCompanyContext context;
+        private PhoneCompanyContext context;
 
         public CallsRepository(PhoneCompanyContext context)
         {
@@ -73,6 +73,5 @@ namespace Dal.Repositories
                 throw new DataProcedureException(ex.Message);
             }
         }
-
     }
 }
