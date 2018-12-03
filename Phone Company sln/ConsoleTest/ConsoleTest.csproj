@@ -67,5 +67,15 @@
   <ItemGroup>
     <Content Include="TryToConvert.html" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BillingService\BillingService.csproj">
+      <Project>{A3F9D30F-FDB4-4A8D-B510-0CEB65B7EBCF}</Project>
+      <Name>BillingService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{05145F7D-7C86-4F70-BD31-706CACE61D12}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

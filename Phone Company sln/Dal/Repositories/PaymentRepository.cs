@@ -14,7 +14,7 @@ namespace Dal.Repositories
 {
     public class PaymentRepository : IPaymentRepository
     {
-        PhoneCompanyContext context;
+        private PhoneCompanyContext context;
 
         public PaymentRepository(PhoneCompanyContext context)
         {
@@ -59,7 +59,7 @@ namespace Dal.Repositories
 
         public double GetPackagePaymentByLine(int lineId)
         {
-            return context.Packages.Where
+            throw new NotImplementedException();
         }
     }
 }

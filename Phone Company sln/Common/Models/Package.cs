@@ -13,7 +13,7 @@ namespace Common.Models
         private double totalPrice;
         private int maxMinute;
         private double fixedPrice;
-        private double disscountPrecentage;
+        private int disscountPrecentage;
         private bool mostCallNumber;
         private bool insideFamilyCall;
         private int selectedNumberId;
