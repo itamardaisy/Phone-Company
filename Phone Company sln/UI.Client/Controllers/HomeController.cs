@@ -1,30 +1,40 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
+using UI.Client.Models;
 
 namespace UI.Client.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private const string BASE_ADDRESS = "http://localhost:51418/";
+        private HttpClient client;
+
+        public HomeController()
         {
-            return View();
+            client = new HttpClient();
+            client.BaseAddress = new Uri(BASE_ADDRESS);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public ActionResult About()
+        public ActionResult Login(Models.Client clientModel)
         {
-            ViewBag.Message = "Your application description page.";
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:63465/");
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            HttpResponseMessage response = client.PostAsync("api/Login/Login").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToActionPermanent("Index", "Project");
+            }
+            return View(clientModel);
         }
     }
 }

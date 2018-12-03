@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BL.Services
 {
-    public class LoginService : ILoginService
+    public class LoginService : IEmploeeLoginService
     {
-        public object Login(string name, string password)
+        public bool Login(string name, string password)
         {
             throw new NotImplementedException();
         }

@@ -22,6 +22,11 @@ namespace Dal.Repositories
             this.context = context;
         }
 
+        public bool LoginClient(string name, int clientId)
+        {
+            return context.Clients.Any(x => x.Id == clientId && x.Name == name);
+        }
+
         /// <summary>
         /// This method gets a client from the BL and add it to the context.
         /// </summary>

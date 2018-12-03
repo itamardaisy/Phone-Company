@@ -4,12 +4,12 @@ namespace Server.Employee.Controllers
 {
     public class BillingController : ApiController
     {
-        private const string Route = "api/Billing/";
+        private const string BASE_ROUTE = "api/Billing/";
 
         /// <summary>
         /// Calling The Create PDF Function from the API to the service
         /// </summary>
-        [Route(Route + "CreatePDF")]
+        [Route(BASE_ROUTE + "CreatePDF")]
         [HttpGet]
         public string CreatePdf()
         {

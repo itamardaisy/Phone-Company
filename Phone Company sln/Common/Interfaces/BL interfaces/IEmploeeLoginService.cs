@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common.Interfaces
 {
-    public interface ILoginService
+    public interface IEmploeeLoginService
     {
-        object Login(string name, string password);
+        bool Login(string name, string password);
 
         bool Logout(int id);
     }
