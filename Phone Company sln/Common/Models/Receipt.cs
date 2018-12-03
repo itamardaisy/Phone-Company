@@ -8,19 +8,53 @@ namespace Common.Models
 {
     public class Receipt
     {
-        private byte[] pdfReceiptFile;
-        private ICollection<Payment> clientPayments;
+        private double basePrice;
+        private double sMSsExtraPrice;
+        private double callsExtraPrice;
+        private int disscountPercentage;
+        private double totalPriceBeforeDisscount;
+        private double totalPriceAfterDisscount;
 
-        public ICollection<Payment> ClientPayments
+        public double BasePrice
         {
-            get { return clientPayments; }
-            set { clientPayments = value; }
+            get { return basePrice; }
+            set { basePrice = value; }
         }
 
-        public byte[] PdfReceiptFile
+        public double TotalPriceAfterDisscount
         {
-            get { return pdfReceiptFile; }
-            set { pdfReceiptFile = value; }
+            get { return totalPriceAfterDisscount; }
+            private set
+            {
+                totalPriceAfterDisscount = totalPriceBeforeDisscount - ((disscountPercentage / 100) * totalPriceBeforeDisscount);
+            }
+        }
+
+        public double TotalPriceBeforeDisscount
+        {
+            get { return totalPriceBeforeDisscount; }
+            private set
+            {
+                totalPriceBeforeDisscount = basePrice + sMSsExtraPrice + callsExtraPrice;
+            }
+        }
+
+        public int DisscountPercentage
+        {
+            get { return disscountPercentage; }
+            set { disscountPercentage = value; }
+        }
+
+        public double CallsExtraPrice
+        {
+            get { return callsExtraPrice; }
+            set { callsExtraPrice = value; }
+        }
+
+        public double SMSsExtraPrice
+        {
+            get { return sMSsExtraPrice; }
+            set { sMSsExtraPrice = value; }
         }
     }
 }

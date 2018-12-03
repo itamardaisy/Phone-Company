@@ -19,19 +19,12 @@ namespace BillingService.Services
             PDA = new PaymentDataAccess();
         }
 
-        public Dictionary<string, double> GetTotalClientPayment(int clientId)
+        public Dictionary<string, Receipt> GetTotalClientPayment(int clientId, DateTime date)
         {
             List<Line> clientLins = PDA.GetClientLines(clientId);
-            Dictionary<string, double> TotalLinePrice = new Dictionary<string, double>();
-            double overLinitPrice = 0.0, basePrice, total;
+            Dictionary<string, Receipt> TotalLinePrice = new Dictionary<string, Receipt>();
             foreach (var line in clientLins)
-            {
-                overLinitPrice = PDA.CalcOverCallLimitPrice(line, DateTime.Now, clientId);
-                overLinitPrice += PDA.CalcOverSMSsLimitPrice(line, DateTime.Now, clientId);
-                basePrice = PDA.GetBasePackagePrice(line);
-                total = basePrice + overLinitPrice;
-                TotalLinePrice.Add(line.Number, total);
-            }
+                TotalLinePrice.Add(line.Number, PDA.SetLineReceipt(line, date, clientId));
             return TotalLinePrice;
         }
     }

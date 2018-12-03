@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Common.Interfaces.BillingService_interfaces
 {
     public interface IPaymentCalculator
     {
-        Dictionary<string, double> GetTotalClientPayment(int clientId);
+        Dictionary<string, Receipt> GetTotalClientPayment(int clientId, DateTime date);
     }
 }

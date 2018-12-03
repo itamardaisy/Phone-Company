@@ -39,7 +39,7 @@ namespace Dal.DataModels
         public double FixedPrice { get; set; }
 
         [Required]
-        public double DisscountPrecentage { get; set; }
+        public int DisscountPrecentage { get; set; }
 
         [Required]
         [DefaultValue(false)]

@@ -17,7 +17,7 @@ namespace BillingService.Services
             set => pdfFile = value;
         }
 
-        public void WriteToFile(ICollection<Payment> payments)
+        public void WriteToFile(Dictionary<string, Receipt> payments)
         {
             string header = "<h1>Recipt Samerry</h1>";
             string tableRows = "";

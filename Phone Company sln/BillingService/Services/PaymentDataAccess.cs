@@ -27,7 +27,17 @@ namespace BillingService.Services
             CLIENT_REPOSITORY = new ClientRepository(context);
         }
 
-        internal double CalcOverSMSsLimitPrice(Line line, DateTime date, int clientId)
+        internal Receipt SetLineReceipt(Line line, DateTime date, int clientId)
+        {
+            Receipt receipt = new Receipt();
+            receipt.BasePrice = PACKAGE_REPOSITORY.GetBasePrice(line.Id);
+            receipt.CallsExtraPrice = CalcOverCallLimitPrice(line, date, clientId);
+            receipt.SMSsExtraPrice = CalcOverSMSsLimitPrice(line, date, clientId);
+            receipt.DisscountPercentage = PACKAGE_REPOSITORY.GetPackagePercentage(line.PackageId);
+            return receipt;
+        }
+
+        private double CalcOverSMSsLimitPrice(Line line, DateTime date, int clientId)
         {
             int clientTypeId = CLIENT_REPOSITORY.GetClientById(clientId).ClientTypeId;
             int overLimitSMSs = 0;
@@ -38,20 +48,15 @@ namespace BillingService.Services
             return PAYMENT_REPOSITORY.CalcOverLimitCallsPayment(overLimitSMSs, clientTypeId);
         }
 
-        internal double CalcOverCallLimitPrice(Line line,DateTime date, int clientId)
+        private double CalcOverCallLimitPrice(Line line,DateTime date, int clientId)
         {
             int clientTypeId = CLIENT_REPOSITORY.GetClientById(clientId).ClientTypeId;
             double overLimitMinuts = 0.0;
             double minutsInPackage = (double)PACKAGE_REPOSITORY.GetMinutsInPackage(line.Id);
-            double actualyMinuts = LINE_REPOSITORY.GetActualMonthSMSs(line.Id, date);
+            double actualyMinuts = LINE_REPOSITORY.GetActualMonthCalls(line.Id, date);
             if (actualyMinuts > minutsInPackage)
                 overLimitMinuts = actualyMinuts - minutsInPackage;
             return PAYMENT_REPOSITORY.CalcOverLimitCallsPayment(overLimitMinuts, clientTypeId);
-        }
-
-        internal double GetBasePackagePrice(Line line)
-        {
-            throw new NotImplementedException();
         }
 
         internal List<Line> GetClientLines(int clientId)

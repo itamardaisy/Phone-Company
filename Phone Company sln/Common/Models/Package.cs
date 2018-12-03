@@ -55,7 +55,7 @@ namespace Common.Models
             set { fixedPrice = value; }
         }
 
-        public double DisscountPrecentage
+        public int DisscountPrecentage
         {
             get { return disscountPrecentage; }
             set { disscountPrecentage = value; }

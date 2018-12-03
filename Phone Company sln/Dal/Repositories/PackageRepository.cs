@@ -44,6 +44,17 @@ namespace Dal.Repositories
             return context.Packages.FirstOrDefault(c => c.Id == context.Lines.FirstOrDefault(x => x.Id == lineId).PackageId).MaxMinute;
         }
 
+        public double GetBasePrice(int lineId)
+        {
+            var line = context.Lines.FirstOrDefault(x => x.Id == lineId);
+            return context.Packages.Where(x => x.Id == line.PackageId).FirstOrDefault().TotalPrice;
+        }
+
+        public int GetPackagePercentage(int packageId)
+        {
+            return context.Packages.FirstOrDefault(x => x.Id == packageId).DisscountPrecentage;
+        }
+
         public int GetSMSsInPackage(int lineId)
         {
             return context.Packages.FirstOrDefault(c => c.Id == context.Lines.FirstOrDefault(x => x.Id == lineId).PackageId).MaxSMSs;

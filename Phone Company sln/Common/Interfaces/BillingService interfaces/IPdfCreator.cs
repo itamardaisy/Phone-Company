@@ -12,6 +12,6 @@ namespace Common.Interfaces
     {
         byte[] PdfFile { get; set; }
 
-        void WriteToFile(ICollection<Payment> payments);
+        void WriteToFile(Dictionary<string, Receipt> payments);
     }
 }
