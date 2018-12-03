@@ -18,6 +18,8 @@ namespace Dal.ModelConverters
 {
     internal static class FromDbToCommon
     {
+        private static readonly PhoneCompanyContext context = new PhoneCompanyContext();
+
         internal static Call DbToCommon(this DbCall dbCall)
         {
             Call call = new Call()
@@ -67,7 +69,9 @@ namespace Dal.ModelConverters
                 Id = dbLine.Id,
                 Number = dbLine.Number,
                 PackageId = dbLine.PackageId,
-                Status = dbLine.Status
+                Status = dbLine.Status,
+                CallsList = context.Calls.Where(x => x.LineId == dbLine.Id).Select(x => x.DbToCommon()).ToList(),
+                SMSsList = context.SMSs.Where(x => x.LineId == dbLine.Id).Select(x => x.DbToCommon()).ToList()
             };
             return line;
         }
@@ -84,7 +88,8 @@ namespace Dal.ModelConverters
                 MaxMinute = dbPackage.MaxMinute,
                 MostCallNumber = dbPackage.MostCallNumber,
                 PackageName = dbPackage.PackageName,
-                SelectedNumberId = dbPackage.SelectedNumberId
+                SelectedNumberId = dbPackage.SelectedNumberId,
+                MaxSMSs = dbPackage.MaxSMSs
             };
             return package;
         }

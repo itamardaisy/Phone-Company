@@ -13,6 +13,21 @@ namespace Common.Models
         private bool status;
         private int packageId;
         private int clientId;
+        private List<Call> callsList;
+        private List<SMS> sMSsList;
+
+        public List<SMS> SMSsList
+        {
+            get { return sMSsList; }
+            set { sMSsList = value; }
+        }
+
+
+        public List<Call> CallsList
+        {
+            get { return callsList; }
+            set { callsList = value; }
+        }
 
         public int Id
         {

@@ -13,5 +13,9 @@ namespace Common.Interfaces
         Dictionary<PaymentType, Payment> GetByMonth(DateTime dateTime, Client client, string lineNumber);
 
         void AddPayment(Payment payment);
+
+        double CalcOverLimitSMSsPayment(int overLimitSMSs, int clientTypeId);
+
+        double CalcOverLimitCallsPayment(double overLimitMinuts, int clientTypeId);
     }
 }

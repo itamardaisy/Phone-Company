@@ -16,5 +16,7 @@ namespace Common.Interfaces
         void UpdateLine(Line line);
 
         void SetPackage(int ClientId, int newPackageId);
+
+        List<Line> GetClientLines(int clientId);
     }
 }
