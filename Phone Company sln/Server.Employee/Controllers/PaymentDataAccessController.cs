@@ -16,14 +16,14 @@ namespace Server.Employee.Controllers
         [HttpGet]
         public ICollection<Payment> GetClientMonthPayment(int clientId, DateTime month)
         {
-            return paymentDataAccess.GetClientMonthPayment(clientId, month);
+            throw new NotImplementedException();
         }
 
         [Route(Route + "GetPdfFileFromDataBaseAsByteArray")]
         [HttpGet]
         public byte[] GetPdfFileFromDataBaseAsByteArray()
         {
-            return paymentDataAccess.GetPdfFileFromDataBaseAsByteArray();
+            throw new NotImplementedException();
         }
 
         [Route(Route + "SaveFileToDatabase")]
