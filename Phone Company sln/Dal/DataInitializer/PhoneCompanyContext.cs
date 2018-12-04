@@ -25,5 +25,10 @@ namespace Dal.DataInitializer
         public virtual DbSet<DbSMS> SMSs{ get; set; }
         public virtual DbSet<DbUnsignClient> UnsignClients { get; set; }
         public DbSet<DbUser> Users { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer<PhoneCompanyContext>(null);
+        }
     }
 }

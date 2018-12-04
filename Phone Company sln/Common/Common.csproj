@@ -63,6 +63,7 @@
     <Compile Include="Interfaces\Repository interfaces\IClientRepository.cs" />
     <Compile Include="Interfaces\Repository interfaces\IClientTypeRepository.cs" />
     <Compile Include="Interfaces\BL interfaces\IEmploeeService.cs" />
+    <Compile Include="Interfaces\Repository interfaces\IEmployeeRepository.cs" />
     <Compile Include="Interfaces\Repository interfaces\ILineRepository.cs" />
     <Compile Include="Interfaces\BL interfaces\IEmploeeLoginService.cs" />
     <Compile Include="Interfaces\Repository interfaces\IManagerRepository.cs" />

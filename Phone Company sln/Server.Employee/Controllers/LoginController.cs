@@ -12,11 +12,13 @@ namespace Server.Employee.Controllers
     public class LoginController : ApiController
     {
         private LoginService loginService = new LoginService();
+        private const string BASE_ADDRESS = "api/Login";
 
         [HttpPost]
-        public User UserLogin()
+        [Route(BASE_ADDRESS)]
+        public User UserLogin([FromBody]User userLogin)
         {
-            return loginService.Login()
+            return loginService.Login(userLogin.Name, userLogin.Password);
         }
     }
 }

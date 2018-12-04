@@ -137,7 +137,6 @@
     <Compile Include="Models\SMS.cs" />
     <Compile Include="Models\UmsignClient.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Pages\AddNewClientPage.xaml.cs">
       <DependentUpon>AddNewClientPage.xaml</DependentUpon>
     </Compile>
@@ -220,6 +219,9 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime">
+      <Version>4.3.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />

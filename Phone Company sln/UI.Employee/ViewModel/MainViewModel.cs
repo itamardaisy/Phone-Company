@@ -31,9 +31,9 @@ namespace UI.Employee.ViewModel
 
         private void NavigateCommandAction()
         {
-            var user = new UserLogin
+            var user = new User
             {
-                UserName = UserName,
+                Name = UserName,
                 Password = Password
             };
             var itemAsJson = JsonConvert.SerializeObject(user);
@@ -41,7 +41,7 @@ namespace UI.Employee.ViewModel
 
             var response = client.PostAsync(BASE_ADDRESS + "api/Login", content).Result;
 
-            if (expr)
+            if (true)
             {
                 _navigationService.NavigateTo("EmployeeMainPage");
             }

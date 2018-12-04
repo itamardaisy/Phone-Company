@@ -7,15 +7,15 @@ using UI.Employee.Enums;
 
 namespace UI.Employee.Models
 {
-    internal class User
+    class User
     {
         private int id;
         private string name;
         private string email;
         private string password;
-        private int callAnswer;
-        private DateTime signDate;
         private UserType type;
+        private DateTime signDate;
+        private int callAnswer;
 
         public int Id
         {

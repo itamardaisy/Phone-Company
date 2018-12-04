@@ -20,13 +20,13 @@ namespace Web.UI.Client.Tests.Controllers
             LoginController controller = new LoginController();
 
             // Act
-            IEnumerable<string> result = controller.Get();
+           // IEnumerable<string> result = controller.Get();
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.Count());
-            Assert.AreEqual("value1", result.ElementAt(0));
-            Assert.AreEqual("value2", result.ElementAt(1));
+            //Assert.IsNotNull(result);
+            //Assert.AreEqual(2, result.Count());
+            //Assert.AreEqual("value1", result.ElementAt(0));
+            //Assert.AreEqual("value2", result.ElementAt(1));
         }
 
         [TestMethod]
@@ -36,10 +36,10 @@ namespace Web.UI.Client.Tests.Controllers
             LoginController controller = new LoginController();
 
             // Act
-            string result = controller.Get(5);
+            //string result = controller.Get(5);
 
             // Assert
-            Assert.AreEqual("value", result);
+          //  Assert.AreEqual("value", result);
         }
 
         [TestMethod]
@@ -49,9 +49,11 @@ namespace Web.UI.Client.Tests.Controllers
             LoginController controller = new LoginController();
 
             // Act
-            controller.Post("value");
+            //controller.Post("value");
 
             // Assert
+            throw new NotImplementedException();
+
         }
 
         [TestMethod]
@@ -61,9 +63,11 @@ namespace Web.UI.Client.Tests.Controllers
             LoginController controller = new LoginController();
 
             // Act
-            controller.Put(5, "value");
+            // controller.Put(5, "value");
 
             // Assert
+            throw new NotImplementedException();
+
         }
 
         [TestMethod]
@@ -73,9 +77,11 @@ namespace Web.UI.Client.Tests.Controllers
             LoginController controller = new LoginController();
 
             // Act
-            controller.Delete(5);
+            // controller.Delete(5);
 
             // Assert
+            throw new NotImplementedException();
+
         }
     }
 }
