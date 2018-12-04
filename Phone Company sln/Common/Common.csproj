@@ -51,12 +51,13 @@
     <Compile Include="Exceptions\RemoveFromDatabaseException.cs" />
     <Compile Include="Interfaces\BillingService interfaces\IPaymentCalculator.cs" />
     <Compile Include="Interfaces\BillingService interfaces\IPaymentDataAccess.cs" />
+    <Compile Include="Interfaces\ClientBL Interfaces\IClientLoginService.cs" />
     <Compile Include="Interfaces\Repository interfaces\ICallsRepository.cs" />
     <Compile Include="Interfaces\Repository interfaces\IClientRepository.cs" />
     <Compile Include="Interfaces\Repository interfaces\IClientTypeRepository.cs" />
     <Compile Include="Interfaces\BL interfaces\IEmploeeService.cs" />
     <Compile Include="Interfaces\Repository interfaces\ILineRepository.cs" />
-    <Compile Include="Interfaces\BL interfaces\ILoginService.cs" />
+    <Compile Include="Interfaces\BL interfaces\IEmploeeLoginService.cs" />
     <Compile Include="Interfaces\Repository interfaces\IManagerRepository.cs" />
     <Compile Include="Interfaces\BL interfaces\IManagerService.cs" />
     <Compile Include="Interfaces\Repository interfaces\IPackageRepository.cs" />
