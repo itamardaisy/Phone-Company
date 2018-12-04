@@ -15,11 +15,12 @@ namespace UI.Employee.ViewModel
     {
         #region PageKey for navigation Service
 
-        public const string MainPageKey = "MainView";
-        public const string EmployeeMainPageKey = "EmployeeMainPage";
-        public const string FindClientPageKey = "FindClientPage";
-        public const string AddNewClientPageKey = "AddNewClientPage";
-        public const string ClientsInfoPageKey = "ClientsInfoPage";
+        private const string MainPageKey = "MainView";
+        private const string EmployeeMainPageKey = "EmployeeMainPage";
+        private const string FindClientPageKey = "FindClientPage";
+        private const string AddNewClientPageKey = "AddNewClientPage";
+        private const string ClientsInfoPageKey = "ClientsInfoPage";
+        private const string ManagerMainPageKey = "ManagerMainPage";
 
         #endregion PageKey for navigation Service
 
@@ -36,6 +37,7 @@ namespace UI.Employee.ViewModel
             SimpleIoc.Default.Register<EmployeeMainViewModel>();
             SimpleIoc.Default.Register<FindClientViewModel>();
             SimpleIoc.Default.Register<AddNewClientViewModel>();
+            SimpleIoc.Default.Register<ManagerMainViewModel>();
             SimpleIoc.Default.Register(() => new ClientsInfoViewModel());
             //Example For Registering Service
             //  SimpleIoc.Default.Register<IService, Service>();
@@ -48,16 +50,17 @@ namespace UI.Employee.ViewModel
         /// <summary>
         /// Configuring each PageKey for a page
         /// </summary>
-        private static void SetUpNavigation()
+        private void SetUpNavigation()
         {
-            var nav = new FrameNavigationService();
+            var nav = new NavigationService();
 
-            nav.Configure(MainPageKey, new Uri("../MainPage.xaml", UriKind.Relative));
-            nav.Configure(EmployeeMainPageKey, new Uri("../Pages/EmployeePage.xaml", UriKind.Relative));
-            nav.Configure(FindClientPageKey, new Uri("../Pages/FindClientPage.xaml", UriKind.Relative));
-            nav.Configure(AddNewClientPageKey, new Uri("../Pages/AddNewClientPage.xaml", UriKind.Relative));
-            nav.Configure(ClientsInfoPageKey, new Uri("../Pages/ClientsInfoPage.xaml", UriKind.Relative));
-            SimpleIoc.Default.Register<IFrameNavigationService>(() => nav);
+            nav.Configure(MainPageKey, typeof(MainPage));
+            nav.Configure(EmployeeMainPageKey, typeof(Pages.EmployeeMainPage));
+            nav.Configure(FindClientPageKey, typeof(Pages.FindClientPage));
+            nav.Configure(AddNewClientPageKey, typeof(Pages.AddNewClientPage));
+            nav.Configure(ClientsInfoPageKey, typeof(Pages.ClientsInfoPage));
+            nav.Configure(ManagerMainPageKey, typeof(Pages.ManagerMainPage));
+            SimpleIoc.Default.Register<INavigationService>(() => nav);
         }
 
         #region Setting ViewModels
@@ -99,6 +102,14 @@ namespace UI.Employee.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<AddNewClientViewModel>();
+            }
+        }
+
+        public ManagerMainViewModel ManagerMainViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ManagerMainViewModel>();
             }
         }
 

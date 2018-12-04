@@ -15,14 +15,14 @@ namespace UI.Employee.ViewModel
 {
     internal class ClientsInfoViewModel
     {
-        private readonly IFrameNavigationService _navigationService;
+        private readonly INavigationService _navigationService;
 
         public RelayCommand UpdateClient { get; set; }
         public RelayCommand DeleteClient { get; set; }
 
         private static Client newClient { get; set; }
 
-        public ClientsInfoViewModel(IFrameNavigationService navigationService)
+        public ClientsInfoViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             UpdateClient = new RelayCommand(UpdateClientCommand);

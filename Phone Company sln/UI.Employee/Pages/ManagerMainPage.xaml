@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="UI.Employee.Pages.EmployeeMainPage"
+    x:Class="UI.Employee.Pages.ManagerMainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:UI.Employee.Pages"
@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    DataContext="{Binding Source={StaticResource Locator},Path=EmployeeMainViewModel}">
+    DataContext="{Binding Source={StaticResource Locator},Path=ManagerMainViewModel}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -29,11 +29,6 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.ColumnSpan="10" Text="Employee Main Page" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" />
-
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.ColumnSpan="10" Grid.RowSpan="10">
-            <Button FontSize="50" VerticalAlignment="Center" Command="{Binding NavigateCommandToAddClient}" HorizontalAlignment="Center" Content="Add Client" />
-            <Button FontSize="50" VerticalAlignment="Center" Command="{Binding NavigateCommandToSearchForClient }" HorizontalAlignment="Center" Content="Find Client" />
-        </StackPanel>
+        <TextBlock Grid.ColumnSpan="10" Text="Manager Main Page" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" />
     </Grid>
 </Page>

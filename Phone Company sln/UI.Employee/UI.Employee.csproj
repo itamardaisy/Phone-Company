@@ -149,12 +149,16 @@
     <Compile Include="Pages\FindClientPage.xaml.cs">
       <DependentUpon>FindClientPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ManagerMainPage.xaml.cs">
+      <DependentUpon>ManagerMainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\AddNewClientViewModel.cs" />
     <Compile Include="ViewModel\ClientsInfoViewModel.cs" />
     <Compile Include="ViewModel\EmployeeMainViewModel.cs" />
     <Compile Include="ViewModel\FindClientViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ManagerMainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +199,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\FindClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ManagerMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
