@@ -7,10 +7,10 @@
 
 <h2>LoginView</h2>
 
-@using (Html.BeginForm("Login", "HomeController", FormMethod.Post)) 
+@using (Html.BeginForm("Login", "Home"))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>LoginClient</h4>
         <hr />
