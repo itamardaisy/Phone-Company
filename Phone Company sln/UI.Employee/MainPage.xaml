@@ -32,8 +32,8 @@
 
         <TextBlock Grid.ColumnSpan="10" Text="Employee Login Page" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" />
 
-        <TextBox x:Name="UserName"  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="40" PlaceholderText="User Name" />
-        <TextBox x:Name="Password" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="40" PlaceholderText="Password" />
+        <TextBox x:Name="UserName"   Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding UserName}" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="40" PlaceholderText="User Name" />
+        <TextBox x:Name="Password" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Text="{Binding Password}" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="40" PlaceholderText="Password" />
 
         <Button x:Name="LoginBtn" Command="{Binding NavigateCommandToMainEmployeePage}" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="40" Content="Login" />
     </Grid>

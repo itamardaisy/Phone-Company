@@ -20,9 +20,11 @@ namespace Web.UI.Client.Tests.Controllers
             LoginController controller = new LoginController();
 
             // Act
-            controller.Post("value");
+            //controller.Post("value");
 
             // Assert
+            throw new NotImplementedException();
+
         }
     }
 }

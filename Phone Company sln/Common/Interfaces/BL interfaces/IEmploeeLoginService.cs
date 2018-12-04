@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Common.Interfaces
 {
     public interface IEmploeeLoginService
     {
-        bool Login(string name, string password);
+        User Login(string name, string password);
 
         bool Logout(int id);
     }

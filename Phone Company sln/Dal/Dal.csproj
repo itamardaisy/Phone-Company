@@ -67,6 +67,10 @@
     <Compile Include="Migrations\201811181259011_new.Designer.cs">
       <DependentUpon>201811181259011_new.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812041257593_update.cs" />
+    <Compile Include="Migrations\201812041257593_update.Designer.cs">
+      <DependentUpon>201812041257593_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConverters\FromCommonToDb.cs" />
     <Compile Include="ModelConverters\FromDbToCommon.cs" />
@@ -74,6 +78,7 @@
     <Compile Include="Repositories\CallsRepository.cs" />
     <Compile Include="Repositories\ClientRepository.cs" />
     <Compile Include="Repositories\ClientTypeRepository.cs" />
+    <Compile Include="Repositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\LineRepository.cs" />
     <Compile Include="Repositories\ManagerRepository.cs" />
     <Compile Include="Repositories\PackageRepository.cs" />
@@ -91,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811181259011_new.resx">
       <DependentUpon>201811181259011_new.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812041257593_update.resx">
+      <DependentUpon>201812041257593_update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

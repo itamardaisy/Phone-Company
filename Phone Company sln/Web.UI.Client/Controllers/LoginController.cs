@@ -20,7 +20,7 @@ namespace Web.UI.Client.Controllers
 
         // POST api/login
         [HttpPost]
-        [Route("api/Login")]
+        //  [Route("api/Login")]
         public bool Post([FromBody]LoginClient loginClient)
         {
             return LOGIN_SERVICE.Login(loginClient.Name, loginClient.ClientId);
