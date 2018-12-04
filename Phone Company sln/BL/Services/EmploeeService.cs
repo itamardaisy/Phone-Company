@@ -26,29 +26,36 @@ namespace BL.Services
 
         public void AddNewClient(Client client)
         {
-            try{
+            try
+            {
                 CR.AddNewClient(client);
             }
-            catch (AddToDatabaseException ex){
+            catch (AddToDatabaseException ex)
+            {
                 Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
             }
-            catch(RemoveFromDatabaseException ex){
+            catch (RemoveFromDatabaseException ex)
+            {
                 Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
             }
-            catch (GetFromDatabaseException ex){
+            catch (GetFromDatabaseException ex)
+            {
                 Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
             }
-        }   
+        }
 
         public bool DeleteClient(int id)
         {
-            try{
+            try
+            {
                 return CR.DeleteClient(id);
             }
-            catch (GetFromDatabaseException ex){ 
+            catch (GetFromDatabaseException ex)
+            {
                 Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
-            }   
-            catch (DataProcedureException ex){
+            }
+            catch (DataProcedureException ex)
+            {
                 Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
             }
             return false;

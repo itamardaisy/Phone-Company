@@ -2,15 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
+using Web.UI.Client.Models;
 
-namespace Server.Client.Controllers
+namespace Web.UI.Client.Controllers
 {
     public class LoginController : ApiController
     {
-        private const string BASE_ROUTE = "api/Login/";
         private readonly LoginService LOGIN_SERVICE;
 
         public LoginController()
@@ -18,11 +18,12 @@ namespace Server.Client.Controllers
             LOGIN_SERVICE = new LoginService();
         }
 
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.Route(BASE_ROUTE + "Login")]
-        public bool Login(string name, int clientId)
+        // POST api/login
+        [HttpPost]
+        [Route("api/Login")]
+        public bool Post([FromBody]LoginClient loginClient)
         {
-            return LOGIN_SERVICE.Login(name, clientId);
+            return LOGIN_SERVICE.Login(loginClient.Name, loginClient.ClientId);
         }
     }
 }

@@ -1,19 +1,17 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
-using UI.Client.Models;
+using Web.UI.Client.Models;
 
-namespace UI.Client.Controllers
+namespace Web.UI.Client.Controllers
 {
     public class HomeController : Controller
     {
-        private const string BASE_ADDRESS = "http://localhost:51418/";
+        private const string BASE_ADDRESS = "http://localhost:52036/";
         private HttpClient client;
 
         public HomeController()
@@ -29,9 +27,9 @@ namespace UI.Client.Controllers
             return View("LoginView");
         }
 
-        public ActionResult Login(Models.Client clientModel)
+        public ActionResult Login(LoginClient loginClient)
         {
-            var response = client.PostAsJsonAsync(BASE_ADDRESS+"api/Login/Login", clientModel).Result;
+            var response = client.PostAsJsonAsync(BASE_ADDRESS + "api/Login", loginClient).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 return RedirectToActionPermanent("Index");
