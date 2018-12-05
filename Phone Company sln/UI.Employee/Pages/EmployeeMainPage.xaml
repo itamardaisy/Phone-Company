@@ -35,5 +35,6 @@
             <Button FontSize="50" VerticalAlignment="Center" Command="{Binding NavigateCommandToAddClient}" HorizontalAlignment="Center" Content="Add Client" />
             <Button FontSize="50" VerticalAlignment="Center" Command="{Binding NavigateCommandToSearchForClient }" HorizontalAlignment="Center" Content="Find Client" />
         </StackPanel>
+        <Button Grid.Row="5" Command="{Binding NavigateCommandToLogout}" Grid.Column="1" Content="Logout"  FontSize="50" />
     </Grid>
 </Page>

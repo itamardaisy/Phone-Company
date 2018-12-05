@@ -13,7 +13,7 @@ namespace Common.Interfaces
 
         void UpdateClientDetails(Client client);
 
-        Client GetClient(string lineNumber, string clientName);
+        Client GetClient(int clientID);
 
         bool DeleteClient(int id);
 

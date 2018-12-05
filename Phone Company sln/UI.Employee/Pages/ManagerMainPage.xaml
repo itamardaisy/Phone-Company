@@ -30,5 +30,14 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.ColumnSpan="10" Text="Manager Main Page" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" />
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.ColumnSpan="10" Grid.RowSpan="10">
+            <Button FontSize="50" VerticalAlignment="Center" Command="{Binding NavigateCommandToAnnoyingCustomer}" HorizontalAlignment="Center" Content="Get Most Annoying Customer" />
+            <Button FontSize="50" VerticalAlignment="Center" Command="{Binding NavigateCommandToAddNewPackage }" HorizontalAlignment="Center" Content="Add New  Package" />
+            <Button FontSize="50" VerticalAlignment="Center" Command="{Binding NavigateCommandToConnectedClient }" HorizontalAlignment="Center" Content="Get Most Connected Client" />
+            <Button FontSize="50" VerticalAlignment="Center" Command="{Binding NavigateCommandProfitableClient }" HorizontalAlignment="Center" Content="Get Most Profitable Client" />
+        </StackPanel>
+
+        <Button Grid.Row="5" Command="{Binding NavigateCommandToLogout}" Grid.Column="1" Content="Logout"  FontSize="50" />
     </Grid>
 </Page>

@@ -4,8 +4,10 @@ using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using UI.Employee.Enums;
 using UI.Employee.Models;
+using Windows.UI.Popups;
 
 namespace UI.Employee.ViewModel
 {
@@ -29,23 +31,31 @@ namespace UI.Employee.ViewModel
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        private void NavigateCommandAction()
+        private async void NavigateCommandAction()
         {
             var user = new User
             {
                 Name = UserName,
                 Password = Password
             };
-            var itemAsJson = JsonConvert.SerializeObject(user);
-            var content = new StringContent(itemAsJson);
 
-            var response = client.PostAsync(BASE_ADDRESS + "api/Login", content).Result;
+            var myUri = new Uri(BASE_ADDRESS + "api/Login", UriKind.Absolute);
 
-            if (true)
+            var message = await client.PostAsJsonAsync<User>(myUri, user);
+
+            using (HttpResponseMessage respone = message)
             {
-                _navigationService.NavigateTo("EmployeeMainPage");
+                if (respone.IsSuccessStatusCode)
+                {
+                    User userFromDB = await respone.Content.ReadAsAsync<User>();
+                    if (userFromDB.Type == UserType.Emploee)
+                    {
+                        _navigationService.NavigateTo("EmployeeMainPage");
+                    }
+                    _navigationService.NavigateTo("ManagerMainPage");
+                }
+                await new MessageDialog("Bad Connection To The Server").ShowAsync();
             }
-            _navigationService.NavigateTo("ManagerMainPage");
         }
     }
 }

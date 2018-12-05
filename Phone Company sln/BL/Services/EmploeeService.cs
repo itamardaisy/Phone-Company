@@ -1,6 +1,7 @@
 ﻿using Common.Exceptions;
 using Common.Interfaces;
 using Common.Models;
+using Dal.DataInitializer;
 using Dal.Repositories;
 using System;
 using System.Collections.Generic;
@@ -15,13 +16,13 @@ namespace BL.Services
     {
         private readonly ClientRepository CR;
         private readonly ClientTypeRepository CTR;
+        private readonly PhoneCompanyContext CONTEXT;
 
         public EmploeeService()
         {
-            //CR = new ClientRepository();
-            //CTR = new ClientTypeRepository();
-            throw new NotImplementedException();
-
+            CONTEXT = new PhoneCompanyContext();
+            CR = new ClientRepository(CONTEXT);
+            CTR = new ClientTypeRepository(CONTEXT);
         }
 
         public void AddNewClient(Client client)
@@ -66,9 +67,9 @@ namespace BL.Services
             throw new NotImplementedException();
         }
 
-        public Client GetClient(string lineNumber, string clientName)
+        public Client GetClient(int clientID)
         {
-            throw new NotImplementedException();
+            return CR.GetClientById(clientID);
         }
 
         public List<ClientType> GetClientTypes()

@@ -56,9 +56,9 @@ namespace Server.Employee.Controllers
         /// <returns> The client that we asked for </returns>
         [Route(Route + "GetClient")]
         [HttpGet]
-        public Client GetClient(string lineNumber, string clientName)
+        public Client GetClient(int clientID)
         {
-            return employeeService.GetClient(lineNumber, clientName);
+            return employeeService.GetClient(clientID);
         }
 
         /// <summary>

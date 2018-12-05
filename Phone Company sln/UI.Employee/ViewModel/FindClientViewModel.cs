@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using UI.Employee.Helper;
@@ -18,8 +20,10 @@ namespace UI.Employee.ViewModel
         private readonly INavigationService _navigationService;
 
         public int SearchID { get; set; }
-
         public Client SelctedClient { get; set; }
+
+        private const string BASE_ADDRESS = "http://localhost:50066/api/employee/";
+        private HttpClient client;
 
         public ObservableCollection<Client> ClientsFound { get; set; }
 
@@ -33,16 +37,15 @@ namespace UI.Employee.ViewModel
             NavigateCommandToBack = new RelayCommand(NavigateCommandActionToBack);
             CommandToGetUserByID = new RelayCommand(CommandToGetUser);
             CommandToMoveToSelectedUser = new RelayCommand(CommandMoveToSelctedUser);
-            // there's a new client here just to see that the binding works
-            ClientsFound = new ObservableCollection<Client>
-            {
-                new Client { Adress = "asdasdsa", CallToCenter = 111, ClientTypeId = 1, ContactNumber = "12312312", Id = 1, LastName = "baba", Name = "asdasda", SignDate = DateTime.MinValue }
-            };
+
+            client = new HttpClient();
+            client.BaseAddress = new Uri(BASE_ADDRESS);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         private void CommandMoveToSelctedUser()
         {
-            //await new MessageDialog("This Method will move you to a screen where you can change info on the user || The User ID IS " + localClientToUSe.Id).ShowAsync();
             _navigationService.NavigateTo("ClientsInfoPage", SelctedClient);
         }
 
@@ -50,8 +53,20 @@ namespace UI.Employee.ViewModel
         //with OnChangeProperty so the list will be updated
         private async void CommandToGetUser()
         {
-            await new MessageDialog("This Method will get the id that user has entered").ShowAsync();
             //SelectedUser = ClientsFound.FirstOrDefault();
+
+            var myUri = new Uri(BASE_ADDRESS + "GetClient", UriKind.Absolute);
+
+            var message = await client.GetAsync(myUri + $"?clientId={SearchID}");
+
+            using (HttpResponseMessage respone = message)
+            {
+                if (respone.IsSuccessStatusCode)
+                {
+                    ClientsFound = await respone.Content.ReadAsAsync<ObservableCollection<Client>>();
+                }
+                await new MessageDialog("Bad Connection To The Server").ShowAsync();
+            }
         }
 
         private void NavigateCommandActionToBack()

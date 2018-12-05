@@ -18,7 +18,6 @@ namespace Dal.Repositories
     {
         private PhoneCompanyContext context;
 
-
         public EmployeeRepository(PhoneCompanyContext context)
         {
             this.context = context;
@@ -31,13 +30,17 @@ namespace Dal.Repositories
                 return context.Users.
                     Where(x => x.Name == name && x.Password == password)
                     .FirstOrDefault().DbToCommon();
-               // return userDB.DbToCommon();
             }
             catch (ArgumentNullException ex)
             {
                 Services.WriteExceptionsToLogger(ex);
                 throw new GetFromDatabaseException(ex.Message);
-            }                          
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
