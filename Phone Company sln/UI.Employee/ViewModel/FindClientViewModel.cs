@@ -38,6 +38,12 @@ namespace UI.Employee.ViewModel
             CommandToGetUserByID = new RelayCommand(CommandToGetUser);
             CommandToMoveToSelectedUser = new RelayCommand(CommandMoveToSelctedUser);
 
+            ClientsFound = new ObservableCollection<Client>()
+            {
+                new Client{Id = 1,Adress = "asdasd",CallToCenter = 12,ClientTypeId = 1,
+                    ContactNumber = "2131231",LastName = "bababa",Name = "bababa",SignDate = DateTime.Now}
+            };
+
             client = new HttpClient();
             client.BaseAddress = new Uri(BASE_ADDRESS);
             client.DefaultRequestHeaders.Accept.Clear();
@@ -46,11 +52,14 @@ namespace UI.Employee.ViewModel
 
         private void CommandMoveToSelctedUser()
         {
+            SelctedClient = ClientsFound.FirstOrDefault();
             _navigationService.NavigateTo("ClientsInfoPage", SelctedClient);
         }
 
-        //This Method will get the id that user has entered
-        //with OnChangeProperty so the list will be updated
+        /// <summary>
+        /// This Method will get the id that user has entered
+        /// with OnChangeProperty so the list will be updated
+        /// </summary>
         private async void CommandToGetUser()
         {
             //SelectedUser = ClientsFound.FirstOrDefault();

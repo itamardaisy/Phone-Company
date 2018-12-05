@@ -74,7 +74,7 @@ namespace BL.Services
 
         public List<ClientType> GetClientTypes()
         {
-            throw new NotImplementedException();
+            return CTR.GetAllTypes();
         }
 
         public Receipt GetReceiptByMonth(int clientId, DateTime month)
@@ -84,7 +84,7 @@ namespace BL.Services
 
         public void UpdateClientDetails(Client client)
         {
-            throw new NotImplementedException();
+            CR.UpdateClient(client);
         }
     }
 }

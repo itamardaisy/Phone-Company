@@ -31,31 +31,33 @@ namespace UI.Employee.ViewModel
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        private async void NavigateCommandAction()
+        private void NavigateCommandAction()
         {
             var user = new User
             {
                 Name = UserName,
                 Password = Password
             };
+            _navigationService.NavigateTo("EmployeeMainPage");
 
             var myUri = new Uri(BASE_ADDRESS + "api/Login", UriKind.Absolute);
 
-            var message = await client.PostAsJsonAsync<User>(myUri, user);
+            //the code below is working DO NOT DELETE
 
-            using (HttpResponseMessage respone = message)
-            {
-                if (respone.IsSuccessStatusCode)
-                {
-                    User userFromDB = await respone.Content.ReadAsAsync<User>();
-                    if (userFromDB.Type == UserType.Emploee)
-                    {
-                        _navigationService.NavigateTo("EmployeeMainPage");
-                    }
-                    _navigationService.NavigateTo("ManagerMainPage");
-                }
-                await new MessageDialog("Bad Connection To The Server").ShowAsync();
-            }
+            //var message = await client.PostAsJsonAsync<User>(myUri, user);
+
+            //using (HttpResponseMessage respone = message)
+            //{
+            //    if (respone.IsSuccessStatusCode)
+            //    {
+            //        User userFromDB = await respone.Content.ReadAsAsync<User>();
+            //        if (userFromDB.Type == UserType.Emploee)
+            //        {
+            //        }
+            //        _navigationService.NavigateTo("ManagerMainPage");
+            //    }
+            //    await new MessageDialog("Bad Connection To The Server").ShowAsync();
+            //}
         }
     }
 }

@@ -30,7 +30,7 @@ namespace UI.Employee.Pages
         }
 
         private Client newClient { get; set; }
-        private ClientsInfoViewModel clientsInfoViewModel = new ClientsInfoViewModel();
+        private ClientsInfoViewModel clientsInfoViewModel;
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -40,6 +40,7 @@ namespace UI.Employee.Pages
             clientAddress.Text = newClient.Adress.ToString();
             clientNumber.Text = newClient.ContactNumber.ToString();
             clientType.Text = newClient.ClientTypeId.ToString();
+            // clientsInfoViewModel.newClientFrom = newClient;
 
             base.OnNavigatedTo(e);
         }

@@ -38,7 +38,7 @@ namespace UI.Employee.ViewModel
             SimpleIoc.Default.Register<FindClientViewModel>();
             SimpleIoc.Default.Register<AddNewClientViewModel>();
             SimpleIoc.Default.Register<ManagerMainViewModel>();
-            SimpleIoc.Default.Register(() => new ClientsInfoViewModel());
+            SimpleIoc.Default.Register<ClientsInfoViewModel>();
             //Example For Registering Service
             //  SimpleIoc.Default.Register<IService, Service>();
 
