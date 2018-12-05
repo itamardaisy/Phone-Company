@@ -53,7 +53,7 @@ namespace BillingService.Services
             int clientTypeId = CLIENT_REPOSITORY.GetClientById(clientId).ClientTypeId;
             double overLimitMinuts = 0.0;
             double minutsInPackage = (double)PACKAGE_REPOSITORY.GetMinutsInPackage(line.Id);
-            double actualyMinuts = LINE_REPOSITORY.GetActualMonthCalls(line.Id, date);
+            double actualyMinuts = LINE_REPOSITORY.GetActualMonthMinuteCalls(line.Id, date);
             if (actualyMinuts > minutsInPackage)
                 overLimitMinuts = actualyMinuts - minutsInPackage;
             return PAYMENT_REPOSITORY.CalcOverLimitCallsPayment(overLimitMinuts, clientTypeId);

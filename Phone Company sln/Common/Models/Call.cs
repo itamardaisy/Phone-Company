@@ -13,6 +13,20 @@ namespace Common.Models
         private string destinationNumber;
         private DateTime callDate;
         private int lineId;
+        private bool familyCall;
+        private bool selectedNumberCall;
+
+        public bool SelectedNumberCall
+        {
+            get { return selectedNumberCall; }
+            set { selectedNumberCall = value; }
+        }
+
+        public bool FamilyCall
+        {
+            get { return familyCall; }
+            set { familyCall = value; }
+        }
 
         public int Id
         {

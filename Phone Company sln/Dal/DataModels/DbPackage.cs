@@ -15,10 +15,7 @@ namespace Dal.DataModels
         public int Id { get; set; }
 
         [Required]
-        [ForeignKey(nameof(SelectedNumber))]
-        public int SelectedNumberId { get; set; }
-
-        public DbSelectedNumber SelectedNumber { get; set; }
+        public bool SelectedNumberId { get; set; }
 
         [Required]
         [DataType(DataType.Text)]

@@ -1,20 +1,22 @@
-﻿using System;
+﻿using Common.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using Web.UI.Client.HardCodeds;
 using Web.UI.Client.Models;
 
 namespace Web.UI.Client.Controllers
 {
-    public class HomeController : Controller
+    public class DetailsController : Controller
     {
         private HttpClient client;
 
-        public HomeController()
+        public DetailsController()
         {
             client = new HttpClient();
             client.BaseAddress = new Uri(ProjectFields.BASE_ADDRESS);
@@ -24,12 +26,21 @@ namespace Web.UI.Client.Controllers
 
         public ActionResult Index()
         {
-            return View(ProjectFields.LOGIN_VIEW_NAME);
+            return View(ProjectFields.INDEX_VIEW_NAME);
         }
 
-        public ActionResult Login(LoginClient loginClient)
+        public async double GetTotalMinuts(DetailsModel detailsModel)
         {
-            var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_LOGIN, loginClient).Result;
+            var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinuts, detailsModel).Result;
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                return await response.Content.ReadAsAsync<double>();
+            else
+                return -1;
+        }
+
+        public ActionResult GetTotalSMS(DetailsModel detailsModel)
+        {
+            var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalSMS, detailsModel).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 return RedirectToActionPermanent(ProjectFields.INDEX_VIEW_NAME);

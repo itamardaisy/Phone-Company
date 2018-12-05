@@ -10,7 +10,7 @@ using Dal.DataInitializer;
 using Dal.DataModels;
 using Common.EnvironmentService;
 using Common.Exceptions;
-
+        
 namespace Dal.Repositories
 {
     public class LineRepository : ILineRepository
@@ -45,7 +45,13 @@ namespace Dal.Repositories
             }
         }
 
-        public double GetActualMonthCalls(int lineId, DateTime date)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public double GetActualMonthMinuteCalls(int lineId, DateTime date)
         {
             double minutSum = 0.0;
             var calls = context.Calls.Where(x => x.LineId == lineId && x.CallDate.Month == date.Month).Select(x => x.DbToCommon()).ToList();
@@ -54,6 +60,62 @@ namespace Dal.Repositories
             return minutSum;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <param name="now"></param>
+        /// <returns></returns>
+        public double GetTotalMinutesTopNumber(int lineId, DateTime now)
+        {
+            double MinutsCounter = 0.0;
+            var lineCalls = context.Calls.Where(x => x.LineId == lineId && x.CallDate.Month == now.Month).ToList();
+            List<NumberCounter<int, string>> numberCounters = new List<NumberCounter<int, string>>();
+            for (int i = 0; i < lineCalls.Count; i++)
+                if (!numberCounters.Any(x => x.DestinationNumber == lineCalls[i].DestinationNumber))
+                    numberCounters.Add(new NumberCounter<int, string> { Counter = 1, DestinationNumber = lineCalls[i].DestinationNumber });
+                else
+                    numberCounters.Where(x => x.DestinationNumber == lineCalls[i].DestinationNumber).FirstOrDefault().Counter++;
+            var topNumbers = numberCounters.OrderByDescending(x => x.Counter).Reverse().Take(5).ToList();
+            for (int i = 0; i < topNumbers.Count; i++)
+                MinutsCounter += lineCalls.Where(x => x.DestinationNumber == topNumbers[i].DestinationNumber).FirstOrDefault().Duration;
+            return MinutsCounter;
+        }
+
+        public double GetTotalMinutesFamily(int lineId, DateTime now)
+        {
+            double minutsCounter = 0.0;
+            var familyCalls = context.Calls.Where(x => x.FamilyCall == true).ToList();
+            foreach (var call in familyCalls)
+                minutsCounter += call.Duration;
+            return minutsCounter;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <param name="now"></param>
+        /// <returns></returns>
+        public double GetTotalMinutesThreeTopNumber(int lineId, DateTime now)
+        {
+            double MinutsCounter = 0.0;
+            var lineCalls = context.Calls.Where(x => x.LineId == lineId && x.CallDate.Month == now.Month).ToList();
+            var clientSelectedNumber = context.SelectedNumbers.FirstOrDefault(x => x.LineId == lineId);
+            for (int i = 0; i < lineCalls.Count; i++)
+                if (lineCalls[i].DestinationNumber == clientSelectedNumber.FirstNumber ||
+                    lineCalls[i].DestinationNumber == clientSelectedNumber.SecondNumber ||
+                    lineCalls[i].DestinationNumber == clientSelectedNumber.ThirdNumber)
+                        MinutsCounter += lineCalls[i].Duration;
+            return MinutsCounter;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public int GetActualMonthSMSs(int lineId, DateTime date)
         {
             var SMSs = context.SMSs.Where(x => x.LineId == lineId && x.SMSDate.Month == date.Month).Select(x => x.DbToCommon()).ToList();
@@ -146,9 +208,25 @@ namespace Dal.Repositories
             dbLine.Status = line.Status;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <returns></returns>
         public List<Line> GetClientLines(int clientId)
         {
             return context.Lines.Where(x => x.ClientId == clientId).Select(x => x.DbToCommon()).ToList();
         }
+    }
+    /// <summary>
+    /// This class created to counter inside a list of numbers the numbers of calls.
+    /// NumberCounter<3,"0545822125"> three calls to number 0545822125.
+    /// </summary>
+    /// <typeparam name="I"> The counter </typeparam>
+    /// <typeparam name="S"> The destination number </typeparam>
+    internal class NumberCounter<I, S>
+    {
+        public I Counter { get; set; }
+        public S DestinationNumber { get; set; }
     }
 }

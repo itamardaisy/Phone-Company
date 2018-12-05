@@ -1,10 +1,8 @@
 ﻿using ClientBL.LoginService;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using Web.UI.Client.HardCodeds;
 using Web.UI.Client.Models;
 
 namespace Web.UI.Client.Controllers
@@ -20,10 +18,18 @@ namespace Web.UI.Client.Controllers
 
         // POST api/login
         [HttpPost]
-        //  [Route("api/Login")]
+        [Route(nameof(ProjectFields.ROUTE_TO_LOGIN))]
         public bool Post([FromBody]LoginClient loginClient)
         {
-            return LOGIN_SERVICE.Login(loginClient.Name, loginClient.ClientId);
+            try
+            {
+                return LOGIN_SERVICE.Login(loginClient.Name, loginClient.ClientId);
+            }
+            catch(Exception ex)
+            {
+                Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
         }
     }
 }
