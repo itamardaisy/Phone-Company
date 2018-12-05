@@ -77,11 +77,6 @@ namespace UI.Employee.ViewModel
             }
         }
 
-        private void CommandInvokedHandler(IUICommand command)
-        {
-            GoBackCommand();
-        }
-
         /// <summary>
         /// This will grab the data and send it to the DB for update
         /// </summary>
@@ -105,6 +100,11 @@ namespace UI.Employee.ViewModel
                 }
                 await new MessageDialog("Bad Connection To The Server").ShowAsync();
             }
+        }
+
+        private void CommandInvokedHandler(IUICommand command)
+        {
+            GoBackCommand();
         }
     }
 }
