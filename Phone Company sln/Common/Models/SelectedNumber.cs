@@ -12,6 +12,13 @@ namespace Common.Models
         private string firstNumber;
         private string secondNumber;
         private string thirdNumber;
+        private int lineId;
+
+        public int LineId
+        {
+            get { return lineId; }
+            set { lineId = value; }
+        }
 
         public int Id
         {

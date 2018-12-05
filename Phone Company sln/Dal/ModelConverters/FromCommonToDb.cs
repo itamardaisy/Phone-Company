@@ -23,7 +23,9 @@ namespace Dal.ModelConverters
                 Duration = call.Duration,
                 Id = call.Id,
                 LineId = call.LineId,
-                CallDate = call.CallDate
+                CallDate = call.CallDate,
+                FamilyCall = call.FamilyCall,
+                SelectedNumberCall = call.SelectedNumberCall
             };
             return dbCall;
         }
@@ -64,7 +66,8 @@ namespace Dal.ModelConverters
                 Id = line.Id,
                 Number = line.Number,
                 PackageId = line.PackageId,
-                Status = line.Status
+                Status = line.Status,
+                ClientId = line.ClientId,
             };
             return dbLine;
         }
@@ -77,12 +80,12 @@ namespace Dal.ModelConverters
                 FixedPrice = package.FixedPrice,
                 InsideFamilyCall = package.InsideFamilyCall,
                 Id = package.Id,
-                SelectedNumberId = package.SelectedNumberId,
+                SelectedNumberId = package.SelectedNumber,
                 MaxMinute = package.MaxMinute,
                 MostCallNumber = package.MostCallNumber,
                 PackageName = package.PackageName,
                 TotalPrice = package.TotalPrice,
-                MaxSMSs = package.MaxSMSs
+                MaxSMSs = package.MaxSMSs,
             };
             return dbPackage;
         }
@@ -106,7 +109,8 @@ namespace Dal.ModelConverters
                 Id = selectedNumber.Id,
                 FirstNumber = selectedNumber.FirstNumber,
                 SecondNumber = selectedNumber.SecondNumber,
-                ThirdNumber = selectedNumber.ThirdNumber
+                ThirdNumber = selectedNumber.ThirdNumber,
+                LineId = selectedNumber.LineId
             };
             return dbSelectedNumber;
         }
@@ -119,7 +123,10 @@ namespace Dal.ModelConverters
                 ExternalPrice = sMS.ExternalPrice,
                 Id = sMS.Id,
                 LineId = sMS.LineId,
-                SMSDate = sMS.SMSDate
+                SMSDate = sMS.SMSDate,
+                SelectedNumberCall = sMS.SelectedNumberCall,
+                SmsDate = sMS.SMSDate,
+                FamilyCall = sMS.FamilyCall
             };
             return dbSMS;
         }

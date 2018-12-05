@@ -22,7 +22,6 @@ namespace Common.Models
             set { sMSsList = value; }
         }
 
-
         public List<Call> CallsList
         {
             get { return callsList; }

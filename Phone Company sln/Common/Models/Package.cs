@@ -16,7 +16,7 @@ namespace Common.Models
         private int disscountPrecentage;
         private bool mostCallNumber;
         private bool insideFamilyCall;
-        private int selectedNumberId;
+        private bool selectedNumber;
         private int maxSMSs;
 
         public int MaxSMSs
@@ -73,10 +73,10 @@ namespace Common.Models
             set { insideFamilyCall = value; }
         }
 
-        public int SelectedNumberId
+        public bool SelectedNumber
         {
-            get { return selectedNumberId; }
-            set { selectedNumberId = value; }
+            get { return selectedNumber; }
+            set { selectedNumber = value; }
         }
     }
 }
