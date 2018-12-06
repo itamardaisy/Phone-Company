@@ -39,7 +39,7 @@ namespace UI.Employee.Pages
             clientLastName.Text = newClient.LastName.ToString();
             clientAddress.Text = newClient.Adress.ToString();
             clientNumber.Text = newClient.ContactNumber.ToString();
-            clientType.Text = newClient.ClientTypeId.ToString();
+            clientType.SelectedIndex = newClient.ClientTypeId;
             // clientsInfoViewModel.newClientFrom = newClient;
 
             base.OnNavigatedTo(e);
