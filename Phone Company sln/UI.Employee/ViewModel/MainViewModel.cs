@@ -33,17 +33,17 @@ namespace UI.Employee.ViewModel
 
         private void NavigateCommandAction()
         {
-            var user = new User
-            {
-                Name = UserName,
-                Password = Password
-            };
-            _navigationService.NavigateTo("EmployeeMainPage");
-
-            var myUri = new Uri(BASE_ADDRESS + "api/Login", UriKind.Absolute);
+            _navigationService.NavigateTo("ManagerMainPage");
 
             //the code below is working DO NOT DELETE
 
+            //var user = new User
+            //{
+            //    Name = UserName,
+            //    Password = Password
+            //};
+
+            //var myUri = new Uri(BASE_ADDRESS + "api/Login", UriKind.Absolute);
             //var message = await client.PostAsJsonAsync<User>(myUri, user);
 
             //using (HttpResponseMessage respone = message)

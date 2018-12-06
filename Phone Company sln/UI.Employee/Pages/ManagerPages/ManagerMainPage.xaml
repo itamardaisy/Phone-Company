@@ -34,8 +34,8 @@
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.ColumnSpan="10" Grid.RowSpan="10">
             <Button FontSize="50" VerticalAlignment="Center" Command="{Binding NavigateCommandToAnnoyingCustomer}" HorizontalAlignment="Center" Content="Get Most Annoying Customer" />
             <Button FontSize="50" VerticalAlignment="Center" Command="{Binding NavigateCommandToAddNewPackage }" HorizontalAlignment="Center" Content="Add New  Package" />
-            <Button FontSize="50" VerticalAlignment="Center" Command="{Binding NavigateCommandToConnectedClient }" HorizontalAlignment="Center" Content="Get Most Connected Client" />
-            <Button FontSize="50" VerticalAlignment="Center" Command="{Binding NavigateCommandProfitableClient }" HorizontalAlignment="Center" Content="Get Most Profitable Client" />
+            <Button FontSize="50" VerticalAlignment="Center" Command="{Binding NavigateCommandToMostConnectedClient }" HorizontalAlignment="Center" Content="Get Most Connected Client" />
+            <Button FontSize="50" VerticalAlignment="Center" Command="{Binding NavigateCommandToMostProfitableClient }" HorizontalAlignment="Center" Content="Get Most Profitable Client" />
         </StackPanel>
 
         <Button Grid.Row="5" Command="{Binding NavigateCommandToLogout}" Grid.Column="1" Content="Logout"  FontSize="50" />
