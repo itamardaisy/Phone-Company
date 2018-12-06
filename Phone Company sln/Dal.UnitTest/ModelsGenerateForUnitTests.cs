@@ -74,7 +74,7 @@ namespace Dal.UnitTest
                 MaxMinute = 100,
                 MostCallNumber = false,
                 PackageName = "blbal",
-                SelectedNumber = 1,
+                SelectedNumber = true,
                 TotalPrice = 10000,
             };
         }

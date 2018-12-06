@@ -102,6 +102,11 @@ namespace UI.Employee.ViewModel
             }
         }
 
+
+        /// <summary>
+        /// Add UI command to the MessageDialog
+        /// </summary>
+        /// <param name="command"></param>
         private void CommandInvokedHandler(IUICommand command)
         {
             GoBackCommand();

@@ -30,7 +30,7 @@ namespace UI.Employee.Pages
         }
 
         private Client newClient { get; set; }
-        private ClientsInfoViewModel clientsInfoViewModel;
+     
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {

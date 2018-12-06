@@ -137,28 +137,44 @@
     <Compile Include="Models\SMS.cs" />
     <Compile Include="Models\UmsignClient.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Pages\AddNewClientPage.xaml.cs">
+    <Compile Include="Pages\EmployeePages\AddNewClientPage.xaml.cs">
       <DependentUpon>AddNewClientPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ClientsInfoPage.xaml.cs">
+    <Compile Include="Pages\ManagerPages\AddNewPackagePage.xaml.cs">
+      <DependentUpon>AddNewPackagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EmployeePages\ClientsInfoPage.xaml.cs">
       <DependentUpon>ClientsInfoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\EmployeeMainPage.xaml.cs">
+    <Compile Include="Pages\EmployeePages\EmployeeMainPage.xaml.cs">
       <DependentUpon>EmployeeMainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\FindClientPage.xaml.cs">
+    <Compile Include="Pages\EmployeePages\FindClientPage.xaml.cs">
       <DependentUpon>FindClientPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ManagerMainPage.xaml.cs">
+    <Compile Include="Pages\ManagerPages\ManagerMainPage.xaml.cs">
       <DependentUpon>ManagerMainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ManagerPages\MostAnnoyingCustomerPage.xaml.cs">
+      <DependentUpon>MostAnnoyingCustomerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ManagerPages\MostConnectedClientPage.xaml.cs">
+      <DependentUpon>MostConnectedClientPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ManagerPages\MostProfitableClientPage.xaml.cs">
+      <DependentUpon>MostProfitableClientPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\AddNewClientViewModel.cs" />
-    <Compile Include="ViewModel\ClientsInfoViewModel.cs" />
-    <Compile Include="ViewModel\EmployeeMainViewModel.cs" />
-    <Compile Include="ViewModel\FindClientViewModel.cs" />
+    <Compile Include="ViewModel\EmployeeViewModel\AddNewClientViewModel.cs" />
+    <Compile Include="ViewModel\ManagerViewModel\AddNewPackageViewModel.cs" />
+    <Compile Include="ViewModel\EmployeeViewModel\ClientsInfoViewModel.cs" />
+    <Compile Include="ViewModel\EmployeeViewModel\EmployeeMainViewModel.cs" />
+    <Compile Include="ViewModel\EmployeeViewModel\FindClientViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ManagerMainViewModel.cs" />
+    <Compile Include="ViewModel\ManagerViewModel\ManagerMainViewModel.cs" />
+    <Compile Include="ViewModel\ManagerViewModel\MostAnnoyingCustomerViewModel.cs" />
+    <Compile Include="ViewModel\ManagerViewModel\MostConnectedClientViewModel.cs" />
+    <Compile Include="ViewModel\ManagerViewModel\MostProfitableClientViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -186,23 +202,39 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\AddNewClientPage.xaml">
+    <Page Include="Pages\EmployeePages\AddNewClientPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ClientsInfoPage.xaml">
+    <Page Include="Pages\ManagerPages\AddNewPackagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\EmployeeMainPage.xaml">
+    <Page Include="Pages\EmployeePages\ClientsInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\FindClientPage.xaml">
+    <Page Include="Pages\EmployeePages\EmployeeMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ManagerMainPage.xaml">
+    <Page Include="Pages\EmployeePages\FindClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ManagerPages\ManagerMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ManagerPages\MostAnnoyingCustomerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ManagerPages\MostConnectedClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ManagerPages\MostProfitableClientPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
