@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,18 @@ namespace UI.Employee.ViewModel
 {
     internal class MostConnectedClientViewModel
     {
+        private readonly INavigationService _navigationService;
+        public RelayCommand NavigateCommandToManagerPage { get; private set; }
+
+        public MostConnectedClientViewModel(INavigationService navigationService)
+        {
+            _navigationService = navigationService;
+            NavigateCommandToManagerPage = new RelayCommand(GoBackCommand);
+        }
+
+        private void GoBackCommand()
+        {
+            _navigationService.NavigateTo(pageKey: "ManagerMainPage");
+        }
     }
 }
