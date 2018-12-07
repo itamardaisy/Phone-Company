@@ -35,7 +35,13 @@ namespace ClientBL.DetailServices
 
         public List<string> GetClientLines(int clientId)
         {
-            LINE_REPOSITORY.GetClientLines(clientId)
+            List<string> lines = new List<string>();
+            var theLines = LINE_REPOSITORY.GetClientLines(clientId);
+            foreach (var item in theLines)
+            {
+                lines.Add(item.Number);
+            }
+            return lines;
         }
 
         /// <summary>
