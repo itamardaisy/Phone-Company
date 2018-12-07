@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Common.Interfaces.ClientBL_Interfaces
 {
     public interface IClientLoginService
     {
-        bool Login(string name, int clientId);
+        Client Login(string name, int clientId);
     }
 }

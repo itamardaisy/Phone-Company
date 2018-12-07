@@ -7,7 +7,6 @@ namespace UI.ClientWebPage.HardCodeds
 {
     public class ProjectFields
     {
-        /*Home Controller*/
         internal static readonly string BASE_ADDRESS = "http://localhost:52036/";
         internal static readonly string ROUTE_TO_LOGIN = "api/Login";
         internal static readonly string ROUTE_TO_GetTotalMinuts = "api/GetTotalMinuts";
@@ -18,5 +17,6 @@ namespace UI.ClientWebPage.HardCodeds
         internal static readonly string HEADER_TYPE = "application/json";
         internal static readonly string LOGIN_VIEW_NAME = "LoginView";
         internal static readonly string INDEX_VIEW_NAME = "index";
+        internal static readonly string DETAILS_VIEW = "DetailsView";
     }
 }

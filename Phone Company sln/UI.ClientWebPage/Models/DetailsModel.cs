@@ -10,6 +10,6 @@ namespace UI.ClientWebPage.Models
     {
         public List<Package> RecommendedPackages { get; set; }
         public Common.Models.Client CurrentClient { get; set; }
-        public string LineNumber { get; set; }
+        public List<string> ClientLines { get; set; }
     }
 }

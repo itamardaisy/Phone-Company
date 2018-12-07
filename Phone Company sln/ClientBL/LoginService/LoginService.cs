@@ -1,5 +1,6 @@
 ﻿using Common.Interfaces;
 using Common.Interfaces.ClientBL_Interfaces;
+using Common.Models;
 using Dal.DataInitializer;
 using Dal.Repositories;
 using System;
@@ -26,11 +27,11 @@ namespace ClientBL.LoginService
         /// <param name="name"> The name of the client </param>
         /// <param name="clientId"> The id of the client </param>
         /// <returns> Return true if the client exist, otherwise false. </returns>
-        public bool Login(string name, int clientId)
+        public Client Login(string name, int clientId)
         {
-            if (CLIENT_REPOSITORY.LoginClient(name, clientId))
-                return true;
-            return false;
+            if (CLIENT_REPOSITORY.LoginClient(name, clientId) != null)  
+                return CLIENT_REPOSITORY.LoginClient(name, clientId);
+            return null;
         }
     }
 }
