@@ -28,6 +28,16 @@ namespace UI.ClientWebPage.Controllers
             return View(ProjectFields.INDEX_VIEW_NAME);
         }
 
+        public ActionResult SetLine(string chosenLine)
+        {
+            DetailsModel detailModel = new DetailsModel()
+            {
+                ChosenLine = chosenLine,
+
+            };
+            return View("Details", detailModel);
+        }
+
         public async Task<double> GetTotalMinuts(DetailsModel detailsModel)
         {
             var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinuts, detailsModel).Result;

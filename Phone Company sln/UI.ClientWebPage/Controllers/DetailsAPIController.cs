@@ -25,7 +25,7 @@ namespace UI.ClientWebPage.Controllers
         {
             try
             {
-                return DETAILS_SERVICE.GetTotalMinutes(detailsModel.CurrentClient, detailsModel.LineNumber);
+                return DETAILS_SERVICE.GetTotalMinutes(detailsModel.CurrentClient, detailsModel.ChosenLine);
             }
             catch (Exception ex)
             {
@@ -40,7 +40,7 @@ namespace UI.ClientWebPage.Controllers
         {
             try
             {
-                return DETAILS_SERVICE.GetTotalSMS(detailsModel.CurrentClient, detailsModel.LineNumber);
+                return DETAILS_SERVICE.GetTotalSMS(detailsModel.CurrentClient, detailsModel.ChosenLine);
             }
             catch (Exception ex)
             {
@@ -55,7 +55,7 @@ namespace UI.ClientWebPage.Controllers
         {
             try
             {
-                return DETAILS_SERVICE.GetTotalMinutesTopNumber(detailsModel.CurrentClient, detailsModel.LineNumber);
+                return DETAILS_SERVICE.GetTotalMinutesTopNumber(detailsModel.CurrentClient, detailsModel.ChosenLine);
             }
             catch (Exception ex)
             {
@@ -70,7 +70,7 @@ namespace UI.ClientWebPage.Controllers
         {
             try
             {
-                return DETAILS_SERVICE.GetTotalMinutesThreeTopNumber(detailsModel.CurrentClient, detailsModel.LineNumber);
+                return DETAILS_SERVICE.GetTotalMinutesThreeTopNumber(detailsModel.CurrentClient, detailsModel.ChosenLine);
             }
             catch (Exception ex)
             {
@@ -85,7 +85,7 @@ namespace UI.ClientWebPage.Controllers
         {
             try
             {
-                return DETAILS_SERVICE.GetTotalMinutesFamily(detailsModel.CurrentClient, detailsModel.LineNumber);
+                return DETAILS_SERVICE.GetTotalMinutesFamily(detailsModel.CurrentClient, detailsModel.ChosenLine);
             }
             catch (Exception ex)
             {

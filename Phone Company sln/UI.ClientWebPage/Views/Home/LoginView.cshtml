@@ -7,7 +7,7 @@
 
 <h2>LoginView</h2>
 
-@using (Html.BeginForm("Login", "Home"))
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -38,7 +38,6 @@
         </div>
     </div>
 }
-
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
