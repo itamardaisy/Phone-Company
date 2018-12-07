@@ -13,10 +13,17 @@ namespace UI.Employee.Models
         private double totalPrice;
         private int maxMinute;
         private double fixedPrice;
-        private double disscountPrecentage;
+        private int disscountPrecentage;
         private bool mostCallNumber;
         private bool insideFamilyCall;
-        private int selectedNumberId;
+        private bool selectedNumber;
+        private int maxSMSs;
+
+        public int MaxSMSs
+        {
+            get { return maxSMSs; }
+            set { maxSMSs = value; }
+        }
 
         public int Id
         {
@@ -48,7 +55,7 @@ namespace UI.Employee.Models
             set { fixedPrice = value; }
         }
 
-        public double DisscountPrecentage
+        public int DisscountPrecentage
         {
             get { return disscountPrecentage; }
             set { disscountPrecentage = value; }
@@ -66,10 +73,10 @@ namespace UI.Employee.Models
             set { insideFamilyCall = value; }
         }
 
-        public int SelectedNumberId
+        public bool SelectedNumber
         {
-            get { return selectedNumberId; }
-            set { selectedNumberId = value; }
+            get { return selectedNumber; }
+            set { selectedNumber = value; }
         }
     }
 }
