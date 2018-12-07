@@ -36,7 +36,7 @@
 
         <TextBox Name="clientAddress" PlaceholderText="Address" Grid.Row="3" Text="{Binding Address}"  Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="40" />
 
-        <TextBox Name="clientType" PlaceholderText="Type" Grid.Row="4"    Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="40" />
+        <ComboBox Name="clientType" PlaceholderText="Type" Grid.Row="4" ItemsSource="{Binding ClientTypes,Mode=TwoWay}" SelectedValuePath="Id" SelectedValue="{Binding ChosenClientType,Mode=TwoWay}" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="40" />
         <TextBox Name="clientNumber" PlaceholderText="Number" Grid.Row="4" Text="{Binding Number}"  Grid.Column="4" Grid.ColumnSpan="2" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
 
         <Button Grid.Column="2" Grid.Row="5" Grid.ColumnSpan="3" Content="Update" Command="{Binding UpdateClient}" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
