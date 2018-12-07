@@ -31,7 +31,6 @@ namespace UI.Employee.Pages
 
         private Client newClient { get; set; }
      
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             newClient = e.Parameter as Client;  // "My data"

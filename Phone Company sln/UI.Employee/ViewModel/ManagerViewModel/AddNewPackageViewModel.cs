@@ -1,14 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UI.Employee.Models;
-
 namespace UI.Employee.ViewModel
 {
     internal class AddNewPackageViewModel: ViewModelBase
@@ -56,7 +49,11 @@ namespace UI.Employee.ViewModel
         }
 
         public string Name { get; set; }
-
+        public double TotalPrice { get; set; }
+        public int MaxSMSs { get; set; }
+        public int MaxMinuts { get; set; }
+        public double FixedPrice { get; set; }
+        public int DisscountPrecentage { get; set; }
 
         public AddNewPackageViewModel(INavigationService navigationService)
         {
@@ -71,11 +68,9 @@ namespace UI.Employee.ViewModel
             {
                 MostCallNumber = _isMostCallNumbeChecked,
                 InsideFamilyCall = _isInsideFamilyCallChecked,
-                SelectedNumber = _isSelectedNumberChecked,
+                SelectedNumber = _isSelectedNumberChecked,       
                 
             };
-
-
         }
      
         private void GoBackCommand()
