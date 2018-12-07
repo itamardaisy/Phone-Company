@@ -22,9 +22,9 @@ namespace Dal.Repositories
             this.context = context;
         }
 
-        public bool LoginClient(string name, int clientId)
+        public Client LoginClient(string name, int clientId)
         {
-            return context.Clients.Any(x => x.Id == clientId && x.Name == name);
+            return context.Clients.FirstOrDefault(x => x.Id == clientId && x.Name == name).DbToCommon();
         }
 
         /// <summary>

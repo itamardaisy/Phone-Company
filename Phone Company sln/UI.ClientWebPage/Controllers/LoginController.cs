@@ -1,4 +1,6 @@
-﻿using ClientBL.LoginService;
+﻿using ClientBL.DetailServices;
+using ClientBL.LoginService;
+using Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,20 +15,34 @@ namespace UI.ClientWebPage.Controllers
     public class LoginController : ApiController
     {
         private readonly LoginService LOGIN_SERVICE;
+        private readonly DetailService DETAIL_SERVICE;
 
         public LoginController()
         {
             LOGIN_SERVICE = new LoginService();
+            DETAIL_SERVICE = new DetailService();
         }
 
         // POST api/login
         [HttpPost]
         [Route(nameof(ProjectFields.ROUTE_TO_LOGIN))]
-        public bool Post([FromBody]LoginClient loginClient)
+        public DetailsModel Post([FromBody]LoginClient loginClient)
         {
             try
             {
-                return LOGIN_SERVICE.Login(loginClient.Name, loginClient.ClientId);
+                if (LOGIN_SERVICE.Login(loginClient.Name, loginClient.ClientId) != null)
+                {
+                    Client client = LOGIN_SERVICE.Login(loginClient.Name, loginClient.ClientId);
+                    DetailsModel detailsModel = new DetailsModel()
+                    {
+                        CurrentClient = client,
+                        ClientLines = DETAIL_SERVICE.GetClientLines(client.Id),
+                        RecommendedPackages = DETAIL_SERVICE.GetOptimalPackages()
+                    };
+                    return detailsModel;
+                }
+                else
+                    return null;
             }
             catch (Exception ex)
             {

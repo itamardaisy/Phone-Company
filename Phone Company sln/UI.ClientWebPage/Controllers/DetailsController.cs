@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using UI.ClientWebPage.HardCodeds;
@@ -27,23 +28,57 @@ namespace UI.ClientWebPage.Controllers
             return View(ProjectFields.INDEX_VIEW_NAME);
         }
 
-        public async double GetTotalMinuts(DetailsModel detailsModel)
+        public async Task<double> GetTotalMinuts(DetailsModel detailsModel)
         {
             var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinuts, detailsModel).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 return await response.Content.ReadAsAsync<double>();
             else
-                return -1;
+                throw new Exception("Error");
         }
 
-        public ActionResult GetTotalSMS(DetailsModel detailsModel)
+        public async Task<int> GetTotalSMS(DetailsModel detailsModel)
         {
             var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalSMS, detailsModel).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                return RedirectToActionPermanent(ProjectFields.INDEX_VIEW_NAME);
+                return await response.Content.ReadAsAsync<int>();
             }
-            return View(ProjectFields.LOGIN_VIEW_NAME);
+            else
+                throw new Exception("Error");
+        }
+
+        public async Task<double> GetTotalMinutesTopNumber(DetailsModel detailsModel)
+        {
+            var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinutesTopNumber, detailsModel).Result;
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                return await response.Content.ReadAsAsync<double>();
+            }
+            else
+                throw new Exception("Error");
+        }
+
+        public async Task<double> GetTotalMinutesThreeTopNumber(DetailsModel detailsModel)
+        {
+            var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinutesThreeTopNumber, detailsModel).Result;
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                return await response.Content.ReadAsAsync<double>();
+            }
+            else
+                throw new Exception("Error");
+        }
+
+        public async Task<double> GetTotalMinutesFamily(DetailsModel detailsModel)
+        {
+            var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinutesFamily, detailsModel).Result;
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                return await response.Content.ReadAsAsync<double>();
+            }
+            else
+                throw new Exception("Error");
         }
     }
 }

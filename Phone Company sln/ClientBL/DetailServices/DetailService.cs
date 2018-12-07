@@ -33,6 +33,11 @@ namespace ClientBL.DetailServices
             return LINE_REPOSITORY.GetActualMonthMinuteCalls(line.Id, DateTime.Now);
         }
 
+        public List<string> GetClientLines(int clientId)
+        {
+            LINE_REPOSITORY.GetClientLines(clientId)
+        }
+
         /// <summary>
         /// Gets the Total smss that actualy has been in the past month.
         /// </summary>
@@ -80,6 +85,11 @@ namespace ClientBL.DetailServices
         {
             var line = LINE_REPOSITORY.GetClientLines(client.Id).Where(x => x.Number == lineNumber).FirstOrDefault();
             return LINE_REPOSITORY.GetTotalMinutesFamily(line.Id, DateTime.Now);
+        }
+
+        public List<Package> GetOptimalPackages()
+        {
+            throw new Exception();
         }
     }
 }
