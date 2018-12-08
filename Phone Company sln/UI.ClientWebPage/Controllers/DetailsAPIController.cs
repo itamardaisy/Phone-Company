@@ -1,4 +1,5 @@
 ﻿using ClientBL.DetailServices;
+using Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,13 @@ namespace UI.ClientWebPage.Controllers
         public DetailsAPIController()
         {
             DETAILS_SERVICE = new DetailService();
+        }
+
+        [HttpPost]
+        [Route(nameof(ProjectFields.ROUTE_TO_GetOptimalPackage))]
+        public Package GetOptimalPackage([FromBody]DetailsModel detailsModel)
+        {
+            return DETAILS_SERVICE.GetOptimalPackages(detailsModel.CurrentClient, detailsModel.ChosenLine);
         }
 
         [HttpPost]

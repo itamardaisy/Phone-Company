@@ -72,7 +72,7 @@ namespace Common.Models
             get { return insideFamilyCall; }
             set { insideFamilyCall = value; }
         }
-
+              
         public bool SelectedNumber
         {
             get { return selectedNumber; }

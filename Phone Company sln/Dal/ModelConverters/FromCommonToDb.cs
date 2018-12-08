@@ -67,7 +67,7 @@ namespace Dal.ModelConverters
                 Number = line.Number,
                 PackageId = line.PackageId,
                 Status = line.Status,
-                ClientId = line.ClientId,
+                ClientId = line.ClientId
             };
             return dbLine;
         }
@@ -85,7 +85,7 @@ namespace Dal.ModelConverters
                 MostCallNumber = package.MostCallNumber,
                 PackageName = package.PackageName,
                 TotalPrice = package.TotalPrice,
-                MaxSMSs = package.MaxSMSs,
+                MaxSMSs = package.MaxSMSs
             };
             return dbPackage;
         }

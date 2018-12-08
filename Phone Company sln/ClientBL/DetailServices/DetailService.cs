@@ -1,6 +1,7 @@
 ﻿using Common.Models;
 using Dal.DataInitializer;
 using Dal.Repositories;
+using PackageOptimtzation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,14 @@ namespace ClientBL.DetailServices
     {
         private readonly ClientRepository CLIENT_REPOSITORY;
         private readonly LineRepository LINE_REPOSITORY;
+        private readonly OptimalPackage OPTIMAL_PACKAGE;
 
         public DetailService()
         {
             PhoneCompanyContext context = new PhoneCompanyContext();
             CLIENT_REPOSITORY = new ClientRepository(context);
             LINE_REPOSITORY = new LineRepository(context);
+            OPTIMAL_PACKAGE = new OptimalPackage();
         }
 
         /// <summary>
@@ -93,9 +96,9 @@ namespace ClientBL.DetailServices
             return LINE_REPOSITORY.GetTotalMinutesFamily(line.Id, DateTime.Now);
         }
 
-        public List<Package> GetOptimalPackages()
+        public Package GetOptimalPackages(Client client, string packageName)
         {
-            throw new Exception();
+            return OPTIMAL_PACKAGE.GetOptimalPackage(client, packageName);
         }
     }
 }

@@ -19,11 +19,7 @@ namespace Dal.Migrations
 
         protected override void Seed(Dal.DataInitializer.PhoneCompanyContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-            //  to avoid creating duplicate seed data.
-            context.Packages.AddOrUpdate(new DbPackage { DisscountPrecentage = 0, FixedPrice = 100, InsideFamilyCall = false, MaxMinute = 200, MostCallNumber = false, PackageName = "DefaultPackage", TotalPrice = 100 });
+            context.Packages.AddOrUpdate(new DbPackage { DisscountPrecentage = 0, FixedPrice = 100, InsideFamilyCall = false, MaxMinute = 200, MostCallNumber = false, PackageName = "DefaultPackage", TotalPrice = 100,MaxSMSs = 100 });
         }
     }
 }

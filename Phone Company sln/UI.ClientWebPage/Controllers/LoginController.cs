@@ -23,7 +23,6 @@ namespace UI.ClientWebPage.Controllers
             DETAIL_SERVICE = new DetailService();
         }
 
-        // POST api/login
         [HttpPost]
         [Route(nameof(ProjectFields.ROUTE_TO_LOGIN))]
         public DetailsModel Post([FromBody]LoginClient loginClient)
@@ -36,8 +35,7 @@ namespace UI.ClientWebPage.Controllers
                     DetailsModel detailsModel = new DetailsModel()
                     {
                         CurrentClient = client,
-                        ClientLines = DETAIL_SERVICE.GetClientLines(client.Id),
-                        RecommendedPackages = DETAIL_SERVICE.GetOptimalPackages()
+                        ClientLines = DETAIL_SERVICE.GetClientLines(client.Id)
                     };
                     return detailsModel;
                 }

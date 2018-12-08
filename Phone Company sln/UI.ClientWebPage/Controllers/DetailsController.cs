@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -33,9 +34,17 @@ namespace UI.ClientWebPage.Controllers
             DetailsModel detailModel = new DetailsModel()
             {
                 ChosenLine = chosenLine,
-
             };
             return View("Details", detailModel);
+        }
+
+        private async Task<Package> GetOptimalPackage(DetailsModel detailsModel)
+        {
+            var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetOptimalPackage, detailsModel).Result;
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                return await response.Content.ReadAsAsync<Package>();
+            else
+                throw new Exception("Error");
         }
 
         public async Task<double> GetTotalMinuts(DetailsModel detailsModel)

@@ -22,6 +22,12 @@ namespace Dal.Repositories
             this.context = context;
         }
 
+        /// <summary>
+        /// Checks whether the client exist or not and return him.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="clientId"></param>
+        /// <returns></returns>
         public Client LoginClient(string name, int clientId)
         {
             return context.Clients.FirstOrDefault(x => x.Id == clientId && x.Name == name).DbToCommon();

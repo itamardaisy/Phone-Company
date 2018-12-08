@@ -53,11 +53,19 @@ namespace Dal.Repositories
         /// <returns></returns>
         public double GetActualMonthMinuteCalls(int lineId, DateTime date)
         {
-            double minutSum = 0.0;
-            var calls = context.Calls.Where(x => x.LineId == lineId && x.CallDate.Month == date.Month).Select(x => x.DbToCommon()).ToList();
-            foreach (var call in calls)
-                minutSum += call.Duration;
-            return minutSum;
+            try
+            {
+                double minutSum = 0.0;
+                var calls = context.Calls.Where(x => x.LineId == lineId && x.CallDate.Month == date.Month).Select(x => x.DbToCommon()).ToList();
+                foreach (var call in calls)
+                    minutSum += call.Duration;
+                return minutSum;
+            }
+            catch (Exception ex)
+            {
+                Services.WriteExceptionsToLogger(ex);
+                throw new Exception("Problem in the GetActualMonthMinuteCalls method");
+            }
         }
 
         /// <summary>
@@ -68,18 +76,38 @@ namespace Dal.Repositories
         /// <returns></returns>
         public double GetTotalMinutesTopNumber(int lineId, DateTime now)
         {
-            double MinutsCounter = 0.0;
-            var lineCalls = context.Calls.Where(x => x.LineId == lineId && x.CallDate.Month == now.Month).ToList();
+            var lineCalls = GetLineCalls(lineId, now);
             List<NumberCounter<int, string>> numberCounters = new List<NumberCounter<int, string>>();
+            CountTheCallByDestinationNumbers(numberCounters, lineCalls);
+            var topNumbers = GetTopFiveCalls(numberCounters);
+            return CountTheTopFiveTotalMinuts(topNumbers, lineCalls);
+        }
+
+        private double CountTheTopFiveTotalMinuts(List<NumberCounter<int, string>> topNumbers, List<DbCall> lineCalls)
+        {
+            double MinutsCounter = 0.0;
+            for (int i = 0; i < topNumbers.Count; i++)
+                MinutsCounter += lineCalls.Where(x => x.DestinationNumber == topNumbers[i].DestinationNumber).FirstOrDefault().Duration;
+            return MinutsCounter;
+        }
+
+        private List<NumberCounter<int,string>> GetTopFiveCalls(List<NumberCounter<int, string>> numberCounters)
+        {
+            return numberCounters.OrderByDescending(x => x.Counter).Reverse().Take(5).ToList();
+        }
+
+        private void CountTheCallByDestinationNumbers(List<NumberCounter<int, string>> numberCounters, List<DbCall> lineCalls)
+        {
             for (int i = 0; i < lineCalls.Count; i++)
                 if (!numberCounters.Any(x => x.DestinationNumber == lineCalls[i].DestinationNumber))
                     numberCounters.Add(new NumberCounter<int, string> { Counter = 1, DestinationNumber = lineCalls[i].DestinationNumber });
                 else
                     numberCounters.Where(x => x.DestinationNumber == lineCalls[i].DestinationNumber).FirstOrDefault().Counter++;
-            var topNumbers = numberCounters.OrderByDescending(x => x.Counter).Reverse().Take(5).ToList();
-            for (int i = 0; i < topNumbers.Count; i++)
-                MinutsCounter += lineCalls.Where(x => x.DestinationNumber == topNumbers[i].DestinationNumber).FirstOrDefault().Duration;
-            return MinutsCounter;
+        }
+
+        private List<DbCall> GetLineCalls(int lineId, DateTime now)
+        {
+            return context.Calls.Where(x => x.LineId == lineId && x.CallDate.Month == now.Month).ToList();
         }
 
         public double GetTotalMinutesFamily(int lineId, DateTime now)
@@ -100,7 +128,7 @@ namespace Dal.Repositories
         public double GetTotalMinutesThreeTopNumber(int lineId, DateTime now)
         {
             double MinutsCounter = 0.0;
-            var lineCalls = context.Calls.Where(x => x.LineId == lineId && x.CallDate.Month == now.Month).ToList();
+            var lineCalls = GetLineCalls(lineId, now);
             var clientSelectedNumber = context.SelectedNumbers.FirstOrDefault(x => x.LineId == lineId);
             for (int i = 0; i < lineCalls.Count; i++)
                 if (lineCalls[i].DestinationNumber == clientSelectedNumber.FirstNumber ||
