@@ -33,7 +33,7 @@ namespace UI.Employee.ViewModel
 
         private void NavigateCommandAction()
         {
-            _navigationService.NavigateTo("ManagerMainPage");
+            _navigationService.NavigateTo("EmployeeMainPage");
 
             //the code below is working DO NOT DELETE
 
@@ -53,6 +53,7 @@ namespace UI.Employee.ViewModel
             //        User userFromDB = await respone.Content.ReadAsAsync<User>();
             //        if (userFromDB.Type == UserType.Emploee)
             //        {
+
             //        }
             //        _navigationService.NavigateTo("ManagerMainPage");
             //    }

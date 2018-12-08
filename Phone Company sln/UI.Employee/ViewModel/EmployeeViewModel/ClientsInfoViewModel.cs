@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,8 @@ namespace UI.Employee.ViewModel
         public RelayCommand CommandToGoBack { get; set; }
 
         private MessageDialog messageDialog;
+        public Messenger MessengerInstance { get; set; }
+
 
         public Client newClientFrom { get; set; }
         public ObservableCollection<ClientType> ClientTypes { get; set; }
@@ -49,11 +52,23 @@ namespace UI.Employee.ViewModel
             client = new HttpClient();
             client.BaseAddress = new Uri(BASE_ADDRESS);
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); 
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             #endregion
 
-            GetAllClientTypes();
+            MessengerInstance = new Messenger();
+
+           newClientFrom = new Client();
+
+            
+           MessengerInstance.Register<Client>(this,"123456", (a) => { GetTheUser(a); });
+
+           // GetAllClientTypes();
+        }
+
+        private void GetTheUser(Client newClientFrom)
+        {
+            this.newClientFrom = newClientFrom;
         }
 
         /// <summary>
