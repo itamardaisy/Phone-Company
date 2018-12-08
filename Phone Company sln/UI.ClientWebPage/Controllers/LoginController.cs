@@ -25,7 +25,7 @@ namespace UI.ClientWebPage.Controllers
 
         [HttpPost]
         [Route(nameof(ProjectFields.ROUTE_TO_LOGIN))]
-        public DetailsModel Post([FromBody]LoginClient loginClient)
+        public DetailsModel Login([FromBody]LoginClient loginClient)
         {
             try
             {
