@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,13 @@ using Windows.UI.Popups;
 
 namespace UI.Employee.ViewModel
 {
-    internal class AddNewClientViewModel
+    internal class AddNewClientViewModel 
     {
         private readonly INavigationService _navigationService;
         public RelayCommand NavigateCommandToMainEmployeePage { get; private set; }
         public RelayCommand CommandToAddNewUser { get; set; }
+        
+
 
         private const string BASE_ADDRESS = "http://localhost:50066/api/employee/";
         private HttpClient client;
@@ -35,21 +38,30 @@ namespace UI.Employee.ViewModel
 
         #endregion
 
+        /// <summary>
+        /// CTOR
+        /// </summary>
+        /// <param name="navigationService"></param>
         public AddNewClientViewModel(INavigationService navigationService)
         {
-            _navigationService = navigationService;
+           
+
+            _navigationService = navigationService;       
             NavigateCommandToMainEmployeePage = new RelayCommand(NavigationCommandActionToMainEmployeePage);
             CommandToAddNewUser = new RelayCommand(AddNewUserAction);
+
+            #region Configure httpClient for the web api request
 
             client = new HttpClient();
             client.BaseAddress = new Uri(BASE_ADDRESS);
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); 
+
+            #endregion
 
             GetAllClientTypes();
         }
-
-        
+      
         /// <summary>
         /// Add New User Action
         /// </summary>
@@ -79,7 +91,6 @@ namespace UI.Employee.ViewModel
                 await new MessageDialog("Bad Connection To The Server").ShowAsync();
             }
         }
-
 
         /// <summary>
         /// This function will add to the observableCollection all the client types

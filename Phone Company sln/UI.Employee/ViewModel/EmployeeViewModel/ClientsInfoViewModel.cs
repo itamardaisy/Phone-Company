@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,8 @@ namespace UI.Employee.ViewModel
         public RelayCommand CommandToGoBack { get; set; }
 
         private MessageDialog messageDialog;
+        public Messenger MessengerInstance { get; set; }
+
 
         public Client newClientFrom { get; set; }
         public ObservableCollection<ClientType> ClientTypes { get; set; }
@@ -33,6 +36,10 @@ namespace UI.Employee.ViewModel
         private const string BASE_ADDRESS = "http://localhost:50066/api/employee/";
         private HttpClient client;
 
+        /// <summary>
+        /// CTOR
+        /// </summary>
+        /// <param name="navigationService"></param>
         public ClientsInfoViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
@@ -40,14 +47,33 @@ namespace UI.Employee.ViewModel
             DeleteClient = new RelayCommand(DeleteClientCommand);
             CommandToGoBack = new RelayCommand(GoBackCommand);
 
+            #region Configure httpClient for the web api request
+
             client = new HttpClient();
             client.BaseAddress = new Uri(BASE_ADDRESS);
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            GetAllClientTypes();
+            #endregion
+
+            MessengerInstance = new Messenger();
+
+           newClientFrom = new Client();
+
+            
+           MessengerInstance.Register<Client>(this,"123456", (a) => { GetTheUser(a); });
+
+           // GetAllClientTypes();
         }
 
+        private void GetTheUser(Client newClientFrom)
+        {
+            this.newClientFrom = newClientFrom;
+        }
+
+        /// <summary>
+        /// Navigation command to go back to the employee main page
+        /// </summary>
         private void GoBackCommand()
         {
             _navigationService.NavigateTo(pageKey: "EmployeeMainPage");
@@ -106,7 +132,8 @@ namespace UI.Employee.ViewModel
         }
 
        /// <summary>
-       /// Get All ClientTypes
+       /// Command to get all the client types and put
+       /// them in the observableCollection called "ClientTypes"
        /// </summary>
        private async void GetAllClientTypes()
         {
