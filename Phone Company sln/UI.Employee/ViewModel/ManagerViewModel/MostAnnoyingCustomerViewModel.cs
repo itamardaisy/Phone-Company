@@ -19,28 +19,43 @@ namespace UI.Employee.ViewModel
         public RelayCommand NavigateCommandToManagerPage { get; private set; }
 
         public ObservableCollection<Client> Clients { get; set; }
-        private const string BASE_ADDRESS = "http://localhost:50066/api/employee/";
+        private const string BASE_ADDRESS = "http://localhost:50066/api/manager/";
         private HttpClient client;
 
+        /// <summary>
+        /// CTOR
+        /// </summary>
+        /// <param name="navigationService"></param>
         public MostAnnoyingCustomerViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             NavigateCommandToManagerPage = new RelayCommand(GoBackCommand);
 
+            #region Configure httpClient for the web api request
+
             client = new HttpClient();
             client.BaseAddress = new Uri(BASE_ADDRESS);
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); 
+
+            #endregion
 
             GetClients();
         }
 
+        /// <summary>
+        /// Navigation command to go back to the main manger page
+        /// </summary>
         private void GoBackCommand()
         {
             _navigationService.NavigateTo(pageKey: "ManagerMainPage");
         }
 
-        private async void GetClients()
+       /// <summary>
+       /// Command to get the most annoying client
+       /// and put them/him in the observableCollection called "Clients"
+       /// </summary>
+       private async void GetClients()
         {
             var myUri = new Uri(BASE_ADDRESS + "GetMostAnnoyingClient", UriKind.Absolute);
 

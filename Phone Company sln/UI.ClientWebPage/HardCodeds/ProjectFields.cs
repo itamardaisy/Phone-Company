@@ -7,7 +7,7 @@ namespace UI.ClientWebPage.HardCodeds
 {
     public class ProjectFields
     {
-        internal static readonly string BASE_ADDRESS = "http://localhost:52036/";
+        internal static readonly string BASE_ADDRESS = "http://localhost:52685/";
         internal static readonly string ROUTE_TO_LOGIN = "api/Login";
         internal static readonly string ROUTE_TO_GetTotalMinuts = "api/GetTotalMinuts";
         internal static readonly string ROUTE_TO_GetTotalSMS = "api/GetTotalSMS";

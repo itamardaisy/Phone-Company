@@ -35,21 +35,28 @@ namespace UI.Employee.ViewModel
 
         #endregion
 
+        /// <summary>
+        /// CTOR
+        /// </summary>
+        /// <param name="navigationService"></param>
         public AddNewClientViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             NavigateCommandToMainEmployeePage = new RelayCommand(NavigationCommandActionToMainEmployeePage);
             CommandToAddNewUser = new RelayCommand(AddNewUserAction);
 
+            #region Configure httpClient for the web api request
+
             client = new HttpClient();
             client.BaseAddress = new Uri(BASE_ADDRESS);
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); 
+
+            #endregion
 
             GetAllClientTypes();
         }
-
-        
+      
         /// <summary>
         /// Add New User Action
         /// </summary>
@@ -79,7 +86,6 @@ namespace UI.Employee.ViewModel
                 await new MessageDialog("Bad Connection To The Server").ShowAsync();
             }
         }
-
 
         /// <summary>
         /// This function will add to the observableCollection all the client types

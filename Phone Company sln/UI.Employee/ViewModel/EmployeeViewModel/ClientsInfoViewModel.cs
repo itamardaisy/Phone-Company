@@ -33,6 +33,10 @@ namespace UI.Employee.ViewModel
         private const string BASE_ADDRESS = "http://localhost:50066/api/employee/";
         private HttpClient client;
 
+        /// <summary>
+        /// CTOR
+        /// </summary>
+        /// <param name="navigationService"></param>
         public ClientsInfoViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
@@ -40,14 +44,21 @@ namespace UI.Employee.ViewModel
             DeleteClient = new RelayCommand(DeleteClientCommand);
             CommandToGoBack = new RelayCommand(GoBackCommand);
 
+            #region Configure httpClient for the web api request
+
             client = new HttpClient();
             client.BaseAddress = new Uri(BASE_ADDRESS);
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); 
+
+            #endregion
 
             GetAllClientTypes();
         }
 
+        /// <summary>
+        /// Navigation command to go back to the employee main page
+        /// </summary>
         private void GoBackCommand()
         {
             _navigationService.NavigateTo(pageKey: "EmployeeMainPage");
@@ -106,7 +117,8 @@ namespace UI.Employee.ViewModel
         }
 
        /// <summary>
-       /// Get All ClientTypes
+       /// Command to get all the client types and put
+       /// them in the observableCollection called "ClientTypes"
        /// </summary>
        private async void GetAllClientTypes()
         {

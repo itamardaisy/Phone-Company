@@ -19,27 +19,42 @@ namespace UI.Employee.ViewModel
         public RelayCommand NavigateCommandToManagerPage { get; private set; }
 
         public ObservableCollection<Client> Clients { get; set; }
-        private const string BASE_ADDRESS = "http://localhost:50066/api/employee/";
+        private const string BASE_ADDRESS = "http://localhost:50066/api/manager/";
         private HttpClient client;
 
+        /// <summary>
+        /// CTOR
+        /// </summary>
+        /// <param name="navigationService"></param>
         public MostConnectedClientViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             NavigateCommandToManagerPage = new RelayCommand(GoBackCommand);
 
+            #region Configure httpClient for the web api request
+
             client = new HttpClient();
             client.BaseAddress = new Uri(BASE_ADDRESS);
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); 
+
+            #endregion
 
             GetClients();
         }
 
+        /// <summary>
+        /// Navigation command to go back to the manager main page
+        /// </summary>
         private void GoBackCommand()
         {
             _navigationService.NavigateTo(pageKey: "ManagerMainPage");
         }
 
+        /// <summary>
+        /// Command to get the most connected client
+        /// and put him/them in the observableCollection called "Clients"
+        /// </summary>
         private async void GetClients()
         {
             var myUri = new Uri(BASE_ADDRESS + "GetMostConnectedClient", UriKind.Absolute);
