@@ -47,11 +47,17 @@ namespace UI.Employee.ViewModel
                 if (respone.IsSuccessStatusCode)
                 {
                     User userFromDB = await respone.Content.ReadAsAsync<User>();
-                    if (userFromDB.Type == UserType.Emploee)
+                    if (userFromDB == null)
                     {
-                        _navigationService.NavigateTo("EmployeeMainPage");
+                        await new MessageDialog("User Do not Exist").ShowAsync();
                     }
-                    _navigationService.NavigateTo("ManagerMainPage");
+                    else
+                    {
+                        if (userFromDB.Type == UserType.Emploee)
+                            _navigationService.NavigateTo("EmployeeMainPage");
+
+                        _navigationService.NavigateTo("ManagerMainPage");
+                    }
                 }
                 await new MessageDialog("Bad Connection To The Server").ShowAsync();
             }

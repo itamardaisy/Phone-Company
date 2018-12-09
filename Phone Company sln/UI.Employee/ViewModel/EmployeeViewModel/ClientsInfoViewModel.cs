@@ -29,7 +29,6 @@ namespace UI.Employee.ViewModel
         private MessageDialog messageDialog;
         public Messenger MessengerInstance { get; set; }
 
-
         public Client newClientFrom { get; set; }
         public ObservableCollection<ClientType> ClientTypes { get; set; }
 
@@ -54,16 +53,15 @@ namespace UI.Employee.ViewModel
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            #endregion
+            #endregion Configure httpClient for the web api request
 
             MessengerInstance = new Messenger();
 
-           newClientFrom = new Client();
+            newClientFrom = new Client();
 
-            
-           MessengerInstance.Register<Client>(this,"123456", (a) => { GetTheUser(a); });
+            MessengerInstance.Register<Client>(this, "123456", (a) => { GetTheUser(a); });
 
-           // GetAllClientTypes();
+            // GetAllClientTypes();
         }
 
         private void GetTheUser(Client newClientFrom)
@@ -131,11 +129,11 @@ namespace UI.Employee.ViewModel
             }
         }
 
-       /// <summary>
-       /// Command to get all the client types and put
-       /// them in the observableCollection called "ClientTypes"
-       /// </summary>
-       private async void GetAllClientTypes()
+        /// <summary>
+        /// Command to get all the client types and put
+        /// them in the observableCollection called "ClientTypes"
+        /// </summary>
+        private async void GetAllClientTypes()
         {
             var myUri = new Uri(BASE_ADDRESS + "GetClientTypes", UriKind.Absolute);
 
@@ -150,7 +148,6 @@ namespace UI.Employee.ViewModel
                     {
                         ClientTypes = answer;
                     }
-
                 }
                 await new MessageDialog("Bad Connection To The Server").ShowAsync();
             }
