@@ -10,12 +10,12 @@ using Dal.DataInitializer;
 using Dal.DataModels;
 using Common.EnvironmentService;
 using Common.Exceptions;
-        
+
 namespace Dal.Repositories
 {
     public class LineRepository : ILineRepository
     {
-        PhoneCompanyContext context;
+        private PhoneCompanyContext context;
 
         public LineRepository(PhoneCompanyContext context)
         {
@@ -46,7 +46,7 @@ namespace Dal.Repositories
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="lineId"></param>
         /// <param name="date"></param>
@@ -69,7 +69,7 @@ namespace Dal.Repositories
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="lineId"></param>
         /// <param name="now"></param>
@@ -91,7 +91,7 @@ namespace Dal.Repositories
             return MinutsCounter;
         }
 
-        private List<NumberCounter<int,string>> GetTopFiveCalls(List<NumberCounter<int, string>> numberCounters)
+        private List<NumberCounter<int, string>> GetTopFiveCalls(List<NumberCounter<int, string>> numberCounters)
         {
             return numberCounters.OrderByDescending(x => x.Counter).Reverse().Take(5).ToList();
         }
@@ -120,7 +120,7 @@ namespace Dal.Repositories
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="lineId"></param>
         /// <param name="now"></param>
@@ -134,19 +134,19 @@ namespace Dal.Repositories
                 if (lineCalls[i].DestinationNumber == clientSelectedNumber.FirstNumber ||
                     lineCalls[i].DestinationNumber == clientSelectedNumber.SecondNumber ||
                     lineCalls[i].DestinationNumber == clientSelectedNumber.ThirdNumber)
-                        MinutsCounter += lineCalls[i].Duration;
+                    MinutsCounter += lineCalls[i].Duration;
             return MinutsCounter;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="lineId"></param>
         /// <param name="date"></param>
         /// <returns></returns>
         public int GetActualMonthSMSs(int lineId, DateTime date)
         {
-            var SMSs = context.SMSs.Where(x => x.LineId == lineId && x.SMSDate.Month == date.Month).Select(x => x.DbToCommon()).ToList();
+            var SMSs = context.SMSs.Where(x => x.LineId == lineId && x.SmsDate.Month == date.Month).Select(x => x.DbToCommon()).ToList();
             return SMSs.Count;
         }
 
@@ -237,7 +237,7 @@ namespace Dal.Repositories
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="clientId"></param>
         /// <returns></returns>
@@ -246,6 +246,7 @@ namespace Dal.Repositories
             return context.Lines.Where(x => x.ClientId == clientId).Select(x => x.DbToCommon()).ToList();
         }
     }
+
     /// <summary>
     /// This class created to counter inside a list of numbers the numbers of calls.
     /// NumberCounter<3,"0545822125"> three calls to number 0545822125.

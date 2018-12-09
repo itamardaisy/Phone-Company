@@ -97,7 +97,7 @@ namespace BillingService.Services
 
                 oWB.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
             }

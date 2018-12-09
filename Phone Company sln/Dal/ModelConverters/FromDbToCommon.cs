@@ -130,7 +130,7 @@ namespace Dal.ModelConverters
                 ExternalPrice = dbSMS.ExternalPrice,
                 Id = dbSMS.Id,
                 LineId = dbSMS.LineId,
-                SMSDate = dbSMS.SMSDate,
+                SMSDate = dbSMS.SmsDate,
                 SelectedNumberCall = dbSMS.SelectedNumberCall,
                 FamilyCall = dbSMS.FamilyCall,
             };
