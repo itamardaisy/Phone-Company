@@ -30,7 +30,7 @@ namespace UI.ClientWebPage.Controllers
 
         public async Task<ActionResult> Login(LoginClient loginClient)
         {
-            var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_LOGIN, loginClient).Result;
+            var response = client.PostAsJsonAsync(ProjectFields.ROUTE_TO_LOGIN, loginClient).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 DetailsModel detailsModel = await response.Content.ReadAsAsync<DetailsModel>();

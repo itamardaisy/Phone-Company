@@ -9,6 +9,6 @@ namespace Common.Interfaces.ClientBL_Interfaces
 {
     public interface IClientLoginService
     {
-        Client Login(string name, int clientId);
+        Client Login(string name, string phoneNumber);
     }
 }

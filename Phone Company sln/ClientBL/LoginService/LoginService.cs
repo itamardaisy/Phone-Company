@@ -27,10 +27,10 @@ namespace ClientBL.LoginService
         /// <param name="name"> The name of the client </param>
         /// <param name="clientId"> The id of the client </param>
         /// <returns> Return true if the client exist, otherwise false. </returns>
-        public Client Login(string name, int clientId)
+        public Client Login(string name, string phoneNumber)
         {
-            if (CLIENT_REPOSITORY.LoginClient(name, clientId) != null)  
-                return CLIENT_REPOSITORY.LoginClient(name, clientId);
+            if (CLIENT_REPOSITORY.LoginClient(name, phoneNumber) != null)  
+                return CLIENT_REPOSITORY.LoginClient(name, phoneNumber);
             return null;
         }
     }

@@ -28,9 +28,9 @@ namespace Dal.Repositories
         /// <param name="name"></param>
         /// <param name="clientId"></param>
         /// <returns></returns>
-        public Client LoginClient(string name, int clientId)
+        public Client LoginClient(string name, string phoneNumber)
         {
-            return context.Clients.FirstOrDefault(x => x.Id == clientId && x.Name == name).DbToCommon();
+            return context.Clients.FirstOrDefault(x => x.Name == name && x.ContactNumber == phoneNumber).DbToCommon();
         }
 
         /// <summary>
