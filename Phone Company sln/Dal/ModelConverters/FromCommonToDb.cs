@@ -123,7 +123,6 @@ namespace Dal.ModelConverters
                 ExternalPrice = sMS.ExternalPrice,
                 Id = sMS.Id,
                 LineId = sMS.LineId,
-                SMSDate = sMS.SMSDate,
                 SelectedNumberCall = sMS.SelectedNumberCall,
                 SmsDate = sMS.SMSDate,
                 FamilyCall = sMS.FamilyCall

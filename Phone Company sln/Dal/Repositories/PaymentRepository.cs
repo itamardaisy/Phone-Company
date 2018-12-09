@@ -41,7 +41,7 @@ namespace Dal.Repositories
         public Dictionary<PaymentType, Payment> GetByMonth(DateTime dateTime, Client client, string lineNumber)
         {
             var calls = context.Calls.Select(x => x.CallDate.Month == dateTime.Month).ToList();
-            var smss = context.SMSs.Select(x => x.SMSDate.Month == dateTime.Month).ToList();
+            var smss = context.SMSs.Select(x => x.SmsDate.Month == dateTime.Month).ToList();
             return null;
         }
 

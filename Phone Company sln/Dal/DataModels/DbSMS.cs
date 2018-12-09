@@ -31,9 +31,6 @@ namespace Dal.DataModels
         public string DestinationNumber { get; set; }
 
         [Required]
-        public DateTime SMSDate { get; set; }
-
-        [Required]
         [DefaultValue(false)]
         public bool FamilyCall { get; set; }
 

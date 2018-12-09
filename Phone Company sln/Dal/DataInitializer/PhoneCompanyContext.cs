@@ -13,8 +13,8 @@ namespace Dal.DataInitializer
         public PhoneCompanyContext() : base("PhoneCompanyDb")
         {
             Database.SetInitializer<PhoneCompanyContext>(new CreateDatabaseIfNotExists<PhoneCompanyContext>());
-
         }
+
         public virtual DbSet<DbCall> Calls { get; set; }
         public virtual DbSet<DbClient> Clients { get; set; }
         public DbSet<DbClientType> ClientTypes { get; set; }
@@ -22,7 +22,7 @@ namespace Dal.DataInitializer
         public DbSet<DbPackage> Packages { get; set; }
         public virtual DbSet<DbPayment> Payments { get; set; }
         public DbSet<DbSelectedNumber> SelectedNumbers { get; set; }
-        public virtual DbSet<DbSMS> SMSs{ get; set; }
+        public virtual DbSet<DbSMS> SMSs { get; set; }
         public virtual DbSet<DbUnsignClient> UnsignClients { get; set; }
         public DbSet<DbUser> Users { get; set; }
 
