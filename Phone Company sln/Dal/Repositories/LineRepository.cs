@@ -15,13 +15,6 @@ namespace Dal.Repositories
 {
     public class LineRepository : ILineRepository
     {
-        private PhoneCompanyContext context;
-
-        public LineRepository(PhoneCompanyContext context)
-        {
-            this.context = context;
-        }
-
         /// <summary>
         /// This method gets a new line and add it to the context.
         /// </summary>
@@ -30,8 +23,11 @@ namespace Dal.Repositories
         {
             try
             {
-                context.Lines.Add(line.CommonToDb());
-                context.SaveChanges();
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    context.Lines.Add(line.CommonToDb());
+                    context.SaveChanges();
+                }
             }
             catch (ArgumentNullException ex)
             {
@@ -55,11 +51,14 @@ namespace Dal.Repositories
         {
             try
             {
-                double minutSum = 0.0;
-                var calls = context.Calls.Where(x => x.LineId == lineId && x.CallDate.Month == date.Month).Select(x => x.DbToCommon()).ToList();
-                foreach (var call in calls)
-                    minutSum += call.Duration;
-                return minutSum;
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    double minutSum = 0.0;
+                    var calls = context.Calls.Where(x => x.LineId == lineId && x.CallDate.Month == date.Month).Select(x => x.DbToCommon()).ToList();
+                    foreach (var call in calls)
+                        minutSum += call.Duration;
+                    return minutSum;
+                }
             }
             catch (Exception ex)
             {
@@ -107,16 +106,22 @@ namespace Dal.Repositories
 
         private List<DbCall> GetLineCalls(int lineId, DateTime now)
         {
-            return context.Calls.Where(x => x.LineId == lineId && x.CallDate.Month == now.Month).ToList();
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                return context.Calls.Where(x => x.LineId == lineId && x.CallDate.Month == now.Month).ToList();
+            }
         }
 
         public double GetTotalMinutesFamily(int lineId, DateTime now)
         {
-            double minutsCounter = 0.0;
-            var familyCalls = context.Calls.Where(x => x.FamilyCall == true).ToList();
-            foreach (var call in familyCalls)
-                minutsCounter += call.Duration;
-            return minutsCounter;
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                double minutsCounter = 0.0;
+                var familyCalls = context.Calls.Where(x => x.FamilyCall == true).ToList();
+                foreach (var call in familyCalls)
+                    minutsCounter += call.Duration;
+                return minutsCounter;
+            }
         }
 
         /// <summary>
@@ -127,15 +132,18 @@ namespace Dal.Repositories
         /// <returns></returns>
         public double GetTotalMinutesThreeTopNumber(int lineId, DateTime now)
         {
-            double MinutsCounter = 0.0;
-            var lineCalls = GetLineCalls(lineId, now);
-            var clientSelectedNumber = context.SelectedNumbers.FirstOrDefault(x => x.LineId == lineId);
-            for (int i = 0; i < lineCalls.Count; i++)
-                if (lineCalls[i].DestinationNumber == clientSelectedNumber.FirstNumber ||
-                    lineCalls[i].DestinationNumber == clientSelectedNumber.SecondNumber ||
-                    lineCalls[i].DestinationNumber == clientSelectedNumber.ThirdNumber)
-                    MinutsCounter += lineCalls[i].Duration;
-            return MinutsCounter;
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                double MinutsCounter = 0.0;
+                var lineCalls = GetLineCalls(lineId, now);
+                var clientSelectedNumber = context.SelectedNumbers.FirstOrDefault(x => x.LineId == lineId);
+                for (int i = 0; i < lineCalls.Count; i++)
+                    if (lineCalls[i].DestinationNumber == clientSelectedNumber.FirstNumber ||
+                        lineCalls[i].DestinationNumber == clientSelectedNumber.SecondNumber ||
+                        lineCalls[i].DestinationNumber == clientSelectedNumber.ThirdNumber)
+                        MinutsCounter += lineCalls[i].Duration;
+                return MinutsCounter;
+            }
         }
 
         /// <summary>
@@ -146,8 +154,11 @@ namespace Dal.Repositories
         /// <returns></returns>
         public int GetActualMonthSMSs(int lineId, DateTime date)
         {
-            var SMSs = context.SMSs.Where(x => x.LineId == lineId && x.SmsDate.Month == date.Month).Select(x => x.DbToCommon()).ToList();
-            return SMSs.Count;
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                var SMSs = context.SMSs.Where(x => x.LineId == lineId && x.SmsDate.Month == date.Month).Select(x => x.DbToCommon()).ToList();
+                return SMSs.Count;
+            }
         }
 
         /// <summary>
@@ -159,7 +170,10 @@ namespace Dal.Repositories
         {
             try
             {
-                return context.Lines.FirstOrDefault(x => x.Number == lineNumber).DbToCommon();
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    return context.Lines.FirstOrDefault(x => x.Number == lineNumber).DbToCommon();
+                }
             }
             catch (ArgumentNullException ex)
             {
@@ -181,9 +195,12 @@ namespace Dal.Repositories
         {
             try
             {
-                DbLine dbLine = context.Lines.FirstOrDefault(x => x.Id == line.Id);
-                UpdateTheLineProperties(dbLine, line);
-                context.SaveChanges();
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    DbLine dbLine = context.Lines.FirstOrDefault(x => x.Id == line.Id);
+                    UpdateTheLineProperties(dbLine, line);
+                    context.SaveChanges();
+                }
             }
             catch (ArgumentNullException ex)
             {
@@ -207,8 +224,11 @@ namespace Dal.Repositories
         {
             try
             {
-                context.Lines.FirstOrDefault(x => x.ClientId == ClientId).PackageId = newPackageId;
-                context.SaveChanges();
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    context.Lines.FirstOrDefault(x => x.ClientId == ClientId).PackageId = newPackageId;
+                    context.SaveChanges();
+                }
             }
             catch (ArgumentNullException ex)
             {
@@ -243,7 +263,17 @@ namespace Dal.Repositories
         /// <returns></returns>
         public List<Line> GetClientLines(int clientId)
         {
-            return context.Lines.Where(x => x.ClientId == clientId).Select(x => x.DbToCommon()).ToList();
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                List<Line> lines = new List<Line>();
+                var dbLines = context.Lines.Where(x => x.ClientId == clientId).ToList();
+                foreach (var item in dbLines)
+                    lines.Add(item.DbToCommon());
+                if (lines.Count != 0)
+                    return lines;
+                else
+                    return null;
+            }
         }
     }
 

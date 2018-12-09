@@ -16,20 +16,16 @@ namespace Dal.Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        private PhoneCompanyContext context;
-
-        public EmployeeRepository(PhoneCompanyContext context)
-        {
-            this.context = context;
-        }
-
         public User EmployeeLogin(string name, string password)
         {
             try
             {
-                return context.Users.
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    return context.Users.
                     Where(x => x.Name == name && x.Password == password)
                     .FirstOrDefault().DbToCommon();
+                }
             }
             catch (ArgumentNullException ex)
             {

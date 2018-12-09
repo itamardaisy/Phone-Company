@@ -17,6 +17,7 @@ namespace UI.ClientWebPage.Controllers
         private readonly LoginService LOGIN_SERVICE;
         private readonly DetailService DETAIL_SERVICE;
 
+
         public LoginController()
         {
             LOGIN_SERVICE = new LoginService();
@@ -24,19 +25,20 @@ namespace UI.ClientWebPage.Controllers
         }
 
         [HttpPost]
-        [Route(nameof(ProjectFields.ROUTE_TO_LOGIN))]
+        [Route("api/Login")]
         public DetailsModel Login([FromBody]LoginClient loginClient)
         {
             try
             {
-                if (LOGIN_SERVICE.Login(loginClient.Name, loginClient.ClientId) != null)
+                if (LOGIN_SERVICE.Login(loginClient.Name, loginClient.PhoneNumber) != null)
                 {
-                    Client client = LOGIN_SERVICE.Login(loginClient.Name, loginClient.ClientId);
+                    Client client = LOGIN_SERVICE.Login(loginClient.Name, loginClient.PhoneNumber);
                     DetailsModel detailsModel = new DetailsModel()
                     {
                         CurrentClient = client,
                         ClientLines = DETAIL_SERVICE.GetClientLines(client.Id)
                     };
+                    detailsModel.LineList(detailsModel.ClientLines);
                     return detailsModel;
                 }
                 else

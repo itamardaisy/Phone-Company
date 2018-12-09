@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace UI.ClientWebPage.HardCodeds
+﻿namespace UI.ClientWebPage.HardCodeds
 {
     public class ProjectFields
     {
@@ -16,7 +11,7 @@ namespace UI.ClientWebPage.HardCodeds
         internal static readonly string ROUTE_TO_GetTotalMinutesFamily = "api/GetTotalMinutesFamily";
         internal static readonly string ROUTE_TO_GetOptimalPackage = "api/GetOptimalPackage";
         internal static readonly string HEADER_TYPE = "application/json";
-        internal static readonly string LOGIN_VIEW_NAME = "LoginView";
+        internal static readonly string LOGIN_VIEW_NAME = "Login";
         internal static readonly string INDEX_VIEW_NAME = "index";
         internal static readonly string DETAILS_VIEW = "DetailsView";
     }

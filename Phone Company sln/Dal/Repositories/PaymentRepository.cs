@@ -14,13 +14,6 @@ namespace Dal.Repositories
 {
     public class PaymentRepository : IPaymentRepository
     {
-        private PhoneCompanyContext context;
-
-        public PaymentRepository(PhoneCompanyContext context)
-        {
-            this.context = context;
-        }
-
         /// <summary>
         /// This method gets a new payment and add it to the context.
         /// </summary>
@@ -29,8 +22,11 @@ namespace Dal.Repositories
         {
             try
             {
-                context.Payments.Add(payment.CommonToDb());
-                context.SaveChanges();
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    context.Payments.Add(payment.CommonToDb());
+                    context.SaveChanges();
+                }
             }
             catch (Exception ex)
             {
@@ -40,21 +36,30 @@ namespace Dal.Repositories
 
         public Dictionary<PaymentType, Payment> GetByMonth(DateTime dateTime, Client client, string lineNumber)
         {
-            var calls = context.Calls.Select(x => x.CallDate.Month == dateTime.Month).ToList();
-            var smss = context.SMSs.Select(x => x.SmsDate.Month == dateTime.Month).ToList();
-            return null;
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                var calls = context.Calls.Select(x => x.CallDate.Month == dateTime.Month).ToList();
+                var smss = context.SMSs.Select(x => x.SmsDate.Month == dateTime.Month).ToList();
+                return null;
+            }
         }
 
         public double CalcOverLimitCallsPayment(double overLimitMinuts, int clientTypeId)
         {
-            var clientType = context.ClientTypes.FirstOrDefault(x => x.Id == clientTypeId);
-            return overLimitMinuts * clientType.MinutePrice;
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                var clientType = context.ClientTypes.FirstOrDefault(x => x.Id == clientTypeId);
+                return overLimitMinuts * clientType.MinutePrice;
+            }
         }
 
         public double CalcOverLimitSMSsPayment(int overLimitSMSs, int clientTypeId)
         {
-            var clientType = context.ClientTypes.FirstOrDefault(x => x.Id == clientTypeId);
-            return overLimitSMSs * clientType.SMSPrice;
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                var clientType = context.ClientTypes.FirstOrDefault(x => x.Id == clientTypeId);
+                return overLimitSMSs * clientType.SMSPrice;
+            }
         }
 
         public double GetPackagePaymentByLine(int lineId)

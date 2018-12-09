@@ -9,14 +9,6 @@ namespace BillingService.Services
 {
     public class PdfCreator : IPdfCreator
     {
-        private byte[] pdfFile;
-
-        public byte[] PdfFile
-        {
-            get => pdfFile;
-            set => pdfFile = value;
-        }
-
         public void WriteToFile(Dictionary<string, Receipt> payments, DateTime time)
         {
             string header = "<h1>Recipt Summery</h1>";

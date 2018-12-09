@@ -14,13 +14,6 @@ namespace Dal.Repositories
 {
     public class PackageRepository : IPackageRepository 
     {
-        PhoneCompanyContext context;
-
-        public PackageRepository(PhoneCompanyContext context)
-        {
-            this.context = context;
-        }
-
         /// <summary>
         /// This method gets the package from the BL and add it to the contexxt.
         /// </summary>
@@ -29,8 +22,11 @@ namespace Dal.Repositories
         {
             try
             {
-                context.Packages.Add(package.CommonToDb());
-                context.SaveChanges();
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    context.Packages.Add(package.CommonToDb());
+                    context.SaveChanges();
+                }
             }
             catch (Exception ex)
             {
@@ -41,23 +37,35 @@ namespace Dal.Repositories
 
         public int GetMinutsInPackage(int lineId)
         {
-            return context.Packages.FirstOrDefault(c => c.Id == context.Lines.FirstOrDefault(x => x.Id == lineId).PackageId).MaxMinute;
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                return context.Packages.FirstOrDefault(c => c.Id == context.Lines.FirstOrDefault(x => x.Id == lineId).PackageId).MaxMinute;
+            }
         }
 
         public double GetBasePrice(int lineId)
         {
-            var line = context.Lines.FirstOrDefault(x => x.Id == lineId);
-            return context.Packages.Where(x => x.Id == line.PackageId).FirstOrDefault().TotalPrice;
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                var line = context.Lines.FirstOrDefault(x => x.Id == lineId);
+                return context.Packages.Where(x => x.Id == line.PackageId).FirstOrDefault().TotalPrice;
+            }
         }
 
         public int GetPackagePercentage(int packageId)
         {
-            return context.Packages.FirstOrDefault(x => x.Id == packageId).DisscountPrecentage;
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                return context.Packages.FirstOrDefault(x => x.Id == packageId).DisscountPrecentage;
+            }
         }
 
         public int GetSMSsInPackage(int lineId)
         {
-            return context.Packages.FirstOrDefault(c => c.Id == context.Lines.FirstOrDefault(x => x.Id == lineId).PackageId).MaxSMSs;
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                return context.Packages.FirstOrDefault(c => c.Id == context.Lines.FirstOrDefault(x => x.Id == lineId).PackageId).MaxSMSs;
+            }
         }
 
         /// <summary>
@@ -72,16 +80,19 @@ namespace Dal.Repositories
         {
             try
             {
-                var wantedPackage = context.Packages.FirstOrDefault(x => x.PackageName == packageName);
-                List<Client> packageClients = GetPackageClients(packageName);
-                for (int i = 0; i < packageClients.Count; i++)
-                    ChangeToDefaultPackage(packageClients[i].Id);
-                context.Packages.Remove(context.Packages.FirstOrDefault(x => x.PackageName == packageName));
-                context.SaveChanges();
-                if (!context.Packages.Any(x => x.PackageName == packageName))
-                    return true;
-                else
-                    return false;
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    var wantedPackage = context.Packages.FirstOrDefault(x => x.PackageName == packageName);
+                    List<Client> packageClients = GetPackageClients(packageName);
+                    for (int i = 0; i < packageClients.Count; i++)
+                        ChangeToDefaultPackage(packageClients[i].Id);
+                    context.Packages.Remove(context.Packages.FirstOrDefault(x => x.PackageName == packageName));
+                    context.SaveChanges();
+                    if (!context.Packages.Any(x => x.PackageName == packageName))
+                        return true;
+                    else
+                        return false;
+                }
             }
             catch (ArgumentNullException ex)
             {
@@ -104,8 +115,11 @@ namespace Dal.Repositories
         {
             try
             {
-                return context.Lines.Where(x => x.Package.PackageName == packageName)
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    return context.Lines.Where(x => x.Package.PackageName == packageName)
                        .Select(x => x.Client.DbToCommon()).ToList();
+                }
             }
             catch (ArgumentNullException ex)
             {
@@ -123,7 +137,10 @@ namespace Dal.Repositories
         {
             try
             {
-                return context.Packages.FirstOrDefault(x => x.PackageName == packageName).DbToCommon();
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    return context.Packages.FirstOrDefault(x => x.PackageName == packageName).DbToCommon();
+                }
             }
             catch (ArgumentNullException ex)
             {
@@ -140,9 +157,12 @@ namespace Dal.Repositories
         {
             try
             {
-                DbPackage dbPackage = context.Packages.FirstOrDefault(x => x.Id == package.Id);
-                UpdateThePackageProperties(dbPackage, package);
-                context.SaveChanges();
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    DbPackage dbPackage = context.Packages.FirstOrDefault(x => x.Id == package.Id);
+                    UpdateThePackageProperties(dbPackage, package);
+                    context.SaveChanges();
+                }
             }
             catch (ArgumentNullException ex)
             {
@@ -177,9 +197,12 @@ namespace Dal.Repositories
         {
             try
             {
-                int defaultPackageId = context.Packages.FirstOrDefault(x => x.PackageName == "DefaultPackage").Id;
-                context.Lines.FirstOrDefault(x => x.ClientId == clientId).PackageId = defaultPackageId;
-                context.SaveChanges();
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    int defaultPackageId = context.Packages.FirstOrDefault(x => x.PackageName == "DefaultPackage").Id;
+                    context.Lines.FirstOrDefault(x => x.ClientId == clientId).PackageId = defaultPackageId;
+                    context.SaveChanges();
+                }
             }
             catch (ArgumentNullException ex)
             {

@@ -21,14 +21,14 @@ namespace UI.ClientWebPage.Controllers
         }
 
         [HttpPost]
-        [Route(nameof(ProjectFields.ROUTE_TO_GetOptimalPackage))]
-        public Package GetOptimalPackage([FromBody]DetailsModel detailsModel)
+        [Route("api/GetOptimalPackage")]
+        public List<Package> GetOptimalPackage([FromBody]DetailsModel detailsModel)
         {
             return DETAILS_SERVICE.GetOptimalPackages(detailsModel.CurrentClient, detailsModel.ChosenLine);
         }
 
         [HttpPost]
-        [Route(nameof(ProjectFields.ROUTE_TO_GetTotalMinuts))]
+        [Route("api/GetTotalMinuts")]
         public double GetTotalMinuts([FromBody]DetailsModel detailsModel)
         {
             try
@@ -43,7 +43,7 @@ namespace UI.ClientWebPage.Controllers
         }
 
         [HttpPost]
-        [Route(nameof(ProjectFields.ROUTE_TO_GetTotalSMS))]
+        [Route("api/GetTotalSMS")]
         public int GetTotalSMS([FromBody]DetailsModel detailsModel)
         {
             try
@@ -58,7 +58,7 @@ namespace UI.ClientWebPage.Controllers
         }
 
         [HttpPost]
-        [Route(nameof(ProjectFields.ROUTE_TO_GetTotalMinutesTopNumber))]
+        [Route("api/GetTotalMinutesTopNumber")]
         public double GetTotalMinutesTopNumber([FromBody]DetailsModel detailsModel)
         {
             try
@@ -73,7 +73,7 @@ namespace UI.ClientWebPage.Controllers
         }
 
         [HttpPost]
-        [Route(nameof(ProjectFields.ROUTE_TO_GetTotalMinutesThreeTopNumber))]
+        [Route("api/GetTotalMinutesThreeTopNumber")]
         public double GetTotalMinutesThreeTopNumber([FromBody]DetailsModel detailsModel)
         {
             try
@@ -88,7 +88,7 @@ namespace UI.ClientWebPage.Controllers
         }
 
         [HttpPost]
-        [Route(nameof(ProjectFields.ROUTE_TO_GetTotalMinutesFamily))]
+        [Route("api/GetTotalMinutesFamily")]
         public double GetTotalMinutesFamily([FromBody]DetailsModel detailsModel)
         {
             try

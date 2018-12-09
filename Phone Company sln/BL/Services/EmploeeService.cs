@@ -16,13 +16,11 @@ namespace BL.Services
     {
         private readonly ClientRepository CR;
         private readonly ClientTypeRepository CTR;
-        private readonly PhoneCompanyContext CONTEXT;
 
         public EmploeeService()
         {
-            CONTEXT = new PhoneCompanyContext();
-            CR = new ClientRepository(CONTEXT);
-            CTR = new ClientTypeRepository(CONTEXT);
+            CR = new ClientRepository();
+            CTR = new ClientTypeRepository();
         }
 
         public void AddNewClient(Client client)

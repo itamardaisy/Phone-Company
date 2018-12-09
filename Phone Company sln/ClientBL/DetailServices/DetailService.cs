@@ -18,9 +18,8 @@ namespace ClientBL.DetailServices
 
         public DetailService()
         {
-            PhoneCompanyContext context = new PhoneCompanyContext();
-            CLIENT_REPOSITORY = new ClientRepository(context);
-            LINE_REPOSITORY = new LineRepository(context);
+            CLIENT_REPOSITORY = new ClientRepository();
+            LINE_REPOSITORY = new LineRepository();
             OPTIMAL_PACKAGE = new OptimalPackage();
         }
 
@@ -57,7 +56,6 @@ namespace ClientBL.DetailServices
         {
             var line = LINE_REPOSITORY.GetClientLines(client.Id).Where(x => x.Number == lineNumber).FirstOrDefault();
             return LINE_REPOSITORY.GetActualMonthSMSs(line.Id, DateTime.Now);
-
         }
 
         /// <summary>
@@ -96,7 +94,7 @@ namespace ClientBL.DetailServices
             return LINE_REPOSITORY.GetTotalMinutesFamily(line.Id, DateTime.Now);
         }
 
-        public Package GetOptimalPackages(Client client, string packageName)
+        public List<Package> GetOptimalPackages(Client client, string packageName)
         {
             return OPTIMAL_PACKAGE.GetOptimalPackage(client, packageName);
         }

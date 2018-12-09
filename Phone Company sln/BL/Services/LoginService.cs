@@ -18,7 +18,7 @@ namespace BL.Services
         {
             PhoneCompanyContext context = new PhoneCompanyContext();
 
-            employeeRepository = new EmployeeRepository(context);
+            employeeRepository = new EmployeeRepository();
         }
 
         public User Login(string name, string password)

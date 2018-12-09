@@ -12,21 +12,13 @@ namespace UI.ClientWebPage.Models
         public List<Package> RecommendedPackages { get; set; }
         public Client CurrentClient { get; set; }
         public List<string> ClientLines { get; set; }
-        public List<SelectListItem> LineList
+        public List<SelectListItem> lineList { get; set; }
+        public List<SelectListItem> LineList(List<string> ClientLines)
         {
-            get { return LineList; }
-            set
-            {
-                foreach (var item in ClientLines)
-                {
-                    LineList.Add(new SelectListItem
-                    {
-                        Text = item,
-                        Value = item,
-                        Selected = false,
-                    });
-                }
-            }
+            lineList = new List<SelectListItem>();
+            foreach (var item in ClientLines)
+                lineList.Add(new SelectListItem { Text = item, Value = item, Selected = false });
+            return lineList;
         }
         public string ChosenLine { get; set; }
         public double TotalMinuts { get; set; }

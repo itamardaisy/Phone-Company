@@ -25,7 +25,7 @@ namespace Common.Logger
         {
             lock (_DOR)
             {
-                File.WriteAllText("Logger2.txt", DateTime.Now.Millisecond + " --> " + str);
+                File.WriteAllText(@"D:\Programming\Programming Works\Sela Work\Phone Company Github\Phone Company sln\Common\Logger\Logger.txt", DateTime.Now.Millisecond + " --> " + str);
             }
         }
     }
