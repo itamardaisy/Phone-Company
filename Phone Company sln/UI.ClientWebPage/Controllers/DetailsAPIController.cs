@@ -22,7 +22,7 @@ namespace UI.ClientWebPage.Controllers
 
         [HttpPost]
         [Route("api/GetOptimalPackage")]
-        public Package GetOptimalPackage([FromBody]DetailsModel detailsModel)
+        public List<Package> GetOptimalPackage([FromBody]DetailsModel detailsModel)
         {
             return DETAILS_SERVICE.GetOptimalPackages(detailsModel.CurrentClient, detailsModel.ChosenLine);
         }

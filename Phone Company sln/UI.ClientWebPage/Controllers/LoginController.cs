@@ -38,6 +38,7 @@ namespace UI.ClientWebPage.Controllers
                         CurrentClient = client,
                         ClientLines = DETAIL_SERVICE.GetClientLines(client.Id)
                     };
+                    detailsModel.LineList(detailsModel.ClientLines);
                     return detailsModel;
                 }
                 else

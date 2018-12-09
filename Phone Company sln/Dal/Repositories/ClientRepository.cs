@@ -15,13 +15,6 @@ namespace Dal.Repositories
 {
     public class ClientRepository : IClientRepository
     {
-        PhoneCompanyContext context;
-
-        public ClientRepository(PhoneCompanyContext context)
-        {
-            this.context = context;
-        }
-
         /// <summary>
         /// Checks whether the client exist or not and return him.
         /// </summary>
@@ -30,7 +23,11 @@ namespace Dal.Repositories
         /// <returns></returns>
         public Client LoginClient(string name, string phoneNumber)
         {
-            return context.Clients.FirstOrDefault(x => x.Name == name && x.ContactNumber == phoneNumber).DbToCommon();
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                var client = context.Clients.FirstOrDefault(x => x.Name == name && x.ContactNumber == phoneNumber);
+                return client.DbToCommon();
+            }
         }
 
         /// <summary>
@@ -41,8 +38,11 @@ namespace Dal.Repositories
         {
             try
             {
-                context.Clients.Add(client.CommonToDb());
-                context.SaveChanges();
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    context.Clients.Add(client.CommonToDb());
+                    context.SaveChanges();
+                }
             }
             catch (Exception ex)
             {
@@ -60,14 +60,17 @@ namespace Dal.Repositories
         {
             try
             {
-                var clientToRemove = context.Clients.FirstOrDefault(x => x.Id == id);
-                context.UnsignClients.Add(FromClientToUnsignClient(clientToRemove));
-                context.Clients.Remove(clientToRemove);
-                context.SaveChanges();
-                if (context.Clients.Any(x => x.Id == id))
-                    return false;
-                else
-                    return true;
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    var clientToRemove = context.Clients.FirstOrDefault(x => x.Id == id);
+                    context.UnsignClients.Add(FromClientToUnsignClient(clientToRemove));
+                    context.Clients.Remove(clientToRemove);
+                    context.SaveChanges();
+                    if (context.Clients.Any(x => x.Id == id))
+                        return false;
+                    else
+                        return true;
+                }
             }
             catch (ArgumentNullException ex)
             {
@@ -111,7 +114,10 @@ namespace Dal.Repositories
         {
             try
             {
-                return context.Clients.FirstOrDefault(x => x.Id == id).DbToCommon();
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    return context.Clients.FirstOrDefault(x => x.Id == id).DbToCommon();
+                }
             }
             catch (ArgumentNullException ex)
             {
@@ -128,9 +134,12 @@ namespace Dal.Repositories
         {
             try
             {
-                var dbClient = context.Clients.FirstOrDefault(x => x.Id == client.Id);
-                UpdateTheClientProperties(dbClient, client);
-                context.SaveChanges();
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    var dbClient = context.Clients.FirstOrDefault(x => x.Id == client.Id);
+                    UpdateTheClientProperties(dbClient, client);
+                    context.SaveChanges();
+                }
             }
             catch (ArgumentNullException ex)
             {

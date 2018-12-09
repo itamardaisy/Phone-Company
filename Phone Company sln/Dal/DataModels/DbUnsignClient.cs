@@ -30,7 +30,7 @@ namespace Dal.DataModels
 
         [Required]
         [DataType(DataType.Text)]
-        [RegularExpression("([a-z A-Z]{5,20})~([a-z A-Z]{5,20})~([0-9]{1,3})~([0-9A-Z]{1,3})")]
+        //[RegularExpression("([a-z A-Z]{5,20})~([a-z A-Z]{5,20})~([0-9]{1,3})~([0-9A-Z]{1,3})")]
         public string Adress { get; set; }
 
         [Required]

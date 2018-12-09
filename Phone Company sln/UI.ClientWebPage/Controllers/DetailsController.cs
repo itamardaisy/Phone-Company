@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using UI.ClientWebPage.HardCodeds;
 using UI.ClientWebPage.Models;
@@ -24,30 +25,33 @@ namespace UI.ClientWebPage.Controllers
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(ProjectFields.HEADER_TYPE));
         }
 
-        public ActionResult Index()
+        public ActionResult Index(DetailsModel detailsModel)
         {
-            return View(ProjectFields.INDEX_VIEW_NAME);
+            return View(ProjectFields.DETAILS_VIEW, detailsModel);
         }
 
-        public ActionResult SetLine(string chosenLine)
+        public ActionResult SetLine([FromBody]DetailsModel detailsModel)
         {
-            DetailsModel detailModel = new DetailsModel()
-            {
-                ChosenLine = chosenLine,
-            };
-            return View("Details", detailModel);
+            string line = detailsModel.ChosenLine;
+            detailsModel.TotalSMS = GetTotalSMS(detailsModel).Result;
+            detailsModel.TotalMinuts = GetTotalMinuts(detailsModel).Result;
+            detailsModel.TotalMinutesTopNumber = GetTotalMinutesTopNumber(detailsModel).Result;
+            detailsModel.TotalMinutesThreeTopNumber = GetTotalMinutesThreeTopNumber(detailsModel).Result;
+            detailsModel.TotalMinutesFamily = GetTotalMinutesFamily(detailsModel).Result;
+            detailsModel.RecommendedPackages = GetOptimalPackage(detailsModel).Result;
+            return View(ProjectFields.DETAILS_VIEW, detailsModel);
         }
 
-        private async Task<Package> GetOptimalPackage(DetailsModel detailsModel)
+        private async Task<List<Package>> GetOptimalPackage(DetailsModel detailsModel)
         {
             var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetOptimalPackage, detailsModel).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                return await response.Content.ReadAsAsync<Package>();
+                return await response.Content.ReadAsAsync<List<Package>>();
             else
                 throw new Exception("Error");
         }
 
-        public async Task<double> GetTotalMinuts(DetailsModel detailsModel)
+        private async Task<double> GetTotalMinuts(DetailsModel detailsModel)
         {
             var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinuts, detailsModel).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -56,7 +60,7 @@ namespace UI.ClientWebPage.Controllers
                 throw new Exception("Error");
         }
 
-        public async Task<int> GetTotalSMS(DetailsModel detailsModel)
+        private async Task<int> GetTotalSMS(DetailsModel detailsModel)
         {
             var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalSMS, detailsModel).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -67,7 +71,7 @@ namespace UI.ClientWebPage.Controllers
                 throw new Exception("Error");
         }
 
-        public async Task<double> GetTotalMinutesTopNumber(DetailsModel detailsModel)
+        private async Task<double> GetTotalMinutesTopNumber(DetailsModel detailsModel)
         {
             var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinutesTopNumber, detailsModel).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -78,7 +82,7 @@ namespace UI.ClientWebPage.Controllers
                 throw new Exception("Error");
         }
 
-        public async Task<double> GetTotalMinutesThreeTopNumber(DetailsModel detailsModel)
+        private async Task<double> GetTotalMinutesThreeTopNumber(DetailsModel detailsModel)
         {
             var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinutesThreeTopNumber, detailsModel).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -89,7 +93,7 @@ namespace UI.ClientWebPage.Controllers
                 throw new Exception("Error");
         }
 
-        public async Task<double> GetTotalMinutesFamily(DetailsModel detailsModel)
+        private async Task<double> GetTotalMinutesFamily(DetailsModel detailsModel)
         {
             var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinutesFamily, detailsModel).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)

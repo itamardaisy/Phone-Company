@@ -72,8 +72,6 @@ namespace Dal.ModelConverters
                 Number = dbLine.Number,
                 PackageId = dbLine.PackageId,
                 Status = dbLine.Status,
-                CallsList = context.Calls.Where(x => x.LineId == dbLine.Id).Select(x => x.DbToCommon()).ToList(),
-                SMSsList = context.SMSs.Where(x => x.LineId == dbLine.Id).Select(x => x.DbToCommon()).ToList(),
                 ClientId = dbLine.ClientId
             };
             return line;

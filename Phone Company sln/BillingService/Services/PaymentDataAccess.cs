@@ -16,11 +16,10 @@ namespace BillingService.Services
 
         public PaymentDataAccess()
         {
-            PhoneCompanyContext context = new PhoneCompanyContext();
-            LINE_REPOSITORY = new LineRepository(context);
-            PAYMENT_REPOSITORY = new PaymentRepository(context);
-            PACKAGE_REPOSITORY = new PackageRepository(context);
-            CLIENT_REPOSITORY = new ClientRepository(context);
+            LINE_REPOSITORY = new LineRepository();
+            PAYMENT_REPOSITORY = new PaymentRepository();
+            PACKAGE_REPOSITORY = new PackageRepository();
+            CLIENT_REPOSITORY = new ClientRepository();
         }
 
         internal Receipt SetLineReceipt(Line line, DateTime date, int clientId)

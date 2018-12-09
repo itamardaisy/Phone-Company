@@ -59,11 +59,6 @@
     <Compile Include="DataModels\DbSMS.cs" />
     <Compile Include="DataModels\DbUnsignClient.cs" />
     <Compile Include="DataModels\DbUser.cs" />
-    <Compile Include="Migrations\201812090905375_new.cs" />
-    <Compile Include="Migrations\201812090905375_new.Designer.cs">
-      <DependentUpon>201812090905375_new.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConverters\FromCommonToDb.cs" />
     <Compile Include="ModelConverters\FromDbToCommon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,11 +82,6 @@
       <Project>{05145F7D-7C86-4F70-BD31-706CACE61D12}</Project>
       <Name>Common</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812090905375_new.resx">
-      <DependentUpon>201812090905375_new.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

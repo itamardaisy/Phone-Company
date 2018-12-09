@@ -15,13 +15,6 @@ namespace Dal.Repositories
 {
     public class ClientTypeRepository : IClientTypeRepository
     {
-        PhoneCompanyContext context;
-
-        public ClientTypeRepository(PhoneCompanyContext context)
-        {
-            this.context = context;
-        }
-
         /// <summary>
         /// This method gets a new client type and add it to the context.
         /// </summary>
@@ -30,8 +23,11 @@ namespace Dal.Repositories
         {
             try
             {
-                context.ClientTypes.Add(clientType.CommonToDb());
-                context.SaveChanges();
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    context.ClientTypes.Add(clientType.CommonToDb());
+                    context.SaveChanges();
+                }
             }
             catch (Exception ex)
             {
@@ -49,11 +45,14 @@ namespace Dal.Repositories
         {
             try
             {
-                context.ClientTypes.Remove(context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName));
-                if (!(context.ClientTypes.Any(x => x.TypeName == typeName)))
-                    return true;
-                else
-                    return false;
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    context.ClientTypes.Remove(context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName));
+                    if (!(context.ClientTypes.Any(x => x.TypeName == typeName)))
+                        return true;
+                    else
+                        return false;
+                }
             }
             catch (Exception ex)
             {
@@ -70,7 +69,10 @@ namespace Dal.Repositories
         {
             try
             {
-                return context.ClientTypes.Select(x => x.DbToCommon()).ToList();
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    return context.ClientTypes.Select(x => x.DbToCommon()).ToList();
+                }
             }
             catch (ArgumentNullException ex)
             {
@@ -93,7 +95,10 @@ namespace Dal.Repositories
         {
             try
             {
-                return context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName).DbToCommon();
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    return context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName).DbToCommon();
+                }
             }
             catch (ArgumentNullException ex)
             {
@@ -117,9 +122,12 @@ namespace Dal.Repositories
         {
             try
             {
-                context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName)
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName)
                                    .MinutePrice = newPrice;
-                context.SaveChanges();
+                    context.SaveChanges();
+                }
             }
             catch (ArgumentNullException ex)
             {
@@ -143,9 +151,12 @@ namespace Dal.Repositories
         {
             try
             {
-                context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName)
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    context.ClientTypes.FirstOrDefault(x => x.TypeName == typeName)
                                    .SMSPrice = newPrice;
-                context.SaveChanges();
+                    context.SaveChanges();
+                }
             }
             catch (ArgumentNullException ex)
             {

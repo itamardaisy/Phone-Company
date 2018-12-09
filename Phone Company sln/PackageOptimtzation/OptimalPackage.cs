@@ -15,13 +15,14 @@ namespace PackageOptimtzation
 
         public OptimalPackage()
         {
-            PhoneCompanyContext context = new PhoneCompanyContext();
-            PACKAGE_REPOSITORY = new PackageRepository(context);
+            PACKAGE_REPOSITORY = new PackageRepository();
         }
 
-        public Package GetOptimalPackage(Client client, string packageName)
+        public List<Package> GetOptimalPackage(Client client, string packageName)
         {
-            return PACKAGE_REPOSITORY.GetPackageByName(packageName);
+            List<Package> packages = new List<Package>();
+            packages.Add(PACKAGE_REPOSITORY.GetPackageByName(packageName));
+            return packages;
         }
     }
 }

@@ -35,8 +35,8 @@ namespace Dal.UnitTest
             _mockContext = new Mock<PhoneCompanyContext>();
             _mockContext.Setup(m => m.Calls).Returns(_mockSet.Object);
 
-            var service = new CallsRepository(_mockContext.Object);
-            service.AddNewCall(ModelsGenerateForUnitTests.GenrateCall());
+            //var service = new CallsRepository(_mockContext.Object);
+            //service.AddNewCall(ModelsGenerateForUnitTests.GenrateCall());
 
             _mockSet.Verify(m => m.Add(It.IsAny<DbCall>()), Times.Once);
             _mockContext.Verify(m => m.SaveChanges(), Times.Once);

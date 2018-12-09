@@ -17,8 +17,7 @@ namespace ClientBL.LoginService
 
         public LoginService()
         {
-            PhoneCompanyContext context = new PhoneCompanyContext();
-            CLIENT_REPOSITORY = new ClientRepository(context);
+            CLIENT_REPOSITORY = new ClientRepository();
         }
         
         /// <summary>

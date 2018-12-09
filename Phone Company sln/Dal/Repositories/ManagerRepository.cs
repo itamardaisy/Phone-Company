@@ -14,13 +14,6 @@ namespace Dal.Repositories
 {
     public class ManagerRepository : IManagerRepository
     {
-        PhoneCompanyContext context;
-
-        public ManagerRepository(PhoneCompanyContext context)
-        {
-            this.context = context;
-        }
-
         /// <summary>
         /// This method gets the wanted client id and query from the data base his line.
         /// after this it take the all payment on the lines and returns them in list.
@@ -31,11 +24,14 @@ namespace Dal.Repositories
         {
             try
             {
-                var clientLines = context.Lines.Where(x => x.ClientId == clientId).ToList();
-                List<Payment> clientPayments = new List<Payment>();
-                for (int i = 0; i < clientLines.Count; i++)
-                    clientPayments.Add(context.Payments.FirstOrDefault(x => x.LineId == clientLines[i].Id).DbToCommon());
-                return clientPayments;
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    var clientLines = context.Lines.Where(x => x.ClientId == clientId).ToList();
+                    List<Payment> clientPayments = new List<Payment>();
+                    for (int i = 0; i < clientLines.Count; i++)
+                        clientPayments.Add(context.Payments.FirstOrDefault(x => x.LineId == clientLines[i].Id).DbToCommon());
+                    return clientPayments;
+                }
             }
             catch (ArgumentNullException ex)
             {

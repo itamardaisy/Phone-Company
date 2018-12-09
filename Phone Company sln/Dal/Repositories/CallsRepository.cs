@@ -12,19 +12,15 @@ namespace Dal.Repositories
 {
     public class CallsRepository : ICallsRepository
     {
-        private PhoneCompanyContext context;
-
-        public CallsRepository(PhoneCompanyContext context)
-        {
-            this.context = context;
-        }
-
         public void AddNewCall(Call call)
         {
             try
             {
-                context.Calls.Add(call.CommonToDb());
-                context.SaveChanges();
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    context.Calls.Add(call.CommonToDb());
+                    context.SaveChanges();
+                }
             }
             catch (Exception ex)
             {
@@ -37,9 +33,12 @@ namespace Dal.Repositories
         {
             try
             {
-                return context.Calls
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    return context.Calls
                               .Where(x => x.Line.Number == lineNumber)
                               .Select(c => c.DbToCommon()).ToList();
+                }
             }
             catch (ArgumentNullException ex)
             {
@@ -57,10 +56,13 @@ namespace Dal.Repositories
         {
             try
             {
-                DateTime monthAgo = DateTime.Now - TimeSpan.FromDays(30);
-                return context.Calls
-                              .Where(x => x.Line.Number == lineNumber && x.CallDate > monthAgo)
-                              .Select(c => c.DbToCommon()).ToList();
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    DateTime monthAgo = DateTime.Now - TimeSpan.FromDays(30);
+                    return context.Calls
+                                  .Where(x => x.Line.Number == lineNumber && x.CallDate > monthAgo)
+                                  .Select(c => c.DbToCommon()).ToList();
+                }
             }
             catch (ArgumentNullException ex)
             {

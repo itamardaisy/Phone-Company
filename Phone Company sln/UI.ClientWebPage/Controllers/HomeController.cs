@@ -34,7 +34,7 @@ namespace UI.ClientWebPage.Controllers
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 DetailsModel detailsModel = await response.Content.ReadAsAsync<DetailsModel>();
-                return RedirectToActionPermanent(ProjectFields.DETAILS_VIEW, detailsModel);
+                return RedirectToAction("Index", "Details", detailsModel);
             }
             return View(ProjectFields.LOGIN_VIEW_NAME);
         }

@@ -8,6 +8,6 @@ namespace UI.ClientWebPage.Models
     public class LoginClient
     {
         public string PhoneNumber { get; set; }
-        public string Name { get; internal set; }
+        public string Name { get; set; }
     }
 }

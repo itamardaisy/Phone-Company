@@ -6,32 +6,41 @@
 }
 <h1>Details</h1>
 <h3>Choose your Line number:</h3>
-@Html.DropDownListFor(m => m.LineList, Model.LineList, new { @onChange = Html.Action("SetLine", "Details",this)});<br>
+@Html.DropDownListFor(m => m.lineList, Model.lineList, new { @onChange = Html.Action("SetLine","Details", Model.ChosenLine)});<br>
 <div class="form-group">
     <h2>Client Value</h2>
     <h3>Total Price</h3>
     <label for="totalMinuts">Total Minuts </label>
-    <input id="totalMinuts" type="text" value="@Model.TotalMinuts"/>
+    <input id="totalMinuts" type="text" value="@Model.TotalMinuts" />
     <label for="totalSms">Total SMS </label>
-    <input id="totalSms" type="text" value="@Model.TotalSMS"/><br>
+    <input id="totalSms" type="text" value="@Model.TotalSMS" /><br>
     <label for="topNumbers">Total minuts of top numbers</label>
-    <input id="topNumbers" type="text" value="@Model.TotalMinutesTopNumber"/><br>
+    <input id="topNumbers" type="text" value="@Model.TotalMinutesTopNumber" /><br>
     <label for="top3Numbers">Total minuts of top 3 numbers</label>
-    <input id="top3Numbers" type="text" value="@Model.TotalMinutesThreeTopNumber"/><br>
+    <input id="top3Numbers" type="text" value="@Model.TotalMinutesThreeTopNumber" /><br>
     <label for="family">Total minuts of Family calls</label>
-    <input id="family" type="text" value="@Model.TotalMinutesFamily"/><br>
+    <input id="family" type="text" value="@Model.TotalMinutesFamily" /><br>
     <h3>Recommendation</h3>
     <table>
         <tr>
             <th>Package</th>
             <th>Price</th>
         </tr>
-        @foreach (var package in Model.RecommendedPackages)
-        {
-            <tr>
-                <td>@package.PackageName</td>
-                <td>@package.TotalPrice</td>
-            </tr>
+        @{
+            if (Model.RecommendedPackages != null)
+            {
+                foreach (var package in Model.RecommendedPackages)
+                {
+                    <tr>
+                        <td>@package.PackageName</td>
+                        <td>@package.TotalPrice</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td>Please choose a Line</td></tr>
+            }
         }
     </table>
 </div>
