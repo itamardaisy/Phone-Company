@@ -92,7 +92,11 @@ namespace Dal.Repositories
 
         public List<Client> GetMostConectedClients()
         {
-            throw new NotImplementedException();
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                var lines = context.Lines.Select(x => x.ClientId).ToList();
+                var calls = context.Calls.Where()
+            }
         }
 
         public Client GetMostProftableClient()
