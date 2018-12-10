@@ -36,9 +36,9 @@ namespace UI.Employee.ViewModel
             client = new HttpClient();
             client.BaseAddress = new Uri(BASE_ADDRESS);
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); 
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            #endregion
+            #endregion Configure httpClient for the web api request
 
             GetClients();
         }
@@ -70,9 +70,9 @@ namespace UI.Employee.ViewModel
                     {
                         Clients = answer;
                     }
-
                 }
-                await new MessageDialog("Bad Connection To The Server").ShowAsync();
+                else
+                    await new MessageDialog("Bad Connection To The Server").ShowAsync();
             }
         }
     }

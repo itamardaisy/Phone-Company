@@ -61,7 +61,7 @@ namespace UI.Employee.ViewModel
 
             MessengerInstance.Register<Client>(this, "123456", (a) => { GetTheUser(a); });
 
-            // GetAllClientTypes();
+             GetAllClientTypes();
         }
 
         private void GetTheUser(Client newClientFrom)
@@ -82,8 +82,6 @@ namespace UI.Employee.ViewModel
         /// </summary>
         private async void DeleteClientCommand()
         {
-            //The Code Below WORKS
-
             var myUri = new Uri(BASE_ADDRESS + "DeleteClient", UriKind.Absolute);
 
             var message = await client.DeleteAsync(myUri + $"?id={newClientFrom.Id}");
@@ -100,7 +98,8 @@ namespace UI.Employee.ViewModel
                         await messageDialog.ShowAsync();
                     }
                 }
-                await new MessageDialog("Bad Connection To The Server").ShowAsync();
+                else
+                    await new MessageDialog("Bad Connection To The Server").ShowAsync();
             }
         }
 
@@ -125,7 +124,8 @@ namespace UI.Employee.ViewModel
                         await messageDialog.ShowAsync();
                     }
                 }
-                await new MessageDialog("Bad Connection To The Server").ShowAsync();
+                else
+                    await new MessageDialog("Bad Connection To The Server").ShowAsync();
             }
         }
 
@@ -149,7 +149,8 @@ namespace UI.Employee.ViewModel
                         ClientTypes = answer;
                     }
                 }
-                await new MessageDialog("Bad Connection To The Server").ShowAsync();
+                else
+                    await new MessageDialog("Bad Connection To The Server").ShowAsync();
             }
         }
 

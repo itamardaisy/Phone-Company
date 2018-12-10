@@ -72,9 +72,7 @@ namespace UI.Employee.ViewModel
         /// with OnChangeProperty so the list will be updated
         /// </summary>
         private async void CommandToGetUser()
-        {
-            //SelectedUser = ClientsFound.FirstOrDefault();
-
+        {         
             var myUri = new Uri(BASE_ADDRESS + "GetClient", UriKind.Absolute);
 
             var message = await client.GetAsync(myUri + $"?clientId={SearchID}");
@@ -85,7 +83,8 @@ namespace UI.Employee.ViewModel
                 {
                     ClientsFound = await respone.Content.ReadAsAsync<ObservableCollection<Client>>();
                 }
-                await new MessageDialog("Bad Connection To The Server").ShowAsync();
+                else
+                    await new MessageDialog("Bad Connection To The Server").ShowAsync();                
             }
         }
 

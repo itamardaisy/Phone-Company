@@ -70,9 +70,9 @@ namespace UI.Employee.ViewModel
                     {
                         Clients = answer;
                     }
-
                 }
-                await new MessageDialog("Bad Connection To The Server").ShowAsync();
+                else
+                    await new MessageDialog("Bad Connection To The Server").ShowAsync();
             }
         }
     }

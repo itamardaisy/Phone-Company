@@ -28,11 +28,10 @@ namespace Dal.DataInitializer
         protected override void Seed(PhoneCompanyContext context)
         {
             context.Users.Add(new DbUser { Id = 1, CallAnswer = 0, SignDate = DateTime.Now, Email = "itadafefww@mdsf.com", Name = "Baba", Password = "1234", Type = UserType.Manager });
-            context.Users.Add(new DbUser { Id = 2, CallAnswer = 0, SignDate = DateTime.Now, Email = "itadafefww@mdsf.com", Name = "Baba", Password = "1234", Type = UserType.Emploee });
-            context.Users.Add(new DbUser { Id = 3, CallAnswer = 0, SignDate = DateTime.Now, Email = "itadafefww@mdsf.com", Name = "Baba", Password = "1234", Type = UserType.Emploee });
+            context.Users.Add(new DbUser { Id = 2, CallAnswer = 0, SignDate = DateTime.Now, Email = "itadafefww@mdsf.com", Name = "Mama", Password = "1234", Type = UserType.Emploee });
             context.ClientTypes.Add(new DbClientType { Id = 1, MinutePrice = 1.0, SMSPrice = 1.5, TypeName = "Regular" });
-            context.ClientTypes.Add(new DbClientType { Id = 2, MinutePrice = 1.0, SMSPrice = 1.5, TypeName = "Regular" });
-            context.ClientTypes.Add(new DbClientType { Id = 3, MinutePrice = 1.0, SMSPrice = 1.5, TypeName = "Regular" });
+            context.ClientTypes.Add(new DbClientType { Id = 2, MinutePrice = 0.3, SMSPrice = 0.1, TypeName = "VIP" });
+            context.ClientTypes.Add(new DbClientType { Id = 3, MinutePrice = 0.6, SMSPrice = 2.0, TypeName = "Family" });
             context.Packages.Add(new DbPackage { Id = 1, DisscountPrecentage = 0, FixedPrice = 100, InsideFamilyCall = false, MaxMinute = 200, MostCallNumber = false, PackageName = "DefaultPackage", TotalPrice = 100, MaxSMSs = 100, SelectedNumberId = false });
             context.Packages.Add(new DbPackage { Id = 2, DisscountPrecentage = 0, FixedPrice = 100, InsideFamilyCall = false, MaxMinute = 200, MostCallNumber = false, PackageName = "DefaultPackage", TotalPrice = 100, MaxSMSs = 100, SelectedNumberId = false });
             context.Packages.Add(new DbPackage { Id = 3, DisscountPrecentage = 0, FixedPrice = 100, InsideFamilyCall = false, MaxMinute = 200, MostCallNumber = false, PackageName = "DefaultPackage", TotalPrice = 100, MaxSMSs = 100, SelectedNumberId = false });
