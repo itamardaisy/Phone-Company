@@ -52,7 +52,17 @@ namespace Dal.Repositories
         /// <returns></returns>
         public List<Client> GetClientWhoMostLikelyToUnsign()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -66,7 +76,18 @@ namespace Dal.Repositories
 
         public Client GetMostAnoyingClient()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    var client = context.Clients.OrderByDescending(x => x.CallToCenter).FirstOrDefault();
+                    return client.DbToCommon();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<Client> GetMostConectedClients()

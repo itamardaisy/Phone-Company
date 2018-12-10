@@ -12,7 +12,7 @@ using System.Data.Entity.Migrations;
 
 namespace Dal.Repositories
 {
-    public class PackageRepository : IPackageRepository 
+    public class PackageRepository : IPackageRepository
     {
         /// <summary>
         /// This method gets the package from the BL and add it to the contexxt.
@@ -72,9 +72,9 @@ namespace Dal.Repositories
         /// This function needs to delete a spesific package.
         /// on the delete it needs to fine which customer is using this package and change they're package to other one.
         /// </summary>
-        /// 
+        ///
         /// <param name="packageName"> The wanted package name </param>
-        /// 
+        ///
         /// <returns> True if the operation sacceed. otherwise false.  </returns>
         public bool DeletePackage(string packageName)
         {
