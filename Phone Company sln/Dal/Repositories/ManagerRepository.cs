@@ -95,7 +95,8 @@ namespace Dal.Repositories
             using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
                 var lines = context.Lines.Select(x => x.ClientId).ToList();
-                var calls = context.Calls.Where()
+                //  var calls = context.Calls.Where()
+                throw new NotImplementedException();
             }
         }
 
