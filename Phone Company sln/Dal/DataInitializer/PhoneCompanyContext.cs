@@ -37,8 +37,8 @@ namespace Dal.DataInitializer
             context.Packages.Add(new DbPackage { Id = 3, DisscountPrecentage = 0, FixedPrice = 100, InsideFamilyCall = false, MaxMinute = 200, MostCallNumber = false, PackageName = "DefaultPackage", TotalPrice = 100, MaxSMSs = 100, SelectedNumberId = false });
             context.Clients.Add(new DbClient { Id = 1, CallToCenter = 0, Adress = "Raanana, Ahar 7/5", ClientTypeId = 1, ContactNumber = "0545822126", SignDate = DateTime.Now, LastName = "Daisy", Name = "Itamar", UserId = 1 });
             context.Clients.Add(new DbClient { Id = 2, CallToCenter = 0, Adress = "Raanana, Ahar 7/5", ClientTypeId = 1, ContactNumber = "0525822126", SignDate = DateTime.Now, LastName = "Daisy", Name = "Itamar", UserId = 2 });
-            context.Clients.Add(new DbClient { Id = 3, CallToCenter = 0, Adress = "Raanana, Ahar 7/5", ClientTypeId = 1, ContactNumber = "0545824126", SignDate = DateTime.Now, LastName = "Daisy", Name = "Itamar", UserId = 3 });
-            context.Clients.Add(new DbClient { Id = 4, CallToCenter = 0, Adress = "Raanana, Ahar 7/5", ClientTypeId = 1, ContactNumber = "0545734126", SignDate = DateTime.Now, LastName = "Daisy", Name = "Itamar", UserId = 3 });
+            context.Clients.Add(new DbClient { Id = 3, CallToCenter = 0, Adress = "Raanana, Ahar 7/5", ClientTypeId = 1, ContactNumber = "0545824126", SignDate = DateTime.Now, LastName = "Daisy", Name = "Itamar", UserId = 2 });
+            context.Clients.Add(new DbClient { Id = 4, CallToCenter = 0, Adress = "Raanana, Ahar 7/5", ClientTypeId = 1, ContactNumber = "0545734126", SignDate = DateTime.Now, LastName = "Daisy", Name = "Itamar", UserId = 2 });
             context.Lines.Add(new DbLine { ClientId = 1, Number = "0545822126", Id = 1, PackageId = 1, Status = false });
             context.Lines.Add(new DbLine { ClientId = 2, Number = "0525822126", Id = 2, PackageId = 1, Status = false });
             context.Lines.Add(new DbLine { ClientId = 3, Number = "0545824126", Id = 3, PackageId = 1, Status = false });

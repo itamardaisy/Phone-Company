@@ -6,7 +6,7 @@
 }
 <h1>Details</h1>
 <h3>Choose your Line number:</h3>
-@Html.DropDownListFor(m => m.lineList, Model.lineList, new { @onChange = Html.Action("SetLine","Details", Model.ChosenLine)});<br>
+@*@Html.DropDownListFor(m => m.lineList, Model.lineList, new { @onClick = Html.Action("SetLine", "Details", Model) });<br>*@
 <div class="form-group">
     <h2>Client Value</h2>
     <h3>Total Price</h3>

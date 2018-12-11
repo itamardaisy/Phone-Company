@@ -15,7 +15,6 @@ namespace Common.EnvironmentService
         {
             Logger.Logger.GetInstance().LogWrite(ex.Source);
             Logger.Logger.GetInstance().LogWrite(ex.StackTrace);
-            Logger.Logger.GetInstance().LogWrite(ex.InnerException.Source);
         }
 
         public static void WriteToLogger(string message)

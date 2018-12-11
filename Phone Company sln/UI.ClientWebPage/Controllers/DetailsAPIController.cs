@@ -46,11 +46,11 @@ namespace UI.ClientWebPage.Controllers
 
         [HttpPost]
         [Route("api/GetTotalSMS")]
-        public int GetTotalSMS([FromBody]DetailsModel detailsModel)
+        public int GetTotalSMS(Client client, string line)
         {
             try
             {
-                return _detailService.GetTotalSMS(detailsModel.CurrentClient, detailsModel.ChosenLine);
+                return _detailService.GetTotalSMS(client, line);
             }
             catch (Exception ex)
             {

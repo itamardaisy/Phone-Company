@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using UI.ClientWebPage.HardCodeds;
+using UI.ClientWebPage.Helpers;
 using UI.ClientWebPage.Models;
 
 namespace UI.ClientWebPage.Controllers
@@ -17,20 +18,14 @@ namespace UI.ClientWebPage.Controllers
     {
         private HttpClient _client;
 
-        public DetailsController()
-        {
-            _client = new HttpClient();
-            _client.BaseAddress = new Uri(ProjectFields.BASE_ADDRESS);
-            _client.DefaultRequestHeaders.Accept.Clear();
-            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(ProjectFields.HEADER_TYPE));
-        }
+        public DetailsController() => _client = UIHelper.GetCurrentHttpClient();
 
         public ActionResult Index(DetailsModel detailsModel)
         {
             return View(ProjectFields.DETAILS_VIEW, detailsModel);
         }
 
-        public ActionResult SetLine([FromBody]DetailsModel detailsModel)
+        public ActionResult SetLine(DetailsModel detailsModel)
         {
             string line = detailsModel.ChosenLine;
             detailsModel.TotalSMS = GetTotalSMS(detailsModel).Result;
