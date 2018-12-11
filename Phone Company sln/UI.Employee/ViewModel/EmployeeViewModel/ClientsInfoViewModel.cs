@@ -20,11 +20,15 @@ namespace UI.Employee.ViewModel
 {
     internal class ClientsInfoViewModel
     {
+        #region Fields
+
         private readonly INavigationService _navigationService;
 
         public RelayCommand UpdateClient { get; set; }
         public RelayCommand DeleteClient { get; set; }
         public RelayCommand CommandToGoBack { get; set; }
+
+        private Navigator _navigator;
 
         private MessageDialog messageDialog;
         public Messenger MessengerInstance { get; set; }
@@ -35,6 +39,8 @@ namespace UI.Employee.ViewModel
         private const string BASE_ADDRESS = "http://localhost:50066/api/employee/";
         private HttpClient client;
 
+        #endregion Fields
+
         /// <summary>
         /// CTOR
         /// </summary>
@@ -42,18 +48,13 @@ namespace UI.Employee.ViewModel
         public ClientsInfoViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+            _navigator = new Navigator(_navigationService);
             UpdateClient = new RelayCommand(UpdateClientCommand);
             DeleteClient = new RelayCommand(DeleteClientCommand);
             CommandToGoBack = new RelayCommand(GoBackCommand);
 
-            #region Configure httpClient for the web api request
+            client = HttpClientHelper.CreateHttpClient();
 
-            client = new HttpClient();
-            client.BaseAddress = new Uri(BASE_ADDRESS);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            #endregion
             MessengerInstance = new Messenger();
             newClientFrom = new Client();
             MessengerInstance.Register<Client>(this, "123456", (a) => { GetTheUser(a); });
@@ -69,7 +70,7 @@ namespace UI.Employee.ViewModel
         /// </summary>
         private void GoBackCommand()
         {
-            _navigationService.NavigateTo(pageKey: "EmployeeMainPage");
+            _navigator.NavigateToMainEmployeePage();
         }
 
         /// <summary>

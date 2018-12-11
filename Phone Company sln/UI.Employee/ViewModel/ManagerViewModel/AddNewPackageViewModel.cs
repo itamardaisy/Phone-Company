@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight.Views;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using UI.Employee.Helper;
 using UI.Employee.Models;
 using Windows.UI.Popups;
 
@@ -80,14 +81,7 @@ namespace UI.Employee.ViewModel
             NavigateCommandToManagerPage = new RelayCommand(GoBackCommand);
             NavigateCommandToAddNewPackage = new RelayCommand(CommandToAddNewPackage);
 
-            #region Configure httpClient for the web api request
-
-            client = new HttpClient();
-            client.BaseAddress = new Uri(BASE_ADDRESS);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            #endregion Configure httpClient for the web api request
+            client = HttpClientHelper.CreateHttpClient();
         }
 
         /// <summary>

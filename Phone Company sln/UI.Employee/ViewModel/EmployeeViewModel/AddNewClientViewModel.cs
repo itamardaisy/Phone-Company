@@ -15,16 +15,18 @@ using Windows.UI.Popups;
 
 namespace UI.Employee.ViewModel
 {
-    internal class AddNewClientViewModel 
+    internal class AddNewClientViewModel
     {
+        #region Fields
+
         private readonly INavigationService _navigationService;
         public RelayCommand NavigateCommandToMainEmployeePage { get; private set; }
         public RelayCommand CommandToAddNewUser { get; set; }
-        
-
 
         private const string BASE_ADDRESS = "http://localhost:50066/api/employee/";
         private HttpClient client;
+
+        private Navigator _navigator;
 
         #region Client Info
 
@@ -34,9 +36,11 @@ namespace UI.Employee.ViewModel
         public string ClientAddress { get; set; }
         public ObservableCollection<ClientType> ClientTypes { get; set; }
         public int ChosenClientType { get; set; }
-        public string ClientNumber { get; set; } 
+        public string ClientNumber { get; set; }
 
-        #endregion
+        #endregion Client Info
+
+        #endregion Fields
 
         /// <summary>
         /// CTOR
@@ -44,24 +48,16 @@ namespace UI.Employee.ViewModel
         /// <param name="navigationService"></param>
         public AddNewClientViewModel(INavigationService navigationService)
         {
-           
-
-            _navigationService = navigationService;       
+            _navigationService = navigationService;
+            _navigator = new Navigator(_navigationService);
             NavigateCommandToMainEmployeePage = new RelayCommand(NavigationCommandActionToMainEmployeePage);
             CommandToAddNewUser = new RelayCommand(AddNewUserAction);
 
-            #region Configure httpClient for the web api request
-
-            client = new HttpClient();
-            client.BaseAddress = new Uri(BASE_ADDRESS);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); 
-
-            #endregion
+            client = HttpClientHelper.CreateHttpClient();
 
             GetAllClientTypes();
         }
-      
+
         /// <summary>
         /// Add New User Action
         /// </summary>
@@ -110,7 +106,6 @@ namespace UI.Employee.ViewModel
                     {
                         ClientTypes = answer;
                     }
-
                 }
                 await new MessageDialog("Bad Connection To The Server").ShowAsync();
             }
@@ -121,7 +116,7 @@ namespace UI.Employee.ViewModel
         /// </summary>
         private void NavigationCommandActionToMainEmployeePage()
         {
-            _navigationService.NavigateTo("EmployeeMainPage");
+            _navigator.NavigateToMainEmployeePage();
         }
     }
 }

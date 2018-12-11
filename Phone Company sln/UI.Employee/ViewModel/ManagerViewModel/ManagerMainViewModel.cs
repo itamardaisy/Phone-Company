@@ -5,11 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UI.Employee.Helper;
 
 namespace UI.Employee.ViewModel
 {
     internal class ManagerMainViewModel
     {
+        #region Fields
+
         public INavigationService _navigationService { get; set; }
         public RelayCommand NavigateCommandToLogout { get; private set; }
         public RelayCommand NavigateCommandToAnnoyingCustomer { get; private set; }
@@ -17,9 +20,15 @@ namespace UI.Employee.ViewModel
         public RelayCommand NavigateCommandToMostConnectedClient { get; private set; }
         public RelayCommand NavigateCommandToMostProfitableClient { get; private set; }
 
+        private Navigator _navigator;
+
+        #endregion Fields
+
         public ManagerMainViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+            _navigator = new Navigator(_navigationService);
+
             NavigateCommandToLogout = new RelayCommand(CommandToLogout);
             NavigateCommandToAnnoyingCustomer = new RelayCommand(CommandToAnnoyingCustomer);
             NavigateCommandToAddNewPackage = new RelayCommand(CommandToAddNewPackage);
@@ -29,27 +38,27 @@ namespace UI.Employee.ViewModel
 
         private void CommandToMostProfitableClient()
         {
-            _navigationService.NavigateTo("MostProfitableClientPage");
+            _navigator.NavigateToMostProfitableClient();
         }
 
         private void CommandToMostConnectedClient()
         {
-            _navigationService.NavigateTo("MostConnectedClientPage");
+            _navigator.NavigateNavigaetToMostConnectedClient();
         }
 
         private void CommandToAddNewPackage()
         {
-            _navigationService.NavigateTo("AddNewPackagePage");
+            _navigator.NavigateToAddNewPackage();
         }
 
         private void CommandToAnnoyingCustomer()
         {
-            _navigationService.NavigateTo("MostAnnoyingCustomerPage");
+            _navigator.NavigateToAnnoyingCustomer();
         }
 
         private void CommandToLogout()
         {
-            _navigationService.NavigateTo("MainView");
+            _navigator.NavigateToMainPage();
         }
     }
 }

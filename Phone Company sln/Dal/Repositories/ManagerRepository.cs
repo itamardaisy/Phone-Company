@@ -75,6 +75,10 @@ namespace Dal.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// This function  gets the client who called the call center the most
+        /// </summary>
+        /// <returns> The client </returns>
         public Client GetMostAnoyingClient()
         {
             try

@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using UI.Employee.Helper;
 using UI.Employee.Models;
 using Windows.UI.Popups;
 
@@ -31,14 +32,7 @@ namespace UI.Employee.ViewModel
             _navigationService = navigationService;
             NavigateCommandToManagerPage = new RelayCommand(GoBackCommand);
 
-            #region Configure httpClient for the web api request
-
-            client = new HttpClient();
-            client.BaseAddress = new Uri(BASE_ADDRESS);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            #endregion Configure httpClient for the web api request
+            client = HttpClientHelper.CreateHttpClient();
 
             GetClients();
         }

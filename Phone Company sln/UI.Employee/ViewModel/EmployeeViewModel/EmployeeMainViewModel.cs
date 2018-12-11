@@ -17,6 +17,8 @@ namespace UI.Employee.ViewModel
         public RelayCommand NavigateCommandToAddClient { get; set; }
         public RelayCommand NavigateCommandToLogout { get; private set; }
 
+        private Navigator _navigator;
+
         /// <summary>
         /// CTOR
         /// </summary>
@@ -24,6 +26,7 @@ namespace UI.Employee.ViewModel
         public EmployeeMainViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+            _navigator = new Navigator(_navigationService);
             NavigateCommandToSearchForClient = new RelayCommand(NavigateCommandActionToFindClient);
             NavigateCommandToAddClient = new RelayCommand(NavigateCommandActionToAddNewClient);
             NavigateCommandToLogout = new RelayCommand(CommandToLogout);
@@ -34,7 +37,7 @@ namespace UI.Employee.ViewModel
         /// </summary>
         private void NavigateCommandActionToAddNewClient()
         {
-            _navigationService.NavigateTo("AddNewClientPage");
+            _navigator.NavigateToAddNewClientPage();
         }
 
         /// <summary>
@@ -42,7 +45,7 @@ namespace UI.Employee.ViewModel
         /// </summary>
         private void NavigateCommandActionToFindClient()
         {
-            _navigationService.NavigateTo("FindClientPage");
+            _navigator.NavigateToFindClientPage();
         }
 
         /// <summary>
@@ -50,7 +53,7 @@ namespace UI.Employee.ViewModel
         /// </summary>
         private void CommandToLogout()
         {
-            _navigationService.NavigateTo("MainView");
+            _navigator.NavigateToMainPage();
         }
     }
 }
