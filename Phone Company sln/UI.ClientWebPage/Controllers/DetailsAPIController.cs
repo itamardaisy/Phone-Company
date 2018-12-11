@@ -13,18 +13,18 @@ namespace UI.ClientWebPage.Controllers
 {
     public class DetailsAPIController : ApiController
     {
-        private readonly DetailService DETAILS_SERVICE;
+        private readonly DetailService _detailService;
 
         public DetailsAPIController()
         {
-            DETAILS_SERVICE = new DetailService();
+            _detailService = new DetailService();
         }
 
         [HttpPost]
         [Route("api/GetOptimalPackage")]
         public List<Package> GetOptimalPackage([FromBody]DetailsModel detailsModel)
         {
-            return DETAILS_SERVICE.GetOptimalPackages(detailsModel.CurrentClient, detailsModel.ChosenLine);
+            return _detailService.GetOptimalPackages(detailsModel.CurrentClient, detailsModel.ChosenLine);
         }
 
         [HttpPost]
@@ -33,7 +33,7 @@ namespace UI.ClientWebPage.Controllers
         {
             try
             {
-                return DETAILS_SERVICE.GetTotalMinutes(detailsModel.CurrentClient, detailsModel.ChosenLine);
+                return _detailService.GetTotalMinutes(detailsModel.CurrentClient, detailsModel.ChosenLine);
             }
             catch (Exception ex)
             {
@@ -48,7 +48,7 @@ namespace UI.ClientWebPage.Controllers
         {
             try
             {
-                return DETAILS_SERVICE.GetTotalSMS(detailsModel.CurrentClient, detailsModel.ChosenLine);
+                return _detailService.GetTotalSMS(detailsModel.CurrentClient, detailsModel.ChosenLine);
             }
             catch (Exception ex)
             {
@@ -63,7 +63,7 @@ namespace UI.ClientWebPage.Controllers
         {
             try
             {
-                return DETAILS_SERVICE.GetTotalMinutesTopNumber(detailsModel.CurrentClient, detailsModel.ChosenLine);
+                return _detailService.GetTotalMinutesTopNumber(detailsModel.CurrentClient, detailsModel.ChosenLine);
             }
             catch (Exception ex)
             {
@@ -78,7 +78,7 @@ namespace UI.ClientWebPage.Controllers
         {
             try
             {
-                return DETAILS_SERVICE.GetTotalMinutesThreeTopNumber(detailsModel.CurrentClient, detailsModel.ChosenLine);
+                return _detailService.GetTotalMinutesThreeTopNumber(detailsModel.CurrentClient, detailsModel.ChosenLine);
             }
             catch (Exception ex)
             {
@@ -93,7 +93,7 @@ namespace UI.ClientWebPage.Controllers
         {
             try
             {
-                return DETAILS_SERVICE.GetTotalMinutesFamily(detailsModel.CurrentClient, detailsModel.ChosenLine);
+                return _detailService.GetTotalMinutesFamily(detailsModel.CurrentClient, detailsModel.ChosenLine);
             }
             catch (Exception ex)
             {

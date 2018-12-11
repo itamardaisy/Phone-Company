@@ -1,2 +1,2 @@
-696 -->    at ClientBL.DetailServices.DetailService.GetTotalSMS(Client client, String lineNumber) in D:\Programming\Programming Works\Sela Work\Phone Company Github\Phone Company sln\ClientBL\DetailServices\DetailService.cs:line 57
+125 -->    at ClientBL.DetailServices.DetailService.GetTotalSMS(Client client, String lineNumber) in D:\Programming\Programming Works\Sela Work\Phone Company Github\Phone Company sln\ClientBL\DetailServices\DetailService.cs:line 57
    at UI.ClientWebPage.Controllers.DetailsAPIController.GetTotalSMS(DetailsModel detailsModel) in D:\Programming\Programming Works\Sela Work\Phone Company Github\Phone Company sln\UI.ClientWebPage\Controllers\DetailsAPIController.cs:line 51

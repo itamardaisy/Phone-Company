@@ -12,19 +12,19 @@ namespace BillingService.Services
 {
     public class PaymentCalculator : IPaymentCalculator
     {
-        private readonly PaymentDataAccess PDA;
+        private readonly PaymentDataAccess _paymentDataAccess;
 
         public PaymentCalculator()
         {
-            PDA = new PaymentDataAccess();
+            _paymentDataAccess = new PaymentDataAccess();
         }
 
         public Dictionary<string, Receipt> GetTotalClientPayment(int clientId, DateTime date)
         {
-            List<Line> clientLins = PDA.GetClientLines(clientId);
+            List<Line> clientLins = _paymentDataAccess.GetClientLines(clientId);
             Dictionary<string, Receipt> TotalLinePrice = new Dictionary<string, Receipt>();
             foreach (var line in clientLins)
-                TotalLinePrice.Add(line.Number, PDA.SetLineReceipt(line, date, clientId));
+                TotalLinePrice.Add(line.Number, _paymentDataAccess.SetLineReceipt(line, date, clientId));
             return TotalLinePrice;
         }
     }

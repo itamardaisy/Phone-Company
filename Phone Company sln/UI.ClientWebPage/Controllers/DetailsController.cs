@@ -15,14 +15,14 @@ namespace UI.ClientWebPage.Controllers
 {
     public class DetailsController : Controller
     {
-        private HttpClient client;
+        private HttpClient _client;
 
         public DetailsController()
         {
-            client = new HttpClient();
-            client.BaseAddress = new Uri(ProjectFields.BASE_ADDRESS);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(ProjectFields.HEADER_TYPE));
+            _client = new HttpClient();
+            _client.BaseAddress = new Uri(ProjectFields.BASE_ADDRESS);
+            _client.DefaultRequestHeaders.Accept.Clear();
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(ProjectFields.HEADER_TYPE));
         }
 
         public ActionResult Index(DetailsModel detailsModel)
@@ -44,7 +44,7 @@ namespace UI.ClientWebPage.Controllers
 
         private async Task<List<Package>> GetOptimalPackage(DetailsModel detailsModel)
         {
-            var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetOptimalPackage, detailsModel).Result;
+            var response = _client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetOptimalPackage, detailsModel).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 return await response.Content.ReadAsAsync<List<Package>>();
             else
@@ -53,7 +53,7 @@ namespace UI.ClientWebPage.Controllers
 
         private async Task<double> GetTotalMinuts(DetailsModel detailsModel)
         {
-            var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinuts, detailsModel).Result;
+            var response = _client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinuts, detailsModel).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 return await response.Content.ReadAsAsync<double>();
             else
@@ -62,7 +62,7 @@ namespace UI.ClientWebPage.Controllers
 
         private async Task<int> GetTotalSMS(DetailsModel detailsModel)
         {
-            var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalSMS, detailsModel).Result;
+            var response = _client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalSMS, detailsModel).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 return await response.Content.ReadAsAsync<int>();
@@ -73,7 +73,7 @@ namespace UI.ClientWebPage.Controllers
 
         private async Task<double> GetTotalMinutesTopNumber(DetailsModel detailsModel)
         {
-            var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinutesTopNumber, detailsModel).Result;
+            var response = _client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinutesTopNumber, detailsModel).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 return await response.Content.ReadAsAsync<double>();
@@ -84,7 +84,7 @@ namespace UI.ClientWebPage.Controllers
 
         private async Task<double> GetTotalMinutesThreeTopNumber(DetailsModel detailsModel)
         {
-            var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinutesThreeTopNumber, detailsModel).Result;
+            var response = _client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinutesThreeTopNumber, detailsModel).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 return await response.Content.ReadAsAsync<double>();
@@ -95,7 +95,7 @@ namespace UI.ClientWebPage.Controllers
 
         private async Task<double> GetTotalMinutesFamily(DetailsModel detailsModel)
         {
-            var response = client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinutesFamily, detailsModel).Result;
+            var response = _client.PostAsJsonAsync(ProjectFields.BASE_ADDRESS + ProjectFields.ROUTE_TO_GetTotalMinutesFamily, detailsModel).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 return await response.Content.ReadAsAsync<double>();

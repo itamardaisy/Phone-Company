@@ -13,14 +13,14 @@ namespace UI.ClientWebPage.Controllers
 {
     public class HomeController : Controller
     {
-        private HttpClient client;
+        private HttpClient _client;
 
         public HomeController()
         {
-            client = new HttpClient();
-            client.BaseAddress = new Uri(ProjectFields.BASE_ADDRESS);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(ProjectFields.HEADER_TYPE));
+            _client = new HttpClient();
+            _client.BaseAddress = new Uri(ProjectFields.BASE_ADDRESS);
+            _client.DefaultRequestHeaders.Accept.Clear();
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(ProjectFields.HEADER_TYPE));
         }
 
         public ActionResult Index()
@@ -30,7 +30,7 @@ namespace UI.ClientWebPage.Controllers
 
         public async Task<ActionResult> Login(LoginClient loginClient)
         {
-            var response = client.PostAsJsonAsync(ProjectFields.ROUTE_TO_LOGIN, loginClient).Result;
+            var response = _client.PostAsJsonAsync(ProjectFields.ROUTE_TO_LOGIN, loginClient).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 DetailsModel detailsModel = await response.Content.ReadAsAsync<DetailsModel>();

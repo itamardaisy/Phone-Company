@@ -11,17 +11,15 @@ namespace BL.Services
 {
     public class ManagerService : IManagerService
     {
-        private readonly ManagerRepository MR;
+        private readonly ManagerRepository _managerRepository;
 
         public ManagerService()
         {
             throw new NotImplementedException();
-
         }
 
         public void AddNewPackage(Package package)
         {
-            throw new NotImplementedException();
         }
 
         public List<Client> GetClientWhoMostLikelyToUnsign()

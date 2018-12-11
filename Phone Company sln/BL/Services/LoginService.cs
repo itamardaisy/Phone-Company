@@ -12,18 +12,18 @@ namespace BL.Services
 {
     public class LoginService : IEmploeeLoginService
     {
-        private readonly EmployeeRepository employeeRepository;
+        private readonly EmployeeRepository _employeeRepository;
 
         public LoginService()
         {
             PhoneCompanyContext context = new PhoneCompanyContext();
 
-            employeeRepository = new EmployeeRepository();
+            _employeeRepository = new EmployeeRepository();
         }
 
         public User Login(string name, string password)
         {
-            return employeeRepository.EmployeeLogin(name, password);
+            return _employeeRepository.EmployeeLogin(name, password);
         }
 
         public bool Logout(int id)

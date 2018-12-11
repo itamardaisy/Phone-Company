@@ -55,15 +55,9 @@ namespace UI.Employee.ViewModel
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             #endregion
-
             MessengerInstance = new Messenger();
-
-           newClientFrom = new Client();
-
-            
-           MessengerInstance.Register<Client>(this,"123456", (a) => { GetTheUser(a); });
-
-           // GetAllClientTypes();
+            newClientFrom = new Client();
+            MessengerInstance.Register<Client>(this, "123456", (a) => { GetTheUser(a); });
         }
 
         private void GetTheUser(Client newClientFrom)
@@ -131,11 +125,11 @@ namespace UI.Employee.ViewModel
             }
         }
 
-       /// <summary>
-       /// Command to get all the client types and put
-       /// them in the observableCollection called "ClientTypes"
-       /// </summary>
-       private async void GetAllClientTypes()
+        /// <summary>
+        /// Command to get all the client types and put
+        /// them in the observableCollection called "ClientTypes"
+        /// </summary>
+        private async void GetAllClientTypes()
         {
             var myUri = new Uri(BASE_ADDRESS + "GetClientTypes", UriKind.Absolute);
 

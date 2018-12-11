@@ -1,5 +1,6 @@
 ﻿using Common.Interfaces;
 using Common.Interfaces.ClientBL_Interfaces;
+using Common.Interfaces.UI.Client_Interfaces;
 using Common.Models;
 using Dal.DataInitializer;
 using Dal.Repositories;
@@ -11,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace ClientBL.LoginService
 {
-    public class LoginService : IClientLoginService
+    public class LoginService : ILoginService
     {
-        private readonly ClientRepository CLIENT_REPOSITORY;
+        private readonly ClientRepository _clientRepository;
 
         public LoginService()
         {
-            CLIENT_REPOSITORY = new ClientRepository();
+            _clientRepository = new ClientRepository();
         }
         
         /// <summary>
@@ -28,8 +29,8 @@ namespace ClientBL.LoginService
         /// <returns> Return true if the client exist, otherwise false. </returns>
         public Client Login(string name, string phoneNumber)
         {
-            if (CLIENT_REPOSITORY.LoginClient(name, phoneNumber) != null)  
-                return CLIENT_REPOSITORY.LoginClient(name, phoneNumber);
+            if (_clientRepository.LoginClient(name, phoneNumber) != null)  
+                return _clientRepository.LoginClient(name, phoneNumber);
             return null;
         }
     }
