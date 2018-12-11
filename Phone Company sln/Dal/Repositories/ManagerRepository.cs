@@ -74,6 +74,10 @@ namespace Dal.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// This function  gets the client who called the call center the most
+        /// </summary>
+        /// <returns> The client </returns>
         public Client GetMostAnoyingClient()
         {
             try
@@ -94,8 +98,7 @@ namespace Dal.Repositories
         {
             using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
-                var lines = context.Lines.Select(x => x.ClientId).ToList();
-                //  var calls = context.Calls.Where()
+                //todo
                 throw new NotImplementedException();
             }
         }

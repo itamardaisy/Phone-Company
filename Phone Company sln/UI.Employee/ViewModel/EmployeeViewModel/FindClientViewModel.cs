@@ -18,6 +18,8 @@ namespace UI.Employee.ViewModel
 {
     internal class FindClientViewModel
     {
+        #region Fields
+
         private readonly INavigationService _navigationService;
 
         public int SearchID { get; set; }
@@ -28,11 +30,15 @@ namespace UI.Employee.ViewModel
 
         public Messenger MessengerInstance { get; set; }
 
+        private Navigator _navigator;
+
         public ObservableCollection<Client> ClientsFound { get; set; }
 
         public RelayCommand CommandToGetUserByID { get; private set; }
         public RelayCommand NavigateCommandToBack { get; private set; }
         public RelayCommand CommandToMoveToSelectedUser { get; private set; }
+
+        #endregion Fields
 
         /// <summary>
         /// CTOR
@@ -41,20 +47,14 @@ namespace UI.Employee.ViewModel
         public FindClientViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+            _navigator = new Navigator(_navigationService);
             NavigateCommandToBack = new RelayCommand(NavigateCommandActionToBack);
             CommandToGetUserByID = new RelayCommand(CommandToGetUser);
             CommandToMoveToSelectedUser = new RelayCommand(CommandMoveToSelctedUser);
 
             MessengerInstance = new Messenger();
 
-            #region Configure httpClient for the web api request
-
-            client = new HttpClient();
-            client.BaseAddress = new Uri(BASE_ADDRESS);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            #endregion Configure httpClient for the web api request
+            client = HttpClientHelper.CreateHttpClient();
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace UI.Employee.ViewModel
         /// with OnChangeProperty so the list will be updated
         /// </summary>
         private async void CommandToGetUser()
-        {         
+        {
             var myUri = new Uri(BASE_ADDRESS + "GetClient", UriKind.Absolute);
 
             var message = await client.GetAsync(myUri + $"?clientId={SearchID}");
@@ -84,7 +84,7 @@ namespace UI.Employee.ViewModel
                     ClientsFound = await respone.Content.ReadAsAsync<ObservableCollection<Client>>();
                 }
                 else
-                    await new MessageDialog("Bad Connection To The Server").ShowAsync();                
+                    await new MessageDialog("Bad Connection To The Server").ShowAsync();
             }
         }
 
@@ -93,7 +93,7 @@ namespace UI.Employee.ViewModel
         /// </summary>
         private void NavigateCommandActionToBack()
         {
-            _navigationService.NavigateTo(pageKey: "EmployeeMainPage");
+            _navigator.NavigateToMainEmployeePage();
         }
     }
 }

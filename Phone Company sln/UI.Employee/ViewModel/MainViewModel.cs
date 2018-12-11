@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security;
 using UI.Employee.Enums;
+using UI.Employee.Helper;
 using UI.Employee.Models;
 using Windows.UI.Popups;
 
@@ -15,8 +16,11 @@ namespace UI.Employee.ViewModel
     {
         private readonly INavigationService _navigationService;
         public RelayCommand NavigateCommandToMainEmployeePage { get; private set; }
+
         private const string BASE_ADDRESS = "http://localhost:50066/";
         private HttpClient client;
+
+        private Navigator _navigator;
 
         public string UserName { get; set; }
         public string Password { get; set; }
@@ -28,16 +32,10 @@ namespace UI.Employee.ViewModel
         public MainViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+            _navigator = new Navigator(_navigationService);
             NavigateCommandToMainEmployeePage = new RelayCommand(NavigateCommandAction);
 
-            #region httpClient for the web api request
-
-            client = new HttpClient();
-            client.BaseAddress = new Uri(BASE_ADDRESS);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            #endregion httpClient for the web api request
+            client = HttpClientHelper.CreateHttpClient();
         }
 
         /// <summary>
@@ -65,10 +63,9 @@ namespace UI.Employee.ViewModel
                     if (userFromDB != null)
                     {
                         if (userFromDB.Type == UserType.Emploee)
-                        {
-                            _navigationService.NavigateTo("EmployeeMainPage");
-                        }
-                        _navigationService.NavigateTo("ManagerMainPage");
+                            _navigator.NavigateToMainEmployeePage();
+
+                        _navigator.NavigateToMainManagerPage();
                     }
                     else
                         await new MessageDialog("User does not exist").ShowAsync();

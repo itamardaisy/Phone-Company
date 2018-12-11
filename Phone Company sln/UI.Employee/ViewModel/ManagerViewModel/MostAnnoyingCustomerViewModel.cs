@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using UI.Employee.Helper;
 using UI.Employee.Models;
 using Windows.UI.Popups;
 
@@ -31,14 +32,7 @@ namespace UI.Employee.ViewModel
             _navigationService = navigationService;
             NavigateCommandToManagerPage = new RelayCommand(GoBackCommand);
 
-            #region Configure httpClient for the web api request
-
-            client = new HttpClient();
-            client.BaseAddress = new Uri(BASE_ADDRESS);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); 
-
-            #endregion
+            client = HttpClientHelper.CreateHttpClient();
 
             GetClients();
         }
@@ -51,11 +45,11 @@ namespace UI.Employee.ViewModel
             _navigationService.NavigateTo(pageKey: "ManagerMainPage");
         }
 
-       /// <summary>
-       /// Command to get the most annoying client
-       /// and put them/him in the observableCollection called "Clients"
-       /// </summary>
-       private async void GetClients()
+        /// <summary>
+        /// Command to get the most annoying client
+        /// and put them/him in the observableCollection called "Clients"
+        /// </summary>
+        private async void GetClients()
         {
             var myUri = new Uri(BASE_ADDRESS + "GetMostAnnoyingClient", UriKind.Absolute);
 
@@ -65,11 +59,11 @@ namespace UI.Employee.ViewModel
             {
                 if (respone.IsSuccessStatusCode)
                 {
-                    var answer =  await respone.Content.ReadAsAsync<ObservableCollection<Client>>();
+                    var answer = await respone.Content.ReadAsAsync<ObservableCollection<Client>>();
                     if (answer != null)
                     {
                         Clients = answer;
-                    }                 
+                    }
                 }
                 else
                     await new MessageDialog("Bad Connection To The Server").ShowAsync();
