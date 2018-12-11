@@ -55,6 +55,8 @@ namespace Dal.Repositories
         {
             try
             {
+                //ToDo
+
                 using (PhoneCompanyContext context = new PhoneCompanyContext())
                 {
                     throw new NotImplementedException();
@@ -72,6 +74,8 @@ namespace Dal.Repositories
         /// <returns> The client </returns>
         private DbClient AClientWhoUsesTheLeast()
         {
+            //ToDo
+
             throw new NotImplementedException();
         }
 
@@ -130,12 +134,31 @@ namespace Dal.Repositories
 
         public Client GetMostProftableClient()
         {
-            throw new NotImplementedException();
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                //ToDo
+                throw new NotImplementedException();
+            }
         }
 
+        /// <summary>
+        /// Gets the employee that answered the most calls
+        /// </summary>
+        /// <returns></returns>
         public User GetMostvalentEmployee()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (PhoneCompanyContext context = new PhoneCompanyContext())
+                {
+                    var employee = context.Users.OrderByDescending(x => x.CallAnswer).FirstOrDefault();
+                    return employee.DbToCommon();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
