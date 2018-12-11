@@ -1,6 +1,6 @@
 ﻿namespace UI.ClientWebPage.HardCodeds
 {
-    public class ProjectFields
+    public static class ProjectFields
     {
         internal static readonly string BASE_ADDRESS = "http://localhost:52685/";
         internal static readonly string ROUTE_TO_LOGIN = "api/Login";

@@ -73,6 +73,8 @@
     <Compile Include="Interfaces\BillingService interfaces\IPdfCreator.cs" />
     <Compile Include="Interfaces\Repository interfaces\ISelectedNumbersRepository.cs" />
     <Compile Include="Interfaces\Repository interfaces\ISMSRepository.cs" />
+    <Compile Include="Interfaces\UI.Client Interfaces\IDetailsService.cs" />
+    <Compile Include="Interfaces\UI.Client Interfaces\ILoginService.cs" />
     <Compile Include="Logger\Logger.cs" />
     <Compile Include="Models\Call.cs" />
     <Compile Include="Models\Client.cs" />

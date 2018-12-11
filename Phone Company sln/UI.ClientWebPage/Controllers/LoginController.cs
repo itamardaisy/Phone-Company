@@ -14,14 +14,14 @@ namespace UI.ClientWebPage.Controllers
 {
     public class LoginController : ApiController
     {
-        private readonly LoginService LOGIN_SERVICE;
-        private readonly DetailService DETAIL_SERVICE;
+        private readonly LoginService _loginService;
+        private readonly DetailService _detailService;
 
 
         public LoginController()
         {
-            LOGIN_SERVICE = new LoginService();
-            DETAIL_SERVICE = new DetailService();
+            _loginService = new LoginService();
+            _detailService = new DetailService();
         }
 
         [HttpPost]
@@ -30,13 +30,13 @@ namespace UI.ClientWebPage.Controllers
         {
             try
             {
-                if (LOGIN_SERVICE.Login(loginClient.Name, loginClient.PhoneNumber) != null)
+                if (_loginService.Login(loginClient.Name, loginClient.PhoneNumber) != null)
                 {
-                    Client client = LOGIN_SERVICE.Login(loginClient.Name, loginClient.PhoneNumber);
+                    Client client = _loginService.Login(loginClient.Name, loginClient.PhoneNumber);
                     DetailsModel detailsModel = new DetailsModel()
                     {
                         CurrentClient = client,
-                        ClientLines = DETAIL_SERVICE.GetClientLines(client.Id)
+                        ClientLines = _detailService.GetClientLines(client.Id)
                     };
                     detailsModel.LineList(detailsModel.ClientLines);
                     return detailsModel;

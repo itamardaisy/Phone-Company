@@ -9,54 +9,54 @@ namespace BillingService.Services
 {
     public class PaymentDataAccess : IPaymentDataAccess
     {
-        private readonly LineRepository LINE_REPOSITORY;
-        private readonly PackageRepository PACKAGE_REPOSITORY;
-        private readonly PaymentRepository PAYMENT_REPOSITORY;
-        private readonly ClientRepository CLIENT_REPOSITORY;
+        private readonly LineRepository _lineRepository;
+        private readonly PackageRepository _packageRepository;
+        private readonly PaymentRepository _paymentRepository;
+        private readonly ClientRepository _clientRepository;
 
         public PaymentDataAccess()
         {
-            LINE_REPOSITORY = new LineRepository();
-            PAYMENT_REPOSITORY = new PaymentRepository();
-            PACKAGE_REPOSITORY = new PackageRepository();
-            CLIENT_REPOSITORY = new ClientRepository();
+            _lineRepository = new LineRepository();
+            _paymentRepository = new PaymentRepository();
+            _packageRepository = new PackageRepository();
+            _clientRepository = new ClientRepository();
         }
 
         internal Receipt SetLineReceipt(Line line, DateTime date, int clientId)
         {
             Receipt receipt = new Receipt();
-            receipt.BasePrice = PACKAGE_REPOSITORY.GetBasePrice(line.Id);
+            receipt.BasePrice = _packageRepository.GetBasePrice(line.Id);
             receipt.CallsExtraPrice = CalcOverCallLimitPrice(line, date, clientId);
             receipt.SMSsExtraPrice = CalcOverSMSsLimitPrice(line, date, clientId);
-            receipt.DisscountPercentage = PACKAGE_REPOSITORY.GetPackagePercentage(line.PackageId);
+            receipt.DisscountPercentage = _packageRepository.GetPackagePercentage(line.PackageId);
             return receipt;
         }
 
         private double CalcOverSMSsLimitPrice(Line line, DateTime date, int clientId)
         {
-            int clientTypeId = CLIENT_REPOSITORY.GetClientById(clientId).ClientTypeId;
+            int clientTypeId = _clientRepository.GetClientById(clientId).ClientTypeId;
             int overLimitSMSs = 0;
-            int SMSsInPackage = PACKAGE_REPOSITORY.GetSMSsInPackage(line.Id);
-            int actualySMSs = LINE_REPOSITORY.GetActualMonthSMSs(line.Id, date);
+            int SMSsInPackage = _packageRepository.GetSMSsInPackage(line.Id);
+            int actualySMSs = _lineRepository.GetActualMonthSMSs(line.Id, date);
             if (actualySMSs > SMSsInPackage)
                 overLimitSMSs = actualySMSs - SMSsInPackage;
-            return PAYMENT_REPOSITORY.CalcOverLimitCallsPayment(overLimitSMSs, clientTypeId);
+            return _paymentRepository.CalcOverLimitCallsPayment(overLimitSMSs, clientTypeId);
         }
 
         private double CalcOverCallLimitPrice(Line line,DateTime date, int clientId)
         {
-            int clientTypeId = CLIENT_REPOSITORY.GetClientById(clientId).ClientTypeId;
+            int clientTypeId = _clientRepository.GetClientById(clientId).ClientTypeId;
             double overLimitMinuts = 0.0;
-            double minutsInPackage = (double)PACKAGE_REPOSITORY.GetMinutsInPackage(line.Id);
-            double actualyMinuts = LINE_REPOSITORY.GetActualMonthMinuteCalls(line.Id, date);
+            double minutsInPackage = (double)_packageRepository.GetMinutsInPackage(line.Id);
+            double actualyMinuts = _lineRepository.GetActualMonthMinuteCalls(line.Id, date);
             if (actualyMinuts > minutsInPackage)
                 overLimitMinuts = actualyMinuts - minutsInPackage;
-            return PAYMENT_REPOSITORY.CalcOverLimitCallsPayment(overLimitMinuts, clientTypeId);
+            return _paymentRepository.CalcOverLimitCallsPayment(overLimitMinuts, clientTypeId);
         }
 
         internal List<Line> GetClientLines(int clientId)
         {
-            return LINE_REPOSITORY.GetClientLines(clientId);
+            return _lineRepository.GetClientLines(clientId);
         }
     }
 }

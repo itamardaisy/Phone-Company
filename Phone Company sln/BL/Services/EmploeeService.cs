@@ -14,20 +14,20 @@ namespace BL.Services
 {
     public class EmploeeService : IEmploeeService
     {
-        private readonly ClientRepository CR;
-        private readonly ClientTypeRepository CTR;
+        private readonly ClientRepository _clientRepository;
+        private readonly ClientTypeRepository _clientTypeRepository;
 
         public EmploeeService()
         {
-            CR = new ClientRepository();
-            CTR = new ClientTypeRepository();
+            _clientRepository = new ClientRepository();
+            _clientTypeRepository = new ClientTypeRepository();
         }
 
         public void AddNewClient(Client client)
         {
             try
             {
-                CR.AddNewClient(client);
+                _clientRepository.AddNewClient(client);
             }
             catch (AddToDatabaseException ex)
             {
@@ -47,7 +47,7 @@ namespace BL.Services
         {
             try
             {
-                return CR.DeleteClient(id);
+                return _clientRepository.DeleteClient(id);
             }
             catch (GetFromDatabaseException ex)
             {
@@ -67,12 +67,12 @@ namespace BL.Services
 
         public Client GetClient(int clientID)
         {
-            return CR.GetClientById(clientID);
+            return _clientRepository.GetClientById(clientID);
         }
 
         public List<ClientType> GetClientTypes()
         {
-            return CTR.GetAllTypes();
+            return _clientTypeRepository.GetAllTypes();
         }
 
         public Receipt GetReceiptByMonth(int clientId, DateTime month)
@@ -82,7 +82,7 @@ namespace BL.Services
 
         public void UpdateClientDetails(Client client)
         {
-            CR.UpdateClient(client);
+            _clientRepository.UpdateClient(client);
         }
     }
 }

@@ -53,15 +53,10 @@ namespace UI.Employee.ViewModel
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            #endregion Configure httpClient for the web api request
-
+            #endregion
             MessengerInstance = new Messenger();
-
             newClientFrom = new Client();
-
             MessengerInstance.Register<Client>(this, "123456", (a) => { GetTheUser(a); });
-
-             GetAllClientTypes();
         }
 
         private void GetTheUser(Client newClientFrom)
