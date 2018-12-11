@@ -15,4 +15,4 @@
         internal static readonly string INDEX_VIEW_NAME = "index";
         internal static readonly string DETAILS_VIEW = "DetailsView";
     }
-}S
+}
