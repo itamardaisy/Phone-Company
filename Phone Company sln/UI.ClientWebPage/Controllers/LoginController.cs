@@ -1,6 +1,8 @@
 ﻿using ClientBL.DetailServices;
 using ClientBL.LoginService;
 using Common.Models;
+using Dal.Repositories;
+using PackageOptimtzation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,14 +16,13 @@ namespace UI.ClientWebPage.Controllers
 {
     public class LoginController : ApiController
     {
-        private readonly LoginService _loginService;
-        private readonly DetailService _detailService;
-
+        private LoginService _loginService;
+        private DetailService _detailService;
 
         public LoginController()
         {
-            _loginService = new LoginService();
-            _detailService = new DetailService();
+            _loginService = new LoginService(new ClientRepository());
+            _detailService = new DetailService(new LineRepository(), new OptimalPackage());
         }
 
         [HttpPost]

@@ -20,7 +20,5 @@ namespace Common.Interfaces
         Package FindOptimizePackage(Client client);
 
         List<ClientType> GetClientTypes();
-
-        Receipt GetReceiptByMonth(int clientId, DateTime month);
-    }
+   }
 }

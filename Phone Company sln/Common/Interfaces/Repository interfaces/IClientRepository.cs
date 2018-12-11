@@ -16,5 +16,7 @@ namespace Common.Interfaces
         Client GetClientById(int id);
 
         bool DeleteClient(int id);
+
+        Client LoginClient(string name, string phoneNumber);
     }
 }

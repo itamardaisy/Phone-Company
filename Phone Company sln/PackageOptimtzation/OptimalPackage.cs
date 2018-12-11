@@ -1,4 +1,5 @@
-﻿using Common.Models;
+﻿using Common.Interfaces.OptimalPackage_Interfaces;
+using Common.Models;
 using Dal.DataInitializer;
 using Dal.Repositories;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PackageOptimtzation
 {
-    public class OptimalPackage
+    public class OptimalPackage : IOptimalPackage
     {
         private readonly PackageRepository PACKAGE_REPOSITORY;
 

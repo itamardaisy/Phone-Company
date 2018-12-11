@@ -14,13 +14,13 @@ namespace BL.Services
 {
     public class EmploeeService : IEmploeeService
     {
-        private readonly ClientRepository _clientRepository;
-        private readonly ClientTypeRepository _clientTypeRepository;
+        private readonly IClientRepository _clientRepository;
+        private readonly IClientTypeRepository _clientTypeRepository;
 
-        public EmploeeService()
+        public EmploeeService(IClientRepository clientRepository, IClientTypeRepository clientTypeRepository)
         {
-            _clientRepository = new ClientRepository();
-            _clientTypeRepository = new ClientTypeRepository();
+            _clientRepository = clientRepository;
+            _clientTypeRepository = clientTypeRepository;
         }
 
         public void AddNewClient(Client client)
@@ -62,6 +62,7 @@ namespace BL.Services
 
         public Package FindOptimizePackage(Client client)
         {
+            //TODO: Find optimal package in BL Employee Service
             throw new NotImplementedException();
         }
 
@@ -73,11 +74,6 @@ namespace BL.Services
         public List<ClientType> GetClientTypes()
         {
             return _clientTypeRepository.GetAllTypes();
-        }
-
-        public Receipt GetReceiptByMonth(int clientId, DateTime month)
-        {
-            throw new NotImplementedException();
         }
 
         public void UpdateClientDetails(Client client)

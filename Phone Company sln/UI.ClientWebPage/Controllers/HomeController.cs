@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using UI.ClientWebPage.HardCodeds;
+using UI.ClientWebPage.Helpers;
 using UI.ClientWebPage.Models;
 
 namespace UI.ClientWebPage.Controllers
@@ -15,13 +16,7 @@ namespace UI.ClientWebPage.Controllers
     {
         private HttpClient _client;
 
-        public HomeController()
-        {
-            _client = new HttpClient();
-            _client.BaseAddress = new Uri(ProjectFields.BASE_ADDRESS);
-            _client.DefaultRequestHeaders.Accept.Clear();
-            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(ProjectFields.HEADER_TYPE));
-        }
+        public HomeController() => _client = UIHelper.GetCurrentHttpClient();
 
         public ActionResult Index()
         {

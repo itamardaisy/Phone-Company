@@ -174,7 +174,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HardCodeds\ProjectFields.cs" />
+    <Compile Include="Helpers\UIHelper.cs" />
+    <Compile Include="Helpers\ProjectFields.cs" />
     <Compile Include="Models\DetailsModel.cs" />
     <Compile Include="Models\LoginClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -271,6 +272,14 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{05145F7D-7C86-4F70-BD31-706CACE61D12}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dal\Dal.csproj">
+      <Project>{F3A6733C-D80E-4646-B8CF-A53181196990}</Project>
+      <Name>Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageOptimtzation\PackageOptimtzation.csproj">
+      <Project>{7D940458-9367-4F92-B9F0-A7A6082254F0}</Project>
+      <Name>PackageOptimtzation</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

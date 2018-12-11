@@ -1,4 +1,5 @@
 ﻿using Common.EnvironmentService;
+using Common.Helpers;
 using Common.Interfaces;
 using Common.Models;
 using Dal.DataInitializer;
@@ -100,12 +101,34 @@ namespace Dal.Repositories
 
         public List<Client> GetMostConectedClients()
         {
+            List<NumberShows> numberShows = GetTheLineNumberAndShows();
+            List<NumberShows> topFiveElements = numberShows.OrderByDescending(x => x.ShowsCounter).Take(5).ToList();
+            return GetTopFiveClients(topFiveElements);
+        }
+
+        private List<Client> GetTopFiveClients(List<NumberShows> topFiveElements)
+        {
             using (PhoneCompanyContext context = new PhoneCompanyContext())
             {
-                //ToDo
-                var calls = context.Calls.OrderByDescending(x => x.LineId).Select(x => x.LineId).ToList();
-                throw new NotImplementedException();
+                List<Client> clients = new List<Client>();
+                foreach (var item in topFiveElements)
+                    clients.Add(context.Clients.FirstOrDefault(x => x.ContactNumber == item.LineNumber).DbToCommon());
+                return clients;
+            }
+        }
 
+        private List<NumberShows> GetTheLineNumberAndShows()
+        {
+            using (PhoneCompanyContext context = new PhoneCompanyContext())
+            {
+                List<NumberShows> numberShows = new List<NumberShows>();
+                var calls = context.Calls.ToList();
+                for (int i = 0; i < calls.Count; i++)
+                    if (numberShows.Any(x => x.LineNumber == calls[i].Line.Number))
+                        numberShows.FirstOrDefault(x => x.LineNumber == calls[i].Line.Number).ShowsCounter++;
+                    else
+                        numberShows.Add(new NumberShows { LineNumber = calls[i].Line.Number, ShowsCounter = 1 });
+                return numberShows;
             }
         }
 

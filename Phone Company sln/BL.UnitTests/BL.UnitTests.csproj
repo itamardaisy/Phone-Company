@@ -82,6 +82,10 @@
       <Project>{F3A6733C-D80E-4646-B8CF-A53181196990}</Project>
       <Name>Dal</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PackageOptimtzation\PackageOptimtzation.csproj">
+      <Project>{7D940458-9367-4F92-B9F0-A7A6082254F0}</Project>
+      <Name>PackageOptimtzation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

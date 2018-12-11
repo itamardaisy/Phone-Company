@@ -14,11 +14,11 @@ namespace ClientBL.LoginService
 {
     public class LoginService : ILoginService
     {
-        private readonly ClientRepository _clientRepository;
+        private readonly IClientRepository _clientRepository;
 
-        public LoginService()
+        public LoginService(IClientRepository clientRepository)
         {
-            _clientRepository = new ClientRepository();
+            _clientRepository = clientRepository;
         }
         
         /// <summary>

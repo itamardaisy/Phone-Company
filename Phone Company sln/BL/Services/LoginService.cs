@@ -19,7 +19,7 @@ namespace BL.Services
             PhoneCompanyContext context = new PhoneCompanyContext();
 
             _employeeRepository = new EmployeeRepository();
-        }
+        } 
 
         public User Login(string name, string password)
         {

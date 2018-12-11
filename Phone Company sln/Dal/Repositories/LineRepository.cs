@@ -10,6 +10,7 @@ using Dal.DataInitializer;
 using Dal.DataModels;
 using Common.EnvironmentService;
 using Common.Exceptions;
+using Common.Helpers;
 
 namespace Dal.Repositories
 {
@@ -76,32 +77,32 @@ namespace Dal.Repositories
         public double GetTotalMinutesTopNumber(int lineId, DateTime now)
         {
             var lineCalls = GetLineCalls(lineId, now);
-            List<NumberCounter<int, string>> numberCounters = new List<NumberCounter<int, string>>();
+            List<NumberShows> numberCounters = new List<NumberShows>();
             CountTheCallByDestinationNumbers(numberCounters, lineCalls);
             var topNumbers = GetTopFiveCalls(numberCounters);
             return CountTheTopFiveTotalMinuts(topNumbers, lineCalls);
         }
 
-        private double CountTheTopFiveTotalMinuts(List<NumberCounter<int, string>> topNumbers, List<DbCall> lineCalls)
+        private double CountTheTopFiveTotalMinuts(List<NumberShows> topNumbers, List<DbCall> lineCalls)
         {
             double MinutsCounter = 0.0;
             for (int i = 0; i < topNumbers.Count; i++)
-                MinutsCounter += lineCalls.Where(x => x.DestinationNumber == topNumbers[i].DestinationNumber).FirstOrDefault().Duration;
+                MinutsCounter += lineCalls.Where(x => x.DestinationNumber == topNumbers[i].LineNumber).FirstOrDefault().Duration;
             return MinutsCounter;
         }
 
-        private List<NumberCounter<int, string>> GetTopFiveCalls(List<NumberCounter<int, string>> numberCounters)
+        private List<NumberShows> GetTopFiveCalls(List<NumberShows> numberCounters)
         {
-            return numberCounters.OrderByDescending(x => x.Counter).Reverse().Take(5).ToList();
+            return numberCounters.OrderByDescending(x => x.ShowsCounter).Reverse().Take(5).ToList();
         }
 
-        private void CountTheCallByDestinationNumbers(List<NumberCounter<int, string>> numberCounters, List<DbCall> lineCalls)
+        private void CountTheCallByDestinationNumbers(List<NumberShows> numberCounters, List<DbCall> lineCalls)
         {
             for (int i = 0; i < lineCalls.Count; i++)
-                if (!numberCounters.Any(x => x.DestinationNumber == lineCalls[i].DestinationNumber))
-                    numberCounters.Add(new NumberCounter<int, string> { Counter = 1, DestinationNumber = lineCalls[i].DestinationNumber });
+                if (!numberCounters.Any(x => x.LineNumber == lineCalls[i].DestinationNumber))
+                    numberCounters.Add(new NumberShows { ShowsCounter = 1, LineNumber = lineCalls[i].DestinationNumber });
                 else
-                    numberCounters.Where(x => x.DestinationNumber == lineCalls[i].DestinationNumber).FirstOrDefault().Counter++;
+                    numberCounters.Where(x => x.LineNumber == lineCalls[i].DestinationNumber).FirstOrDefault().ShowsCounter++;
         }
 
         private List<DbCall> GetLineCalls(int lineId, DateTime now)
@@ -275,17 +276,5 @@ namespace Dal.Repositories
                     return null;
             }
         }
-    }
-
-    /// <summary>
-    /// This class created to counter inside a list of numbers the numbers of calls.
-    /// NumberCounter<3,"0545822125"> three calls to number 0545822125.
-    /// </summary>
-    /// <typeparam name="I"> The counter </typeparam>
-    /// <typeparam name="S"> The destination number </typeparam>
-    internal class NumberCounter<I, S>
-    {
-        public I Counter { get; set; }
-        public S DestinationNumber { get; set; }
     }
 }
