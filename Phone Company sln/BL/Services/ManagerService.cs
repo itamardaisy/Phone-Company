@@ -11,35 +11,38 @@ namespace BL.Services
 {
     public class ManagerService : IManagerService
     {
-        private readonly ManagerRepository _managerRepository;
+        private readonly ManagerRepository MR;
+        private readonly PackageRepository PR;
 
         public ManagerService()
         {
-            throw new NotImplementedException();
+            MR = new ManagerRepository();
+            PR = new PackageRepository();
         }
 
         public void AddNewPackage(Package package)
         {
+            PR.AddNewPackage(package);
         }
 
         public List<Client> GetClientWhoMostLikelyToUnsign()
         {
-            throw new NotImplementedException();
+            return MR.GetClientWhoMostLikelyToUnsign();
         }
 
         public Client GetMostAnoingClient()
         {
-            throw new NotImplementedException();
+            return MR.GetMostAnoyingClient();
         }
 
-        public Client GetMostConnectedClient()
+        public List<Client> GetMostConnectedClients()
         {
-            throw new NotImplementedException();
+            return MR.GetMostConectedClients();
         }
 
         public Client GetMostProfitableClient()
         {
-            throw new NotImplementedException();
+            return MR.GetMostProftableClient();
         }
 
         public User GetMostValuentEmploee()

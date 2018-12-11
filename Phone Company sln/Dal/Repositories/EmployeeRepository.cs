@@ -35,7 +35,8 @@ namespace Dal.Repositories
             catch (Exception ex)
             {
                 Services.WriteExceptionsToLogger(ex);
-                throw new Exception(ex.Message);
+                //throw new Exception(ex.Message);
+                return null;
             }
         }
     }

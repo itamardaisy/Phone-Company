@@ -33,9 +33,9 @@ namespace Server.Employee.Controllers
 
         [HttpGet]
         [Route(Route + "GetMostConnectedClient")]
-        public Client GetMostConnectedClient()
+        public List<Client> GetMostConnectedClient()
         {
-            return managerService.GetMostConnectedClient();
+            return managerService.GetMostConnectedClients();
         }
 
         [HttpGet]

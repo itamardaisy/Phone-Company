@@ -9,7 +9,7 @@ using Windows.UI.Popups;
 
 namespace UI.Employee.ViewModel
 {
-    internal class AddNewPackageViewModel: ViewModelBase
+    internal class AddNewPackageViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
         public RelayCommand NavigateCommandToAddNewPackage { get; set; }
@@ -23,6 +23,7 @@ namespace UI.Employee.ViewModel
         public Package NewPackage { get; set; }
 
         private bool _isMostCallNumbeChecked;
+
         public bool IsMostCallNumbeChecked
         {
             get { return _isMostCallNumbeChecked; }
@@ -35,6 +36,7 @@ namespace UI.Employee.ViewModel
         }
 
         private bool _isInsideFamilyCallChecked;
+
         public bool IsInsideFamilyCallChecked
         {
             get { return _isInsideFamilyCallChecked; }
@@ -47,6 +49,7 @@ namespace UI.Employee.ViewModel
         }
 
         private bool _isSelectedNumberChecked;
+
         public bool IsSelectedNumberChecked
         {
             get { return _isSelectedNumberChecked; }
@@ -59,13 +62,13 @@ namespace UI.Employee.ViewModel
         }
 
         public string Name { get; set; }
-        public double TotalPrice { get; set; }
-        public int MaxSMSs { get; set; }
-        public int MaxMinuts { get; set; }
-        public double FixedPrice { get; set; }
-        public int DisscountPrecentage { get; set; } 
+        public string TotalPrice { get; set; }
+        public string MaxSMSs { get; set; }
+        public string MaxMinuts { get; set; }
+        public string FixedPrice { get; set; }
+        public string DisscountPrecentage { get; set; }
 
-        #endregion
+        #endregion Package Info
 
         /// <summary>
         /// CTOR
@@ -82,9 +85,9 @@ namespace UI.Employee.ViewModel
             client = new HttpClient();
             client.BaseAddress = new Uri(BASE_ADDRESS);
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); 
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            #endregion
+            #endregion Configure httpClient for the web api request
         }
 
         /// <summary>
@@ -92,34 +95,75 @@ namespace UI.Employee.ViewModel
         /// </summary>
         private async void CommandToAddNewPackage()
         {
-            NewPackage = new Package
+            NewPackage = PackageValidate();
+
+            if (NewPackage != null)
             {
-                MostCallNumber = _isMostCallNumbeChecked,
-                InsideFamilyCall = _isInsideFamilyCallChecked,
-                SelectedNumber = _isSelectedNumberChecked,       
-                
-            };
+                var myUri = new Uri(BASE_ADDRESS + "AddNewPackage", UriKind.Absolute);
 
-            var myUri = new Uri(BASE_ADDRESS + "AddNewPackage", UriKind.Absolute);
+                var message = await client.PostAsJsonAsync(myUri, NewPackage);
 
-            var message = await client.PostAsJsonAsync(myUri, NewPackage);
-
-            using (HttpResponseMessage respone = message)
-            {
-                if (respone.IsSuccessStatusCode)
+                using (HttpResponseMessage respone = message)
                 {
-                    await new MessageDialog("Package Has Been Added").ShowAsync();
+                    if (respone.IsSuccessStatusCode)
+                    {
+                        await new MessageDialog("Package Has Been Added").ShowAsync();
+                    }
+                    else
+                        await new MessageDialog("Bad Connection To The Server").ShowAsync();
                 }
-                await new MessageDialog("Bad Connection To The Server").ShowAsync();
+            }
+            else
+            {
+                await new MessageDialog("Some Of The Fields Re Incorrect").ShowAsync();
             }
         }
-     
+
         /// <summary>
         /// Navigation to the main manager page
         /// </summary>
         private void GoBackCommand()
         {
             _navigationService.NavigateTo(pageKey: "ManagerMainPage");
+        }
+
+        /// <summary>
+        /// Validate if the entered fields are correct
+        /// </summary>
+        /// <returns> If the package validate it will return it </returns>
+        private Package PackageValidate()
+        {
+            int maxSMSs;
+            double totalPrice;
+            int maxMinuts;
+            double fixedPrice;
+            int disscountPrecentage;
+
+            var NewPackage = new Package();
+
+            bool isTotalPrice = double.TryParse(TotalPrice, out totalPrice);
+            bool isMaxSMSs = int.TryParse(MaxSMSs, out maxSMSs);
+            bool isMaxMinuts = int.TryParse(MaxMinuts, out maxMinuts);
+            bool isFixedPrice = double.TryParse(FixedPrice, out fixedPrice);
+            bool isDisscountPrecentage = int.TryParse(DisscountPrecentage, out disscountPrecentage);
+
+            if (isTotalPrice == true || isMaxSMSs == true || isMaxMinuts == true ||
+                isFixedPrice == true || isDisscountPrecentage == true)
+            {
+                NewPackage.MostCallNumber = _isMostCallNumbeChecked;
+                NewPackage.InsideFamilyCall = _isInsideFamilyCallChecked;
+                NewPackage.SelectedNumber = _isSelectedNumberChecked;
+                NewPackage.TotalPrice = totalPrice;
+                NewPackage.MaxSMSs = maxSMSs;
+                NewPackage.MaxMinute = maxMinuts;
+                NewPackage.FixedPrice = fixedPrice;
+                NewPackage.DisscountPrecentage = disscountPrecentage;
+                return NewPackage;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

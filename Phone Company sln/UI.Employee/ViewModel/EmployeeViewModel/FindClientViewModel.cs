@@ -47,20 +47,14 @@ namespace UI.Employee.ViewModel
 
             MessengerInstance = new Messenger();
 
-            ClientsFound = new ObservableCollection<Client>()
-            {
-                new Client{Id = 1,Adress = "asdasd",CallToCenter = 12,ClientTypeId = 1,
-                    ContactNumber = "2131231",LastName = "bababa",Name = "bababa",SignDate = DateTime.Now}
-            };
-
             #region Configure httpClient for the web api request
 
             client = new HttpClient();
             client.BaseAddress = new Uri(BASE_ADDRESS);
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); 
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            #endregion
+            #endregion Configure httpClient for the web api request
         }
 
         /// <summary>
@@ -69,7 +63,7 @@ namespace UI.Employee.ViewModel
         private void CommandMoveToSelctedUser()
         {
             SelctedClient = ClientsFound.FirstOrDefault();
-            MessengerInstance.Send("1212", "123456");
+            MessengerInstance.Send("1212", SelctedClient);
             _navigationService.NavigateTo("ClientsInfoPage", SelctedClient);
         }
 
@@ -78,9 +72,7 @@ namespace UI.Employee.ViewModel
         /// with OnChangeProperty so the list will be updated
         /// </summary>
         private async void CommandToGetUser()
-        {
-            //SelectedUser = ClientsFound.FirstOrDefault();
-
+        {         
             var myUri = new Uri(BASE_ADDRESS + "GetClient", UriKind.Absolute);
 
             var message = await client.GetAsync(myUri + $"?clientId={SearchID}");
@@ -91,14 +83,15 @@ namespace UI.Employee.ViewModel
                 {
                     ClientsFound = await respone.Content.ReadAsAsync<ObservableCollection<Client>>();
                 }
-                await new MessageDialog("Bad Connection To The Server").ShowAsync();
+                else
+                    await new MessageDialog("Bad Connection To The Server").ShowAsync();                
             }
         }
 
-       /// <summary>
-       /// Navigation command to go to the main employee page
-       /// </summary>
-       private void NavigateCommandActionToBack()
+        /// <summary>
+        /// Navigation command to go to the main employee page
+        /// </summary>
+        private void NavigateCommandActionToBack()
         {
             _navigationService.NavigateTo(pageKey: "EmployeeMainPage");
         }

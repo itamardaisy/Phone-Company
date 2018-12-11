@@ -17,7 +17,7 @@ namespace Common.Interfaces
 
         Client GetMostAnoingClient();
 
-        Client GetMostConnectedClient();
+        List<Client> GetMostConnectedClients();
 
         List<Client> GetClientWhoMostLikelyToUnsign();
     }
