@@ -47,7 +47,7 @@ namespace BL.Services
 
         public User GetMostValuentEmploee()
         {
-            throw new NotImplementedException();
+            return MR.GetMostvalentEmployee();
         }
     }
 }

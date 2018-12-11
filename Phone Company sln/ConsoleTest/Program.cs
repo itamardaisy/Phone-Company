@@ -22,11 +22,11 @@ namespace ConsoleTest
                 BasePrice = 100,
                 CallsExtraPrice = 2,
                 DisscountPercentage = 2,
-                SMSsExtraPrice = 12
+                SMSsExtraPrice = 12              
             };
             Dictionary<string, Receipt> dictionary = new Dictionary<string, Receipt>();
             pdgCreator.WriteToFile(dictionary, DateTime.Now);
-            pdgCreator.WriteToExcel(dictionary, DateTime.Now);
+           pdgCreator.WriteToExcel(dictionary, DateTime.Now);
         }
     }
 }
