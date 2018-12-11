@@ -1,4 +1,6 @@
-﻿using Common.Interfaces.UI.Client_Interfaces;
+﻿using Common.Interfaces;
+using Common.Interfaces.OptimalPackage_Interfaces;
+using Common.Interfaces.UI.Client_Interfaces;
 using Common.Models;
 using Dal.DataInitializer;
 using Dal.Repositories;
@@ -13,15 +15,13 @@ namespace ClientBL.DetailServices
 {
     public class DetailService : IDetailsService
     {
-        private readonly ClientRepository _clientRepository;
-        private readonly LineRepository _lineRepository;
-        private readonly OptimalPackage _optimalPackage;
+        private readonly ILineRepository _lineRepository;
+        private readonly IOptimalPackage _optimalPackage;
 
-        public DetailService()
+        public DetailService(ILineRepository lineRepository, IOptimalPackage optimalPackage)
         {
-            _clientRepository = new ClientRepository();
-            _lineRepository = new LineRepository();
-            _optimalPackage = new OptimalPackage();
+            _lineRepository = lineRepository;
+            _optimalPackage = optimalPackage;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace ClientBL.DetailServices
         /// <returns> Minuts </returns>
         public double GetTotalMinutes(Client client, string lineNumber)
         {
-            var line = _lineRepository.GetClientLines(client.Id).Where(x => x.Number == lineNumber).FirstOrDefault();
+            var line = _lineRepository.GetClientLines(client.Id).FirstOrDefault(x => x.Number == lineNumber);
             return _lineRepository.GetActualMonthMinuteCalls(line.Id, DateTime.Now);
         }
 
@@ -55,7 +55,7 @@ namespace ClientBL.DetailServices
         /// <returns> The number of smss </returns>
         public int GetTotalSMS(Client client, string lineNumber)
         {
-            var line = _lineRepository.GetClientLines(client.Id).Where(x => x.Number == lineNumber).FirstOrDefault();
+            var line = _lineRepository.GetClientLines(client.Id).FirstOrDefault(x => x.Number == lineNumber);
             return _lineRepository.GetActualMonthSMSs(line.Id, DateTime.Now);
         }
 
@@ -67,7 +67,7 @@ namespace ClientBL.DetailServices
         /// <returns> The call minuts </returns>
         public double GetTotalMinutesTopNumber(Client client, string lineNumber)
         {
-            var line = _lineRepository.GetClientLines(client.Id).Where(x => x.Number == lineNumber).FirstOrDefault();
+            var line = _lineRepository.GetClientLines(client.Id).FirstOrDefault(x => x.Number == lineNumber);
             return _lineRepository.GetTotalMinutesTopNumber(line.Id, DateTime.Now);
         }
 
@@ -79,7 +79,7 @@ namespace ClientBL.DetailServices
         /// <returns> The minuts </returns>
         public double GetTotalMinutesThreeTopNumber(Client client, string lineNumber)
         {
-            var line = _lineRepository.GetClientLines(client.Id).Where(x => x.Number == lineNumber).FirstOrDefault();
+            var line = _lineRepository.GetClientLines(client.Id).FirstOrDefault(x => x.Number == lineNumber);
             return _lineRepository.GetTotalMinutesThreeTopNumber(line.Id, DateTime.Now);
         }
 
@@ -91,7 +91,7 @@ namespace ClientBL.DetailServices
         /// <returns> The minuts </returns>
         public double GetTotalMinutesFamily(Client client, string lineNumber)
         {
-            var line = _lineRepository.GetClientLines(client.Id).Where(x => x.Number == lineNumber).FirstOrDefault();
+            var line = _lineRepository.GetClientLines(client.Id).FirstOrDefault(x => x.Number == lineNumber);
             return _lineRepository.GetTotalMinutesFamily(line.Id, DateTime.Now);
         }
 

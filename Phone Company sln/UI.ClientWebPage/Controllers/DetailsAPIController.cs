@@ -1,5 +1,7 @@
 ﻿using ClientBL.DetailServices;
 using Common.Models;
+using Dal.Repositories;
+using PackageOptimtzation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +19,7 @@ namespace UI.ClientWebPage.Controllers
 
         public DetailsAPIController()
         {
-            _detailService = new DetailService();
+            _detailService = new DetailService(new LineRepository(), new OptimalPackage());
         }
 
         [HttpPost]

@@ -18,5 +18,15 @@ namespace Common.Interfaces
         void SetPackage(int ClientId, int newPackageId);
 
         List<Line> GetClientLines(int clientId);
+
+        double GetActualMonthMinuteCalls(int id, DateTime date);
+
+        int GetActualMonthSMSs(int id, DateTime date);
+
+        double GetTotalMinutesTopNumber(int id, DateTime date);
+
+        double GetTotalMinutesThreeTopNumber(int id, DateTime date);
+
+        double GetTotalMinutesFamily(int id, DateTime date);
     }
 }

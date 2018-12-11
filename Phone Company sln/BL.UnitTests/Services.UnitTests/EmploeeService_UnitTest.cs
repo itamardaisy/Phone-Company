@@ -6,8 +6,10 @@ using BL.Services;
 using Common.Models;
 using Dal.DataModels;
 using Dal.ModelConverters;
+using Dal.Repositories;
 using FakeItEasy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PackageOptimtzation;
 
 namespace BL.UnitTests.Services_UnitTests
 {
@@ -42,7 +44,7 @@ namespace BL.UnitTests.Services_UnitTests
                 SignDate = DateTime.Now,
                 UserId = 1
             };
-            var employeeService = new EmploeeService();
+            var employeeService = new EmploeeService(new ClientRepository(), new ClientTypeRepository());
 
             var fake = A.Fake<Client>(o => o.Wrapping(newClient));
 
