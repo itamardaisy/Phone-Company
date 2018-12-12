@@ -6,7 +6,17 @@
 }
 <h1>Details</h1>
 <h3>Choose your Line number:</h3>
-@*@Html.DropDownListFor(m => m.lineList, Model.lineList, new { @onClick = Html.Action("SetLine", "Details", Model) });<br>*@
+<form action="/Details/SetLine" method="get">
+    <select id="MovieType" name="MovieType">
+        @{
+            foreach (var lineNumber in Model.lineList)
+            {
+                <option value="@lineNumber">@lineNumber.Text</option>
+            }
+        }
+    </select>
+    <p><input type="submit" value="Submit" /> </p>
+</form>
 <div class="form-group">
     <h2>Client Value</h2>
     <h3>Total Price</h3>
@@ -44,12 +54,8 @@
         }
     </table>
 </div>
-
 @using (Html.BeginForm("GetPaymentOfTheMonthAndCreatePDF", "Details", FormMethod.Post))
 {
-
-
-
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Enter" class="btn btn-default" />

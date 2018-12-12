@@ -26,7 +26,15 @@ namespace UI.ClientWebPage.Controllers
         [Route("api/GetOptimalPackage")]
         public List<Package> GetOptimalPackage([FromBody]DetailsModel detailsModel)
         {
-            return _detailService.GetOptimalPackages(detailsModel.CurrentClient, detailsModel.ChosenLine);
+            try
+            {
+                return _detailService.GetOptimalPackages(detailsModel.CurrentClient, detailsModel.ChosenLine);
+            }
+            catch(Exception ex)
+            {
+                Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
+                return null;
+            }
         }
 
         [HttpPost]
@@ -40,22 +48,22 @@ namespace UI.ClientWebPage.Controllers
             catch (Exception ex)
             {
                 Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return -1.0;
             }
         }
 
         [HttpPost]
         [Route("api/GetTotalSMS")]
-        public int GetTotalSMS(Client client, string line)
+        public int GetTotalSMS([FromBody]DetailsModel detailsModel)
         {
             try
             {
-                return _detailService.GetTotalSMS(client, line);
+                return _detailService.GetTotalSMS(detailsModel.CurrentClient, detailsModel.ChosenLine);
             }
             catch (Exception ex)
             {
                 Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return -1;
             }
         }
 
@@ -70,7 +78,7 @@ namespace UI.ClientWebPage.Controllers
             catch (Exception ex)
             {
                 Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return -1.0;
             }
         }
 
@@ -85,7 +93,7 @@ namespace UI.ClientWebPage.Controllers
             catch (Exception ex)
             {
                 Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return -1.0;
             }
         }
 
@@ -100,7 +108,7 @@ namespace UI.ClientWebPage.Controllers
             catch (Exception ex)
             {
                 Common.EnvironmentService.Services.WriteExceptionsToLogger(ex);
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return -1.0;
             }
         }
     }
